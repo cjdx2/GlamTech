@@ -1,17 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="user_aapointment.css">
     <title>GlamTech</title>
 </head>
+
 <body>
-    <h1>Book Appointment</h1>
 
 
-    </h1>
-    <!--navigation
-    <div id="home-container" style="display: none;">
+    
+    <!--user information-->
+
+    <form id="appointment" action="/userinfo">
+
+        <!--for it to be reuired minlength="3" maxlength="20" required
+            ^(?=.*/d)(?=.*a-z)(?=.*A-Z)(?=.*[a-zA-Z].{8,}$)
+            PASSWORD WITH SYMBOLS LOWER ADN UPPERCASE LETTER MINIMUM OF 8
+        -->
+              <!--navigation-->
+   
+
+        <h1>Book Appointment</h1>
+        <hr>
+        <section id=" form">
+            <div class="name">
+            <label for="firstname"></label>
+            <input class="firstname" type="text" name="firstname" placeholder="First Name">
+        
+            <label for="lastname"></label>
+            <input id="lastname" type="text" placeholder="Last Name">
+        
+                </div>
+
+             <div class="contacts">   
+            <label for="email"></label>
+            <input  id="email" type="email" placeholder="Email" required>
+        
+            <label for="usercontact"></label>
+            <input id="usercontact" type="tel" placeholder="Contact Number" maxlength="11" pattern="[0-9]{4}[0-9]{4}[0-9]{3}" required />
+                </div>
+        
+
+        <p>
+            <label for="services"></label>
+            <select name="services" id="services">
+                <option value="">Service you'd like to book</option>
+                <option value="option1">option1</option>
+                <option value="option2">option2</option>
+                <option value="option3">option3</option>
+                <option value="option4">option4</option>
+                <option value="option5">option5</option>
+            </select>
+
+        </p>
+
+        <P class="text">Appointment Date</P>
+        <p>
+            <label for="date"></label>
+            <input value="date" id="date" type="date" placeholder="Date">
+        </p>
+        <P class="text">Appointment Time</P>
+        <p>
+            <label for="time"></label>
+            <input value="time" type="time" placeholder="Time">
+        </p>
+
+        <p>
+            <!--
+            <label for="confirm"></label>
+            <input id="confirm" type="button" value="Confirm">
+
+            <label for="confirm"></label>
+            <input id="confirm" type="button" value="Back">
+        -->
+            <!--
+            <button id="book">Book Appointment</button> -->
+
+            <button id="booked-btn">
+            Book Appointment
+              </button>
+
+
+        </p>
+        </section>
+  
+
+    </form>
+<!--MENU BUTTON-->
+    <div id="home-container">
         <div class="menu-button" id="menu-button">Menu</div>
         <div class="sub-menu" id="sub-menu">
             <button id="profile-btn">Profile</button>
@@ -23,69 +102,6 @@
             <button id="logout-btn">Logout</button>
         </div>
 
-    -->
-        <!--user information-->
-
-        <form action="/userinfo">
-
-            <p>
-                <label for="firstname"></label>
-                <input id="firstname" type="text" placeholder="First Name"> 
-            </p>
-
-            <p>
-                <label for="lastname"></label>
-                <input id="lastname" type="text" placeholder="Last Name"> 
-            </p>
-<p>
-    Service you'd like to book
-</p>
-            <p>
-                <label for="services"></label>
-                <select name="services" id="services">
-                    <option value="option1">option1</option>
-                    <option value="option2">option2</option>
-                    <option value="option3">option3</option>
-                    <option value="option4">option4</option>
-                    <option value="option5">option5</option>
-                </select>
-
-            </p>
-            <p>
-                <label for="email"></label>
-                <input id="email" type="email" placeholder="Email"> 
-            </p>
-
-            <p>
-                <label for="usercontact"></label>
-                <input id="usercontact" type="number" placeholder="Contact Number"> 
-            </p>
-            <P>Appointment Date</P>
-            <p>
-                <label for="date"></label>
-                <input id="date" type="date" placeholder="Date">
-            </p>
-            <P>Appointment Time</P>
-            <p>
-                <label for="time"></label>
-                <input id="time" type="time" placeholder="Time">
-            </p>
-
-            <p>
-                <label for="confirm"></label>
-                <input id="confirm" type="button" value="Confirm">
-
-            </p>
-            <p>
-                <label for="confirm"></label>
-                <input id="confirm" type="button" value="Back">
-
-            </p>
-
-
-        </form>
-
-
-
 </body>
+
 </html>
