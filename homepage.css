@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f8f7; /* Light Grayish Cyan */
+}
+
+#home-container {
+    position: relative;
+}
+
+.menu-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #0b2534; /* Dark Blue */
+    color: #fff; /* White */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sub-menu {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: #0b2534; /* Dark Blue */
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sub-menu button {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    color: #fff; /* White */
+    border: none;
+    border-bottom: 1px solid #fff; /* White */
+    padding: 8px 0;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sub-menu button:last-child {
+    border-bottom: none;
+}
+
+.sub-menu button:hover {
+    background-color: #093d53; /* Dark Cyan */
+}
+
+header {
+    background-color: #084863; /* Dark Blue */
+    color: #fff; /* White */
+    padding: 15px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    color: #fff; /* White */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #f7da26; /* Yellow */
+}
+
+.content {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.book-now-btn {
+    background-color: #f7da26; /* Yellow */
+    color: #0b2534; /* Dark Blue */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.book-now-btn:hover {
+    background-color: #093d53; /* Dark Cyan */
+    color: #fff; /* White */
+}
+
+footer {
+    background-color: #084863; /* Dark Blue */
+    color: #fff; /* White */
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
