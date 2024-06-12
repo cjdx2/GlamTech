@@ -20,11 +20,21 @@ body {
      width: 400px;
      height: 200px;
 }
-
-h2{
-    display: inline;
-    justify-content: space-between;
+h1{
+   text-align: center;
 }
+.price{
+    margin-left: 180px;
+  
+}
+
+p{
+    display: inline-block;  
+    margin: 0px;
+    margin-left: 5px;
+    
+}
+
 /*
 
 .services{
