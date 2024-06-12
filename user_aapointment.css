@@ -11,8 +11,8 @@ body {
     background-color: #093d53 ;
     width: 430px;
     height:430px;
-    margin-left: 180px;
-    margin-top: 40px;
+    margin-left: 150px;
+    margin-top: 60px;
     
 }
 hr{
@@ -60,12 +60,20 @@ input[type="submit"] {
     margin-left:83px;
     font-size:20px;
     margin-top:10px;
+    background-color: #084863;
+    border:all black;
+    color: white;
+    cursor: pointer;
+   
    
 }
 #booked-btn:hover{
-    background-color: #084863;
-    border-:black;
+    
+    background-color: #0b2534;
+    
     color: white;
+    transform: translateY(-.25em);
+
 
 }
 
