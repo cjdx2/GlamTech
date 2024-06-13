@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/login.png') no-repeat center center fixed;
+    background: url('../GlamTech/img/login.png') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -28,6 +28,7 @@ body {
     backdrop-filter: blur(10px);
     width: 100%;
     max-width: 400px; /* Set a maximum width for the login box */
+    transition: opacity 0.5s, visibility 0.5s;
 }
 
 form {
@@ -78,4 +79,8 @@ input::placeholder {
 .actions button:hover {
     background: #004d7a;
     color: #fff;
+}
+
+#signup-box {
+    display: none; /* Initially hide the signup box */
 }
