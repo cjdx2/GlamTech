@@ -12,7 +12,7 @@ main {
     width: 90%;
     height: 1000px;
     margin: 0 auto;
-    background-color: yellow;
+    background-color: #f2f8f7;
     margin-top: 60px;
     display: flex;
     /*flex-wrap:wrap;  IF MAGDADAGDAG*/
