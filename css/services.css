@@ -1,0 +1,52 @@
+
+
+/*MENU*/
+
+#home-container {
+    position: top;
+}
+
+.menu-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #0b2534; /* Dark Blue */
+    color: #fff; /* White */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sub-menu {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: #0b2534; /* Dark Blue */
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sub-menu button {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    color: #fff; /* White */
+    border: none;
+    border-bottom: 1px solid #fff; /* White */
+    padding: 8px 0;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sub-menu button:last-child {
+    border-bottom: none;
+}
+
+.sub-menu button:hover {
+    background-color: #093d53; /* Dark Cyan */
+}
+
