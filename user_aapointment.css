@@ -60,16 +60,16 @@ input[type="submit"] {
     margin-left:83px;
     font-size:20px;
     margin-top:10px;
-    background-color: #084863;
-    border:all black;
-    color: white;
+    background-color: #F7DA26;
+   
+    color: black;
     cursor: pointer;
    
    
 }
 #booked-btn:hover{
     
-    background-color: #0b2534;
+    background-color: #084863;
     
     color: white;
     transform: translateY(-.25em);
