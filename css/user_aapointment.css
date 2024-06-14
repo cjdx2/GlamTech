@@ -7,20 +7,51 @@ body {
     background-color: #f2f8f7; /* Light Grayish Cyan */
 }
 
-#appointment{
-    background-color: #093d53 ;
-    width: 430px;
-    height:430px;
-    margin-left: 150px;
+
+main {
+    width: 90%;
+    height: 1000px;
+    margin: 0 auto;
+    background-color: yellow;
     margin-top: 60px;
+    display: flex;
+    /*flex-wrap:wrap;  IF MAGDADAGDAG*/
+   
+
+}
+
+#appointment{
+    width: 430px;
+    height: 430px;
+    background-color: #093d53 ;
+    margin-left: 70px;
+    display: inline-block;
+ 
     
 }
+
+#calendar{
+    width: 430px;
+    height: 430px;
+    background-color: red ;
+    margin-left: 100px;
+}
+ /*
+#extra{
+    width: 1030px;
+    height: 430px;
+    background-color: green;
+    display: block;
+   
+}
+IF MAGDADAGDAG NG flex-wrap:wrap; SA MAIN*/
+
 hr{
     margin-top:-10px;
 }
 h1{
     font-size: 25px;
-    padding-top:10px;
+    padding-top:0px;
     padding-left: 10px;
     color:white;    
 }
@@ -47,17 +78,17 @@ input[type="submit"] {
 }
 
 #services {
-    width: 400px;  
+    width: 400px;   
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-left:12px;
 }
-#booked-btn{
-    width: 250px;
+.booked-btn{
+    width: 120px;
     height:50px;
-    border-radius:5px;
-    margin-left:83px;
+    border-radius:10px;
+    margin-left: 60px;
     font-size:20px;
     margin-top:10px;
     background-color: #F7DA26;
@@ -67,7 +98,7 @@ input[type="submit"] {
    
    
 }
-#booked-btn:hover{
+.booked-btn:hover{
     
     background-color: #084863;
     
@@ -76,7 +107,6 @@ input[type="submit"] {
 
 
 }
-
 
 
 
