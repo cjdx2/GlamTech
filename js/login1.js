@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
         // Handle login logic here
-        console.log('Logging in:', username, password);
+        window.location.href = 'homepage.html';
     });
 
     signupForm.addEventListener('submit', (e) => {
@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = document.getElementById('signup-username').value;
         const password = document.getElementById('signup-password').value;
         // Handle signup logic here
-        console.log('Signing up:', username, password);
+        window.location.href = 'homepage.html';
     });
 });
