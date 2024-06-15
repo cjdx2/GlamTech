@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background: url('../img/background.png') no-repeat center center fixed; 
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h2 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h3 {
+  color: #ffffff;
+  font-size: small;
+  text-align: left;
+}
+
+p {
+    color:#ffffff;
+    text-align: center
+}
+
+
+.profile-pic {
+  width: 270px;
+  height: 270px;
+  align-content: center;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 0px solid #ffffff;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-profile {
+  width: 50px;
+  height: 50px;
+  align-content: start;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 0px solid #ffffff;
+}
+
+.user-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.star {
+  color: #ffc107;
+  font-size: 70px;
+  margin: 0 5px;
+  align-items: center;
+}
+
+.rating-feedback{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 10px;
+}
+
+.star-feedback{
+    color: #ffc107;
+    font-size: 27px;
+    margin: 0 3px;
+    align-items: center;
+}
+
+/* the box outline */
+.feedback-box { 
+  width: 90%;
+  height: 160px;
+  border: 1px solid #dddde7;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  margin: 0 auto;
+  resize: vertical;
+}
+
+.feedback-box textarea {
+  width: 98%;
+  height: 70%;
+  font-size: 12px;
+  border: none;
+  resize: none;
+  padding: 10px;
+}
+
+.feedback-box textarea:focus {
+  outline: none;
+}
+
+.feedback-box .submit {
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Name</h1>
+  <div class="profile-pic">
+    <img src="../img/profile 1.png" alt="Profile Picture">
+  </div>
+  <h2>SPECIALTY</h2>
+  <p>employee</p>
+  <div class="rating">
+    <span class="star shaded">&#9733;</span>
+    <span class="star shaded">&#9733;</span>
+    <span class="star shaded">&#9733;</span>
+    <span class="star shaded">&#9733;</span>
+    <span class="star">&#9734;</span>  
+  </div>
+
+  <div class="feedback-box">
+    <div class="user-profile">
+        <img src="../img/profile 2.png" alt="User Profile">
+
+    </div>
+
+    <div class="star-feedback">
+        <span class="star-feedback">&#9734;</span>
+        <span class="star-feedback">&#9734;</span>
+        <span class="star-feedback">&#9734;</span>
+        <span class="star-feedback">&#9734;</span>
+        <span class="star-feedback">&#9734;</span>
+    </div>
+
+    <form>
+      <textarea id="feedback" placeholder="Write a feedback..."></textarea>
+      <button type="submit">Submit</button>
+    </form>
+
+ 
