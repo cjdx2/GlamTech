@@ -1,49 +1,30 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: url('../img/background.png') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url('../img/background.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.feedback-box {
-    background-color: #ffffffee;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .rating {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
+.rating {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 
-  #feedback {
-    width: 85%;
-    height: 100px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  
-  button[type="submit"] {
-    background-color: #ffffff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #ffffff;
-  }
+/* .container-fbinner {
+  visibility: hidden;
+} */
+
+/* .container-feedback {
+  position: absolute;
+}
+
+.container-fbinner {
+  margin-top: auto;
+} */
