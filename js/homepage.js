@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         localStorage.clear();
         window.location.href = "../html/login1.html";
+
+      
     });
 
     // Event listener for menu button
