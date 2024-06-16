@@ -15,10 +15,20 @@ main {
     background-color: #f2f8f7;
     margin-top: 60px;
     display: flex;
-    /*flex-wrap:wrap;  IF MAGDADAGDAG*/
    
 
 }
+
+
+#calendar{
+    width: 430px;
+    height: 430px;
+    background-color: red ;
+    margin-left: 100px;
+}
+
+
+/* Book Appointment */
 
 #appointment{
     width: 430px;
@@ -30,21 +40,17 @@ main {
     
 }
 
-#calendar{
-    width: 430px;
-    height: 430px;
-    background-color: red ;
-    margin-left: 100px;
-}
+
  /*
 #extra{
     width: 1030px;
     height: 430px;
     background-color: green;
     display: block;
-   
+    MAGDADAGDAG NG FLEX-WRAP:WRAP; SA MAIN
 }
-IF MAGDADAGDAG NG flex-wrap:wrap; SA MAIN*/
+*/
+
 
 hr{
     margin-top:-10px;
@@ -110,13 +116,8 @@ input[type="submit"] {
 
 
 
-/* Book Appointment */
-#booked-btn{
-    width:200px;
-    height:50px;
-    font-size:20px;
-    margin-left:110px;
-}
+
+
       
 
 

@@ -16,4 +16,5 @@ document.addEventListener("DOMContentLoaded", function() {
     menuButton.addEventListener("click", function() {
         subMenu.style.display = subMenu.style.display === "block" ? "none" : "block";
     });
+    
 });
