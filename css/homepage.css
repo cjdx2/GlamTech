@@ -4,6 +4,7 @@ body, html {
     height: 100%;
     font-family: 'Arial', sans-serif;
     scroll-behavior: smooth;
+}
 
 #home-container {
     background-image: url('../img/homepagebg.png');
@@ -27,11 +28,13 @@ header {
     width: 100%;
     background: transparent;
     z-index: 1000;
-    transition: background 0.3s;
+    transition: background 0.3s, backdrop-filter 0.3s;
 }
 
 header.scrolled {
     background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .logo img {
@@ -74,7 +77,7 @@ header.scrolled {
 footer {
     text-align: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .menu {
@@ -127,13 +130,22 @@ footer {
     padding-top: 80px;
 }
 
-.services-section, .staff-section, .gallery-section, .about-section, .contact-section {
+.services-section,
+.staff-section,
+.gallery-section,
+.about-section,
+.contact-section {
     padding: 20px;
     text-align: center;
     min-height: 100vh;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
-.services-section h2, .staff-section h2, .gallery-section h2, .about-section h2, .contact-section h2 {
+.services-section h2,
+.gallery-section h2,
+.about-section h2,
+.contact-section h2 {
     font-size: 36px;
     margin-bottom: 20px;
 }
@@ -156,8 +168,22 @@ footer {
     border-radius: 5px;
 }
 
+.staff-section {
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+}
+
 .staff-member {
-    display: inline-block;
     text-align: center;
     margin: 10px;
 }
@@ -168,6 +194,46 @@ footer {
     border-radius: 50%;
     border: 2px solid white;
     margin-bottom: 10px;
+}
+
+.staff-member.owner {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.staff-member.manicurist1 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.staff-member.manicurist2 {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.staff-member.receptionist {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.staff-member.hairdresser1 {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+
+.staff-member.hairdresser2 {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+}
+
+.staff-member.haircut {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+}
+
+.staff-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
 .gallery-item {
@@ -183,8 +249,20 @@ footer {
     object-fit: cover;
 }
 
-.about-section p, .contact-section p {
+.about-section p,
+.contact-section p {
     font-size: 18px;
     margin-bottom: 10px;
 }
+
+/* Ensure there's no excessive padding or margins causing the gaps */
+.services-section,
+.staff-section,
+.gallery-section,
+.about-section,
+.contact-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
