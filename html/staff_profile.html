@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background: url('../img/background.png') no-repeat center center fixed; 
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h2 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h3 {
+  color: #ffffff;
+  font-weight: normal;
+  font-size: small;
+  margin-left: 10px;
+}
+
+p {
+    color:#ffffff;
+    text-align: center
+}
+
+
+.profile-pic {
+  width: 260px;
+  height: 260px;
+  align-content: center;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 0px solid #ffffff;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px;
+  overflow: hidden;
+  border: 0px solid #ffffff;
+  align-content: first baseline;
+}
+
+.user-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.star {
+  color: #ffc107;
+  font-size: 60px;
+  margin: 0 5px;
+  align-items: center;
+}
+
+.star-feedback{
+    color: #ffc107;
+    font-size: 25px;
+    margin: 0 2px;
+}
+
+.container-feedback {
+  background-color: #d9d9d941;
+  padding: 1%;
+  border: 1px solid #d9d9d941;
+  width: 1000px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.container-fbinner {
+  /* background-color: #d9d9d941; */
+  padding: 1px;
+  /* border: 1px solid #d9d9d941; */
+  width: 860px;
+  margin: auto;
+  /* border-radius: 20px; */
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Name</h1>
+  <div class="profile-pic">
+    <img src="../img/profile 1.png" alt="Profile Picture">
+  </div>
+  <h2>SPECIALTY</h2>
+  <p>employee</p>
+  <div class="rating">
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+    <span class="star">&#9733;</span>
+    <span class="star">&#9734;</span>  
+  </div>
+
+  <div class="container-feedback">
+    <div class="user-profile">
+      <img src="../img/profile 2.png" alt="User Profile">
+    </div>
+    <div class="container-fbinner">
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <h3>Write a feedback ...</h3>
+    </div>
+  </div>
