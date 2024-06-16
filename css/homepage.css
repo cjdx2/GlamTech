@@ -3,8 +3,7 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: 'Arial', sans-serif;
-    scroll-behavior: smooth; /* Enables smooth scrolling */
-}
+    scroll-behavior: smooth;
 
 #home-container {
     background-image: url('../img/homepagebg.png');
@@ -22,7 +21,17 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: transparent;
+    z-index: 1000;
+    transition: background 0.3s;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .logo img {
@@ -32,12 +41,15 @@ header {
 .menu-button {
     font-size: 18px;
     cursor: pointer;
+    padding: 20px;
+    margin-right: 20px;
 }
 
 .content {
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
+    padding-top: 80px;
 }
 
 .content h1 {
@@ -67,12 +79,24 @@ footer {
 
 .menu {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 70px;
     right: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .menu ul {
@@ -100,6 +124,7 @@ footer {
     background-size: cover;
     background-position: center;
     color: white;
+    padding-top: 80px;
 }
 
 .services-section, .staff-section, .gallery-section, .about-section, .contact-section {
@@ -153,12 +178,13 @@ footer {
 
 .gallery-item img {
     width: 150px;
-    height: 250px; /* Small portrait size */
+    height: 250px;
     border-radius: 10px;
-    object-fit: cover; /* Ensure image fits within the bounds without distortion */
+    object-fit: cover;
 }
 
 .about-section p, .contact-section p {
     font-size: 18px;
     margin-bottom: 10px;
+}
 }
