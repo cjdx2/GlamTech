@@ -10,21 +10,3 @@ body {
   justify-content: center;
   overflow: hidden;
 }
-
-.rating {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.container-fbinner {
-  visibility: hidden;
-} 
-
-/* .container-feedback {
-  position: absolute;
-} */
-
-.container-fbinner {
-  margin-top: auto;
-}
