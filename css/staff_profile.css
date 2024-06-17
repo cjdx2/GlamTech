@@ -17,14 +17,14 @@ body {
   margin-bottom: 20px;
 }
 
-/* .container-fbinner {
+.container-fbinner {
   visibility: hidden;
-} */
+} 
 
 /* .container-feedback {
   position: absolute;
-}
+} */
 
 .container-fbinner {
   margin-top: auto;
-} */
+}
