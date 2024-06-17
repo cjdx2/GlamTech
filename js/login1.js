@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const showLogin = document.getElementById('show-login');
     const loginBox = document.getElementById('login-box');
     const signupBox = document.getElementById('signup-box');
+    const errorMessage = document.createElement('p');
+
+    errorMessage.style.color = 'red';
+    errorMessage.style.display = 'none';
+    errorMessage.id = 'error-message';
+    loginBox.appendChild(errorMessage);
 
     showSignup.addEventListener('click', (e) => {
         e.preventDefault();
@@ -22,8 +28,19 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
-        // Handle login logic here
-        window.location.href = 'homepage.html';
+
+        // Hard-coded credentials for admin
+        const adminUsername = 'admin';
+        const adminPassword = 'password123';
+
+        if (username === adminUsername && password === adminPassword) {
+            // Redirect to admin page
+            window.location.href = 'adminhome.html';
+        } else {
+            // Show error message
+            errorMessage.textContent = 'Invalid username or password';
+            errorMessage.style.display = 'block';
+        }
     });
 
     signupForm.addEventListener('submit', (e) => {
