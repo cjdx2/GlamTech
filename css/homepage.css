@@ -52,32 +52,39 @@ header.scrolled {
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
-    padding-top: 80px;
+    padding-top: 40px;
 }
 
 .content h1 {
-    font-size: 48px;
+    font-size: 100px;
     margin-bottom: 20px;
 }
 
 .book-now-btn {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #000;
+    background-color: transparent;
+    color: #fff;
     padding: 15px 30px;
-    border: none;
+    border: 2px solid #fff;
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .book-now-btn:hover {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: #fff;
+    color: #09425B;
 }
 
 footer {
     text-align: center;
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    position: relative;
+    z-index: 10;
 }
 
 .menu {
@@ -133,13 +140,35 @@ footer {
 .services-section,
 .staff-section,
 .gallery-section,
-.about-section,
 .contact-section {
     padding: 20px;
     text-align: center;
     min-height: 100vh;
     margin-top: 40px;
     margin-bottom: 40px;
+}
+
+.about-section {
+    text-align: justify;
+    padding: 20px;
+    color: white;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: auto;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 115%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    border-radius: 20px;
 }
 
 .services-section h2,
@@ -236,15 +265,33 @@ footer {
     margin-bottom: 20px;
 }
 
+.gallery-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    transition: scroll-left 0.5s ease;
+}
+
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
 .gallery-item {
-    display: inline-block;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
     margin: 10px;
     vertical-align: top;
 }
 
 .gallery-item img {
-    width: 150px;
-    height: 250px;
+    width: 250px;
+    height: 500px;
     border-radius: 10px;
     object-fit: cover;
 }
@@ -252,10 +299,10 @@ footer {
 .about-section p,
 .contact-section p {
     font-size: 18px;
+    line-height: 1.6;
     margin-bottom: 10px;
 }
 
-/* Ensure there's no excessive padding or margins causing the gaps */
 .services-section,
 .staff-section,
 .gallery-section,
