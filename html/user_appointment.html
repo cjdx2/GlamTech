@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="../css/user_appointment.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Font Link for Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-   
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
     <title>GlamTech</title>
 </head>
 
@@ -18,137 +19,185 @@
     <!--user information-->
 
 
-    <main id="container">
 
-        <form id="appointment" action="/userinfo">
 
-            <!--for it to be reuired minlength="3" maxlength="20" required
+    <form id="appointment" action="/userinfo">
+
+        <!--for it to be reuired minlength="3" maxlength="20" required
             ^(?=.*/d)(?=.*a-z)(?=.*A-Z)(?=.*[a-zA-Z].{8,}$)
             PASSWORD WITH SYMBOLS LOWER ADN UPPERCASE LETTER MINIMUM OF 8
         -->
-            <!--navigation-->
+        <!--navigation-->
 
 
-            <h1>Book Appointment</h1>
-            <hr>
-            <section id="form">
-                <div class="name">
-                    <label for="firstname"></label>
-                    <input class="firstname" type="text" name="firstname" placeholder="First Name">
+        <h1>Book Now</h1>
+        <h2>For An Appointment</h2>
 
-                    <label for="lastname"></label>
-                    <input id="lastname" type="text" placeholder="Last Name">
+        <section id="form">
+            <div class="name">
+                <label for="firstname"></label>
+                <input class="firstname" type="text" name="firstname" placeholder="First Name">
 
-                </div>
+                <label for="lastname"></label>
+                <input id="lastname" type="text" placeholder="Last Name">
 
-                <div class="contacts">
-                    <label for="email"></label>
-                    <input id="email" type="email" placeholder="Email" required>
+            </div>
 
-                    <label for="usercontact"></label>
-                    <input id="usercontact" type="tel" placeholder="Contact Number" maxlength="11"
-                        pattern="[0-9]{4}[0-9]{4}[0-9]{3}" required />
-                </div>
+            <div class="contacts">
+                <label for="email"></label>
+                <input id="email" type="email" placeholder="Email" required>
+
+                <label for="usercontact"></label>
+                <input id="usercontact" type="tel" placeholder="Contact Number" maxlength="11"
+                    pattern="[0-9]{4}[0-9]{4}[0-9]{3}" required />
+            </div>
 
 
-                <p>
-                    <label for="services"></label>
-                    <select name="services" id="services">
-                        <option value="">Service you'd like to book</option>
-                        <option value="option1">option1</option>
-                        <option value="option2">option2</option>
-                        <option value="option3">option3</option>
-                        <option value="option4">option4</option>
-                        <option value="option5">option5</option>
-                    </select>
+            <p>
+                <label for="services"></label>
+                <select name="services" id="services">
+                    <option value="">Service you'd like to book</option>
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                    <option value="option5">option5</option>
+                </select>
 
-                </p>
+            </p>
 
-               
-                <P class="text">Appointment Time</P>
-                <p>
-                    <label for="time"></label>
-                    <input value="time" type="time" placeholder="Time">
-                </p>
+            <P class="text">Appointment Date</P>
+          <p>
+                <label for="date"></label>
+                <input value="date" class="date" type="date" placeholder="Date">
+            </p>
+            <p class="text"> Appointment Time </p>
+            <p>
+                <label for="time"></label>
+                <input value="date" class="date" type="time" placeholder="Time">
+            </p>
+        
+            
 
-                <p>
-                    <!--
+            
+                <!--
             <label for="confirm"></label>
             <input id="confirm" type="button" value="Confirm">
 
             <label for="confirm"></label>
             <input id="confirm" type="button" value="Back">
         -->
-                    <!--
+                <!--
             <button id="book">Book Appointment</button> -->
 
-                    <button class="booked-btn" >
-                        Confirm
-                    </button>
-                    <button class="booked-btn"><a href="../html/homepage.html">
-                            Back
-                        </a>
-                    </button>
+
+                <a class="booked-btn" href="../html/homepage.html">Confirm</a>
+                <a class="booked-btn" href="../html/homepage.html">Back</a>
 
 
-                </p>
-            </section>
-
-        </form>
-
-
-        <!--CALENDAR-->
-
-        <section id="box-calendar">
-
-            <div class="wrapper">
-                <header>
-                  <p class="current-date"></p>
-                  <div class="icons">
-                    <span id="prev" class="material-symbols-rounded">chevron_left</span>
-                    <span id="next" class="material-symbols-rounded">chevron_right</span>
-                  </div>
-                </header>
-                <div class="calendar">
-                  <ul class="weeks">
-                    <li>Sun</li>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                  </ul>
-                  <ul class="days"></ul>
-                </div>
-              </div>
-
+            </p>
         </section>
-<!--EXTRA
-        <section id="extra">
 
-dasdasdasdnaskldnaskl
+    </form>
+    <!--RATINGS-->
+    <section id="ratings">
+        <div class="ratings">
 
-        </section>
-    -->
-
-
-        <!--MENU BUTTON-->
-        <div id="home-container">
-            <div class="menu-button" id="menu-button">Menu</div>
-            <div class="sub-menu" id="sub-menu">
-                <button id="profile-btn">Profile</button>
-                <button id="home-btn">Home</button>
-                <button id="services-btn">Services</button>
-                <button id="staff-btn">Staff</button>
-                <button id="gallery-btn">Gallery</button>
-                <button id="about-btn">About Us</button>
-                <button id="logout-btn">Logout</button>
+            <div class="profile-pic">
+                <img src="../img/profile 1.png" alt="Profile Picture">
             </div>
+            <h3 class="employee">Rosalie Marikit</h3>
+            <h4 class="expertise">Expertise: Manicure and Pedicure</h4>
+            <!--      <p class="ratep">Employee</p>  -->
+            <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+            </div>
+
+    </section>
+
+    <!--REVIEWS-->
+    <section class="reviews">
+        <h3 class="showreview">REVIEWS:</h3>
+    <div class="review-card1">
+        <div class="user-profile">
+          <img src="../img/profile 1.png" alt="User Profile">
         </div>
+        <div class="star-rating">
+          <span class="star-feedback">&#9733;</span>
+          <span class="star-feedback">&#9733;</span>
+          <span class="star-feedback">&#9733;</span>
+          <span class="star-feedback">&#9733;</span>
+          <span class="star-feedback">&#9733;</span>
+          <p class="reviewp">master ka talaga</p>
+        </div>
+      </div>
 
       
-    </main>
+  <div class="review-card2">
+    <div class="user-profile">
+      <img src="../img/profile 2.png" alt="User Profile">
+    </div>
+    <div class="star-rating">
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <p>amazing</p>
+    </div>
+  </div>
+
+  <div class="review-card3">
+    <div class="user-profile">
+      <img src="../img/profile 3.png" alt="User Profile">
+    </div>
+    <div class="star-rating">
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <p>nakakabilib</p>
+    </div>
+  </div>
+
+  <div class="review-card4">
+    <div class="user-profile">
+      <img src="../img/profile 4.png" alt="User Profile">
+    </div>
+    <div class="star-rating">
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9733;</span>
+      <span class="star-feedback">&#9734;</span>
+      <p>da best, may free kopi</p>
+    </div>
+  </div>
+
+      </section>
+
+
+    <!--MENU BUTTON-->
+    <div id="home-container">
+        <div class="menu-button" id="menu-button">MENU</div>
+        <div class="sub-menu" id="sub-menu">
+            <button id="profile-btn">Profile</button>
+            <button id="home-btn">Home</button>
+            <button id="services-btn">Services</button>
+            <button id="staff-btn">Staff</button>
+            <button id="gallery-btn">Gallery</button>
+            <button id="about-btn">About Us</button>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </div>
+
+
+
     <script src="../js/homepage.js"></script>
     <script src="../js/user_appointment.js"></script>
 </body>
