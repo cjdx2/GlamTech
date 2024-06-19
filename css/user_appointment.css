@@ -1,46 +1,197 @@
-/* Import Google font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
 
 body {
+    background: url('../img/appointmentbg5.png') no-repeat center center fixed; 
     display: flex;
     align-items: center;
     padding: 0 10px;
+    flex-wrap: wrap;
     /*  justify-content: center; 
   min-height: 100vh;    */
-    background: #f2f8f7; /*bg color*/
+   
+    /*bg color*/
 }
 
-main {
-    width: 90%;
-    height: 1000px;
-    margin: 0 auto;
-    background-color: #f2f8f7;
-    margin-top: 60px;
-    display: flex;
-    /*flex-wrap:wrap;  IF MAGDADAGDAG*/
 
 
-}
 
 
 /* Book Appointment */
 #appointment {
-    width: 430px;
-    height: 350px;
-    background-color: #093d53;
-    margin-left: 40px;
-    display: inline-block;
+    width: 480px;
+    height: 500px;
+   background-color: transparent;
+    margin-left: 30px;
+    /*#093d53;*/
+}
+
+h1{
+    font-size: 25px;
+    color: white;
+    margin-top: -10px;
+}
+h2{
+    font-size: 22px;
+    color: white;
+    margin-top: -10px;
+}
+#form {
+    margin-top: 0px;
 
 
 }
 
+.date{
+    width: 450px;
+    height: 28px;
+    border: 2px solid #093d53;
+    border-radius: 10px;
+    margin: 2px;
+    margin-left: 35px;
+    background-color: white;
+}
+
+.text {
+    color: white;
+    margin-left: 40px;
+    
+   
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="submit"] {
+    width: 450px;
+    height: 28px;
+    border: 2px solid #093d53;
+    border-radius: 10px;
+    margin: 2px;
+    margin-left: 35px;
+    background: rgba(255, 255, 255, 0.1);
+    
+}
+
+input[type="time"]{
+   
+   margin-bottom: 30px;
+   
+}
+::placeholder{
+   
+    padding: 5px;
+
+}
+
+
+#services {
+    width: 457px;
+    height: 35px;
+    border: 2px solid #093d53;
+    border-radius: 10px;
+    margin: 2px;
+    
+    margin-left: 35px;
+    background: rgba(255, 255, 255, 0.1);
+
+}
+
+.booked-btn {
+    
+    padding: 10px 20px;
+    
+    background-color: #ccc; 
+    color: #093d53; 
+    text-align: center;
+    text-decoration: none; 
+    border-radius: 5px; 
+    border: none; 
+    font-size: 16px; 
+    cursor: pointer; 
+    margin-left: 110px;
+
+}
+
+
+.booked-btn:hover {
+
+    background-color: #084863;
+    color: white;
+    transform: translateY(-.25em);
+    
+    
+}
+
+/*RATINGS*/
+
+#ratings {
+    width: 500px;
+    height: 500px;
+    margin-top: 45px;
+    margin-left: 110px;
+    background-color:transparent;
+}
+
+.employee {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+   
+}
+
+.expertise {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: normal;
+}
+/*
+.ratep {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+*/
+
+.profile-pic {
+    width: 230px;
+    height: 230px;
+    align-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border: 0px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    margin-top: -20px;
+    margin-bottom: 20px;
+
+}
+
+.star {
+    color: #ffc107;
+    font-size: 40px;
+    margin: 0 5px;
+    align-items: center;
+}
 
 /*
 #extra{
@@ -52,209 +203,105 @@ main {
 }
 IF MAGDADAGDAG NG flex-wrap:wrap; SA MAIN*/
 
-hr {
-    margin-top: 5px;
+/*REVIEWS*/
+
+
+.showreview{
+    margin-left: 20px;
+    font-size: 30px
 }
-
-h1 {
-    font-size: 25px;
-    padding-top: 0px;
-    text-align: center;
-    color: white;
-}
-
-#form {
-    margin-top: 10px;
-}
-
-.name {
-    margin-bottom: 15px;
-}
-
-.text {
-    color: white;
-    margin-left: 13px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-input[type="time"],
-input[type="submit"] {
-    width: 192px;
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-left: 13px;
-
-}
-
-#services {
-    width: 400px;
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-left: 12px;
-    margin-top: 10px;
-}
-
-.booked-btn {
-    width: 120px;
-    height: 50px;
-    border-radius: 10px;
-    margin-left: 60px;
-    font-size: 20px;
-    margin-top: 30px;
-    background-color: #F7DA26;
-
-    color: black;
-    cursor: pointer;
-
-
-}
-
-.booked-btn:hover {
-
-    background-color: #084863;
-
-    color: white;
-    transform: translateY(-.25em);
-
-
-}
-
-
-
-#booked-btn {
-    width: 200px;
-    height: 50px;
-    font-size: 20px;
-    margin-left: 110px;
-}
-
-
-/*CALENDAR BOX*/
-
-#box-calendar {
-    width: 430px;
-    height: 430px;
+.reviews   {
+    width: 500px;
+    height: 400px;
+    ;
     
-    margin-left: 100px;
 }
 
-.wrapper {
-    width:480px;
-    background: #fff;
+
+p {
+    color:#ffffff;
+    text-align: auto;
+    font-size: medium;
+    margin: 2px;
+}
+
+.container1 {
+    
+    /* background-color: #d9d9d941; */
+    padding: 100px;
     border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-}
+   
+    display: block;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    
+  }
 
-.wrapper header {
-    display: flex;
-    align-items: center;
-    padding: 25px 30px 10px;
-    justify-content: space-between;
-}
-
-header .icons {
-    display: flex;
-}
-
-header .icons span {
-    height: 38px;
-    width: 38px;
-    margin: 0 1px;
-    cursor: pointer;
-    color: #878787;
-    text-align: center;
-    line-height: 38px;
-    font-size: 1.9rem;
-    user-select: none;
-    border-radius: 50%;
-}
-
-.icons span:last-child {
-    margin-right: -10px;
-}
-
-header .icons span:hover {
-    background: #f2f2f2;
-}
-
-header .current-date {
-    font-size: 1.45rem;
-    font-weight: 500;
-}
-
-.calendar {
+  .review-card1 {
+    background-color: #ffffff6f;
     padding: 20px;
-}
+    width: 600px;
+    height: 60px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-card2 {
+    background-color: #ffffff6f;
+    padding: 20px;
+    width: 600px;
+    height: 60px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-card3 {
+    background-color: #ffffff6f;
+    padding: 20px;
+    width: 600px;
+    height: 60px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-card4 {
+    background-color: #ffffff6f;
+    padding: 20px;
+    width: 600px;
+    height: 60px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
 
-.calendar ul {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    text-align: center;
-}
-
-.calendar .days {
-    margin-bottom: 20px;
-}
-
-.calendar li {
-    color: #333;
-    width: calc(100% / 7);
-    font-size: 1.07rem;
-}
-
-.calendar .weeks li {
-    font-weight: 500;
-    cursor: default;
-}
-
-.calendar .days li {
-    z-index: 1;
-    cursor: pointer;
-    position: relative;
-    margin-top: 30px;
-}
-
-.days li.inactive {
-    color: #aaa;
-}
-
-.days li.active {
-    color: #fff;
-}
-
-.days li::before {
-    position: absolute;
-    content: "";
-    left: 50%;
-    top: 50%;
-    height: 40px;
-    width: 40px;
-    z-index: -1;
+  .user-profile {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
+    margin: 5px;
+    overflow: hidden;
+    border: 0px solid #ffffff;
+    align-content: first baseline;
+    float: left;
+  }
+  .user-profile img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 
-.days li.active::before {
-    background: #9B59B6;
-}
-
-.days li:not(.active):hover::before {
-    background: #f2f2f2;
-}
-
-
-
-
-
+  }
+  
+  
+  .star-rating{
+      color: #ffc107;
+      font-size: 25px;
+      margin: 0 5px;
+      align-items: center;
+      margin-left: 75px;
+  }
 
 
 /*MENU*/
@@ -267,7 +314,7 @@ header .current-date {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #0b2534;
+
     /* Dark Blue */
     color: #fff;
     /* White */
