@@ -1,7 +1,7 @@
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
     background-color: #013440;
     background-image: url('../img/defaultbg.png');
     color: white;
@@ -20,21 +20,21 @@ body {
     background-color: #005f73;
 }
 
-.logo div {
-    display: inline-block;
-    margin-left: 10px;
-}
-
 .logo img {
     height: 80px;
     width: 80px;
+}
+
+.logo div {
+    display: inline-block;
+    margin-left: 10px;
 }
 
 .menu {
     position: relative;
 }
 
-.menu button {
+#menu-button {
     background-color: #007f91;
     color: white;
     border: none;
@@ -43,7 +43,7 @@ body {
     font-size: 16px;
 }
 
-.menu-content {
+#menu-content {
     display: none;
     position: absolute;
     top: 30px;
@@ -68,69 +68,47 @@ body {
 }
 
 .main {
-    display: flex;
-    padding: 2vw;
-    gap: 2vw;
+    padding: 20px;
 }
 
-.calendar {
-    
-    padding: 2vw;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-.appointments {
-    background-color: #015f7a;
-    padding: 60px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-#current-date {
-    
-    font-size: 34px;
-}
-
-#appointments-today {
-    margin-top: 2vw;
-    font-size: 60px;
-}
-
-.calendar-header {
+.logbook {
     text-align: center;
-    margin-bottom: 1vw;
-    font-size: 40px;
 }
 
-
-.calendar-body {
-    display: flex;
-    flex-wrap: wrap;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0.5vw;
-}
-
-.calendar-day {
-    background-color: #015f7a;
-    padding: 1vw;
+table th, table td {
+    border: 1px solid white;
+    padding: 10px;
     text-align: center;
-    border-radius: 5px;
+}
+
+table th {
+    background-color: #005f73;
+}
+
+table td input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #005f73;
+}
+
+button.edit, button.save {
+    background-color: #007f91;
+    color: white;
+    border: none;
+    padding: 5px 10px;
     cursor: pointer;
-    font-size: 40px;
 }
 
-.calendar-day:hover {
-    background-color: #017a90;
-}
-
-.appointment {
-    background-color: #014b60;
-    padding: 1vw;
-    border-radius: 5px;
-    font-size: 1.5vw;
+.total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #005f73;
 }

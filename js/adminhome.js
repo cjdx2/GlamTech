@@ -41,9 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Logout functionality
     const logoutButton = document.getElementById('logout');
     logoutButton.addEventListener('click', () => {
-        // Implement logout functionality here
         alert('You have been logged out.');
         window.location.href = 'login1.html'; // Redirect to login page
+    });
+
+    // Logbook redirection
+    const logbookButton = document.getElementById('logbook');
+    logbookButton.addEventListener('click', () => {
+        window.location.href = 'logbook.html';
     });
 });
 

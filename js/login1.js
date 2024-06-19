@@ -37,9 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Redirect to admin page
             window.location.href = 'adminhome.html';
         } else {
-            // Show error message
-            errorMessage.textContent = 'Invalid username or password';
-            errorMessage.style.display = 'block';
+            window.location.href = 'homepage.html';
         }
     });
 

@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const galleryContainer = document.querySelector('.gallery-container');
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
     const aboutLink = document.querySelector('a[href="#about"]');
+    const homeLink = document.querySelector('a[href="#home"]');
     
     logoutLink.addEventListener("click", function(event) {
         event.preventDefault();
@@ -62,6 +63,16 @@ document.addEventListener("DOMContentLoaded", function() {
     aboutLink.addEventListener("click", function(event) {
         smoothScroll(event, "about");
     });
+
+    // Add event listener for Home link
+    homeLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        subMenu.classList.remove('visible');
+        setTimeout(() => {
+            subMenu.style.display = 'none';
+        }, 300);
+    });
     
     function cloneItems() {
         galleryItems.forEach(item => {
@@ -95,4 +106,4 @@ document.addEventListener("DOMContentLoaded", function() {
             cloneItems();
         }
     });
-    });
+});
