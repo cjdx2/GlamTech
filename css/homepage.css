@@ -16,7 +16,6 @@ body, html {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    text-shadow: 2px 2px 20px rgba(0, 0, 0, 1);
 }
 
 header {
@@ -29,22 +28,17 @@ header {
     width: 100%;
     background: transparent;
     z-index: 1000;
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, backdrop-filter 0.3s;
 }
 
 header.scrolled {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .logo img {
     height: 60px;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
-}
-
-.menu-container {
-    display: flex;
-    align-items: center;
 }
 
 .menu-button {
@@ -52,48 +46,6 @@ header.scrolled {
     cursor: pointer;
     padding: 20px;
     margin-right: 20px;
-}
-
-.menu {
-    display: none;
-    position: fixed;
-    text-align: right;
-    top: 70px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 1001;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    backdrop-filter: blur(10px);
-}
-
-.menu.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu ul li {
-    margin: 10px 0;
-}
-
-.menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.menu ul li a:hover {
-    text-decoration: underline;
 }
 
 .content {
@@ -124,9 +76,9 @@ header.scrolled {
     color: #09425B;
 }
 
-.footer {
+footer {
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -144,10 +96,11 @@ header.scrolled {
     padding: 20px;
     border-radius: 10px;
     z-index: 1001;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .menu.visible {
@@ -185,17 +138,12 @@ header.scrolled {
 }
 
 .services-section,
-.gallery-section {
-    padding: 20px;
-    text-align: center;
-    min-height: 100vh;
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
+.staff-section,
+.gallery-section,
 .contact-section {
     padding: 20px;
     text-align: center;
+    min-height: 100vh;
     margin-top: 40px;
     margin-bottom: 40px;
 }
@@ -225,11 +173,7 @@ header.scrolled {
 
 .services-section h2,
 .gallery-section h2,
-.about-section h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
+.about-section h2,
 .contact-section h2 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -271,27 +215,14 @@ header.scrolled {
 .staff-member {
     text-align: center;
     margin: 10px;
-    position: relative;
 }
 
 .staff-member img {
-    width: 280px;
-    height: 280px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 2px solid white;
     margin-bottom: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.staff-member img:hover {
-    transform: scale(1.1);
-}
-
-.staff-member a {
-    display: block;
-    text-decoration: none;
-    color: inherit;
 }
 
 .staff-member.owner {
@@ -365,30 +296,19 @@ header.scrolled {
     object-fit: cover;
 }
 
-.about-section p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
+.about-section p,
 .contact-section p {
     font-size: 18px;
-    line-height: 0.3;
+    line-height: 1.6;
     margin-bottom: 10px;
 }
 
 .services-section,
 .staff-section,
 .gallery-section,
-.about-section{
-    padding-top: 40px;
-    padding-bottom: 40px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
+.about-section,
 .contact-section {
-    padding-top: 150px;
+    padding-top: 40px;
     padding-bottom: 40px;
     margin-top: 0;
     margin-bottom: 0;

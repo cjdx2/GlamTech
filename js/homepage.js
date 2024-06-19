@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
     const aboutLink = document.querySelector('a[href="#about"]');
     const homeLink = document.querySelector('a[href="#home"]');
-
+    
     logoutLink.addEventListener("click", function(event) {
         event.preventDefault();
         localStorage.clear();
         window.location.href = "../html/login1.html";
     });
-
+    
     menuButton.addEventListener('click', function () {
         if (subMenu.classList.contains('visible')) {
             subMenu.classList.remove('visible');
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 0);
         }
     });
-
+    
     window.addEventListener('scroll', function () {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
             header.classList.remove('scrolled');
         }
     });
-
+    
     function smoothScroll(event, sectionId) {
         event.preventDefault();
         document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
@@ -47,23 +47,24 @@ document.addEventListener("DOMContentLoaded", function() {
             subMenu.style.display = 'none';
         }, 300);
     }
-
+    
     servicesLink.addEventListener("click", function(event) {
         smoothScroll(event, "services");
     });
-
+    
     staffLink.addEventListener("click", function(event) {
         smoothScroll(event, "staff");
     });
-
+    
     galleryLink.addEventListener("click", function(event) {
         smoothScroll(event, "gallery");
     });
-
+    
     aboutLink.addEventListener("click", function(event) {
         smoothScroll(event, "about");
     });
 
+    // Add event listener for Home link
     homeLink.addEventListener("click", function(event) {
         event.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -72,14 +73,14 @@ document.addEventListener("DOMContentLoaded", function() {
             subMenu.style.display = 'none';
         }, 300);
     });
-
+    
     function cloneItems() {
         galleryItems.forEach(item => {
             const clone = item.cloneNode(true);
             galleryContainer.appendChild(clone);
         });
     }
-
+    
     cloneItems();
     
     galleryContainer.addEventListener('wheel', (event) => {
