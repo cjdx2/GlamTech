@@ -1,0 +1,163 @@
+body {
+    background: url('../img/background.png') no-repeat center center fixed; 
+    font-family: 'Neue Montreal', sans-serif;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h1 {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 52px;
+    margin-bottom: 14px;
+  }
+  
+  h2 {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: normal;
+  }
+  
+  p {
+      color:#ffffff;
+      text-align: center;
+      margin-bottom: 1px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .profile-pic {
+    width: 260px;
+    height: 260px;
+    align-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border: 0px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .user-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+    overflow: hidden;
+    border: 0px solid #ffffff;
+    align-content: first baseline;
+    float: left;
+  }
+  
+  .user-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .rating {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+  }
+  
+  .star {
+    color: #ffc107;
+    font-size: 60px;
+    margin: 0 5px;
+    align-items: center;
+  }
+  
+  .star-rating {
+    direction: rtl;
+    display: inline-block;
+    font-size: 2em;
+    margin-left: 20px;
+  }
+  
+  .star-rating input[type="radio"] {
+    display: none;
+  }
+  
+  .star-rating label {
+    color: #dbdbdb;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .star-rating label::before {
+    content: '★';
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .star-rating label:hover,
+  .star-rating label:hover ~ label,
+  .star-rating input[type="radio"]:checked ~ label {
+    color:#ffc107;
+  }
+  
+  .star-rating input[type="radio"]:checked ~ label::before,
+  .star-rating label:hover::before,
+  .star-rating label:hover ~ label::before {
+    opacity: 1;
+  }
+  
+  .feedback {
+    margin-top: 8px;
+    margin-left: 82px;
+  }
+  
+  .feedback label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .feedback textarea {
+    width: 100%;
+    max-width: 880px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff6f;
+  }
+  
+  .submit-button {
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 16px;
+  }
+  
+  .submit-button button {
+    padding: 7px 12px;
+    font-size: 1em;
+    background-color: #529ef0f6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-button button:hover {
+    background-color: #0056b3;
+  }
+  
+  .container-feedback {
+    background-color: #ffffff8f;
+    padding: 2%;
+    width: 1000px;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
