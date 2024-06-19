@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.clear();
         window.location.href = "../html/login1.html";
     });
-
+    
     menuButton.addEventListener('click', function () {
         if (subMenu.classList.contains('visible')) {
             subMenu.classList.remove('visible');
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 0);
         }
     });
-
+    
     window.addEventListener('scroll', function () {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
@@ -38,23 +38,22 @@ document.addEventListener("DOMContentLoaded", function() {
             header.classList.remove('scrolled');
         }
     });
-
-    servicesLink.addEventListener("click", function(event) {
+    
+    function smoothScroll(event, sectionId) {
         event.preventDefault();
-        document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+        document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
         subMenu.classList.remove('visible');
         setTimeout(() => {
             subMenu.style.display = 'none';
         }, 300);
+    }
+    
+    servicesLink.addEventListener("click", function(event) {
+        smoothScroll(event, "services");
     });
     
     staffLink.addEventListener("click", function(event) {
-        event.preventDefault();
-        document.getElementById("staff").scrollIntoView({ behavior: "smooth" });
-        subMenu.classList.remove('visible');
-        setTimeout(() => {
-            subMenu.style.display = 'none';
-        }, 300);
+        smoothScroll(event, "staff");
     });
     
     galleryLink.addEventListener("click", function(event) {
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener for Home link
     homeLink.addEventListener("click", function(event) {
         event.preventDefault();
-        document.getElementById("gallery").scrollIntoView({ behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "smooth" });
         subMenu.classList.remove('visible');
         setTimeout(() => {
             subMenu.style.display = 'none';
@@ -86,10 +85,25 @@ document.addEventListener("DOMContentLoaded", function() {
     
     galleryContainer.addEventListener('wheel', (event) => {
         event.preventDefault();
-        document.getElementById("about").scrollIntoView({ behavior: "smooth" });
-        subMenu.classList.remove('visible');
-        setTimeout(() => {
-            subMenu.style.display = 'none';
-        }, 300);
+        const scrollAmount = event.deltaY;
+        galleryContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+    
+    galleryContainer.addEventListener('mouseenter', () => {
+        galleryContainer.classList.add('paused');
+    });
+    
+    galleryContainer.addEventListener('mouseleave', () => {
+        galleryContainer.classList.remove('paused');
+    });
+    
+    galleryContainer.addEventListener('scroll', () => {
+        const maxScrollLeft = galleryContainer.scrollWidth - galleryContainer.clientWidth;
+        if (!galleryContainer.classList.contains('paused') && galleryContainer.scrollLeft >= maxScrollLeft - 50) {
+            cloneItems();
+        }
     });
 });
