@@ -1,21 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlamTech</title>
-  <link rel="stylesheet" href="../css/staff_profile.css">
+<style>
+body {
+  background: url('../img/background.png') no-repeat center center fixed; 
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h2 {
+  color: #ffffff;
+  text-align: center;
+}
+
+h3 {
+  color: #ffffff;
+  font-weight: normal;
+  font-size: small;
+  margin-left: 10px;
+}
+
+p {
+    color:#ffffff;
+    text-align: center
+}
+
+
+.profile-pic {
+  width: 260px;
+  height: 260px;
+  align-content: center;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 0px solid #ffffff;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px;
+  overflow: hidden;
+  border: 0px solid #ffffff;
+  align-content: first baseline;
+}
+
+.user-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.star {
+  color: #ffc107;
+  font-size: 60px;
+  margin: 0 5px;
+  align-items: center;
+}
+
+.star-feedback{
+    color: #ffc107;
+    font-size: 25px;
+    margin: 0 2px;
+}
+
+.container-feedback {
+  background-color: #d9d9d941;
+  padding: 1%;
+  border: 1px solid #d9d9d941;
+  width: 1000px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.container-fbinner {
+  /* background-color: #d9d9d941; */
+  padding: 1px;
+  /* border: 1px solid #d9d9d941; */
+  width: 860px;
+  margin: auto;
+  /* border-radius: 20px; */
+}
+
+</style>
 </head>
-
-
 <body>
+
 <div class="container">
-<h1>Rosalie Marikit</h1>
+<h1>Name</h1>
   <div class="profile-pic">
     <img src="../img/profile 1.png" alt="Profile Picture">
   </div>
-  <h2>Expertise: Manicure and Pedicure</h2>
-  <p>Employee</p>
+  <h2>SPECIALTY</h2>
+  <p>employee</p>
   <div class="rating">
     <span class="star">&#9733;</span>
     <span class="star">&#9733;</span>
@@ -28,25 +125,12 @@
     <div class="user-profile">
       <img src="../img/profile 2.png" alt="User Profile">
     </div>
-   <div class="star-rating">
-        <input type="radio" id="star5" name="rating" value="5">
-        <label for="star5" title="5 stars">☆</label>
-        <input type="radio" id="star4" name="rating" value="4">
-        <label for="star4" title="4 stars">☆</label>
-        <input type="radio" id="star3" name="rating" value="3">
-        <label for="star3" title="3 stars">☆</label>
-        <input type="radio" id="star2" name="rating" value="2">
-        <label for="star2" title="2 stars">☆</label>
-        <input type="radio" id="star1" name="rating" value="1">
-        <label for="star1" title="1 star">☆</label>
-    </div>
-    <div class="feedback">
-         <textarea id="feedback" name="feedback" rows="4" cols="50" placeholder="Write your feedback here..."></textarea>
-    </div>
-    <div class="submit-button">
-         <button type="submit">Submit</button>
+    <div class="container-fbinner">
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <span class="star-feedback">&#9734;</span>
+      <h3>Write a feedback ...</h3>
     </div>
   </div>
-
-</body>
-</html>  
