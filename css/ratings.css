@@ -6,8 +6,7 @@ p {
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    padding: 25px;
     font-family: 'Neue Montreal', sans-serif;
     background-color: #09425B;
     background-size: cover;
