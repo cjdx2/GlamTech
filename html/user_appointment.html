@@ -56,43 +56,69 @@
             <p>
                 <label for="services"></label>
                 <select name="services" id="services">
-                    <option value="">Service you'd like to book</option>
-                    <option value="option1">option1</option>
-                    <option value="option2">option2</option>
-                    <option value="option3">option3</option>
-                    <option value="option4">option4</option>
-                    <option value="option5">option5</option>
+                    <option class="options" value="">Service you'd like to book</option>
+                    
+                    <option class="servicesoption" value="styling">STYLING</option>
+                    <option class="services" value="haircut">Hair Cut</option>
+                    <option class="services" value="shampoowithblowdry">Shampoo with Blow Dry</option>
+                    <option class="services" value="hairiron">Hair Iron</option>
+
+                    <option class="servicesoption" value="color">COLOR</option>
+                    <option class="services" value="haircolor">Hair Color</option>
+                    <option class="services" value="highlights">Highlights</option>
+
+                    <option class="servicesoption" value="nailsandfeet">NAILS AND FEET</option>
+                    <option class="services" value="manicure">Manicure</option>
+                    <option class="services" value="pedicure">Pedicure</option>
+                    <option class="services" value="gelpolishmanicure">Gel Polish Manicure</option>
+                    <option class="services" value="gelpolish">Gel Polish</option>
+                    <option class="services" value="footspa">Foot Spa</option>
+                    <option class="services" value="premiumfootspa">Premium Foot Spa</option>
+
+                    <option class="servicesoption" value="hairtreatment">NAILS AND FEET</option>
+                    <option class="services" value="hotoil">Hot Oil</option>
+                    <option class="services" value="hairmask">Hair Mask</option>
+                    <option class="services" value="hairspa">Hair Spa</option>
+                    <option class="services" value="semidlino">Semi D' Lino (Per Vial)</option>
+                    <option class="services" value="cellophane">Cellophane</option>
+                    <option class="services" value="coldwave">Cold Wave (Perming)</option>
+
+                    <option class="servicesoption" value="promo">PROMO PACKAGE</option>
+                    <option class="services" value="promo1">Manicure, Pedicure, Foot Spa</option>
+                    <option class="services" value="hairmask">Hair, Make-up</option>
+                    <option class="services" value="hairspa">Hair Cut, Hair Spa, Manicure, Pedicure, Foot Spa</option>
+                    <option class="services" value="hairspa">Hair Cut, Hair Color, Hair Spa, Vitamin E</option>
                 </select>
 
             </p>
 
             <P class="text">Appointment Date</P>
-          <p>
+            <p>
                 <label for="date"></label>
-                <input value="date" class="date" type="date" placeholder="Date">
+                <input type="date" id="date" name="date" min="<?php echo date('Y-m-d'); ?>" required>
             </p>
             <p class="text"> Appointment Time </p>
             <p>
                 <label for="time"></label>
                 <input value="date" class="date" type="time" placeholder="Time">
             </p>
-        
-            
 
-            
-                <!--
+
+
+
+            <!--
             <label for="confirm"></label>
             <input id="confirm" type="button" value="Confirm">
 
             <label for="confirm"></label>
             <input id="confirm" type="button" value="Back">
         -->
-                <!--
+            <!--
             <button id="book">Book Appointment</button> -->
 
 
-                <a class="booked-btn" href="../html/homepage.html">Confirm</a>
-                <a class="booked-btn" href="../html/homepage.html">Back</a>
+            <a class="booked-btn" href="../html/homepage.html">Confirm</a>
+            <a class="booked-btn" href="../html/homepage.html">Back</a>
 
 
             </p>
@@ -122,64 +148,64 @@
     <!--REVIEWS-->
     <section class="reviews">
         <h3 class="showreview">REVIEWS:</h3>
-    <div class="review-card1">
-        <div class="user-profile">
-          <img src="../img/profile 1.png" alt="User Profile">
+        <div class="review-card1">
+            <div class="user-profile">
+                <img src="../img/profile 1.png" alt="User Profile">
+            </div>
+            <div class="star-rating">
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <p class="reviewp">master ka talaga</p>
+            </div>
         </div>
-        <div class="star-rating">
-          <span class="star-feedback">&#9733;</span>
-          <span class="star-feedback">&#9733;</span>
-          <span class="star-feedback">&#9733;</span>
-          <span class="star-feedback">&#9733;</span>
-          <span class="star-feedback">&#9733;</span>
-          <p class="reviewp">master ka talaga</p>
+
+
+        <div class="review-card2">
+            <div class="user-profile">
+                <img src="../img/profile 2.png" alt="User Profile">
+            </div>
+            <div class="star-rating">
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <p>amazing</p>
+            </div>
         </div>
-      </div>
 
-      
-  <div class="review-card2">
-    <div class="user-profile">
-      <img src="../img/profile 2.png" alt="User Profile">
-    </div>
-    <div class="star-rating">
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <p>amazing</p>
-    </div>
-  </div>
+        <div class="review-card3">
+            <div class="user-profile">
+                <img src="../img/profile 3.png" alt="User Profile">
+            </div>
+            <div class="star-rating">
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <p>nakakabilib</p>
+            </div>
+        </div>
 
-  <div class="review-card3">
-    <div class="user-profile">
-      <img src="../img/profile 3.png" alt="User Profile">
-    </div>
-    <div class="star-rating">
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <p>nakakabilib</p>
-    </div>
-  </div>
+        <div class="review-card4">
+            <div class="user-profile">
+                <img src="../img/profile 4.png" alt="User Profile">
+            </div>
+            <div class="star-rating">
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9733;</span>
+                <span class="star-feedback">&#9734;</span>
+                <p>da best, may free kopi</p>
+            </div>
+        </div>
 
-  <div class="review-card4">
-    <div class="user-profile">
-      <img src="../img/profile 4.png" alt="User Profile">
-    </div>
-    <div class="star-rating">
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9733;</span>
-      <span class="star-feedback">&#9734;</span>
-      <p>da best, may free kopi</p>
-    </div>
-  </div>
-
-      </section>
+    </section>
 
 
     <!--MENU BUTTON-->
@@ -198,7 +224,7 @@
 
 
 
-    <script src="../js/homepage.js"></script>
+
     <script src="../js/user_appointment.js"></script>
 </body>
 

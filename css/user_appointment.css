@@ -54,7 +54,7 @@ h2{
 .text {
     color: white;
     margin-left: 40px;
-    
+    font-size: 20px;
    
 }
 
@@ -66,37 +66,81 @@ input[type="date"],
 input[type="time"],
 input[type="submit"] {
     width: 450px;
-    height: 28px;
-    border: 2px solid #093d53;
+    height: 33px;
+    font-size: 15px;
+     border: 2px solid #093d53;
     border-radius: 10px;
     margin: 2px;
     margin-left: 35px;
     background: rgba(255, 255, 255, 0.1);
+color: #d0d5d7;;
+ padding-left: 10px;
     
 }
 
 input[type="time"]{
    
    margin-bottom: 30px;
-   
 }
+
+
 ::placeholder{
    
-    padding: 5px;
+    
+  color: #d0d5d7;
 
 }
 
 
 #services {
-    width: 457px;
+    width: 466px;
     height: 35px;
+    font-size: 15px;
     border: 2px solid #093d53;
     border-radius: 10px;
     margin: 2px;
-    
-    margin-left: 35px;
+    margin-left: 32px;
     background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    color: #d0d5d7;
+    padding-left: 8px;
+    
 
+}
+
+
+.options{
+    background-color: #093d53;
+    color: white;
+    font-size: large;
+ 
+
+}
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.servicesoption{
+    text-align: center;
+    background-color: #ffc107;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}
+
+.services{
+    background-color: #093d53;
+    color: white;
+    font-size: 15px;
+}
+
+.services:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .booked-btn {
