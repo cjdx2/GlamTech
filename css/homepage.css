@@ -14,7 +14,8 @@ body, html {
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     position: relative;
     text-shadow: 2px 2px 20px rgba(0, 0, 0, 1);
 }
@@ -100,12 +101,20 @@ header.scrolled {
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
-    padding-top: 40px;
+    padding-top: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .content h1 {
     font-size: 100px;
     margin-bottom: 20px;
+}
+
+.book-now-container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .book-now-btn {
@@ -117,6 +126,9 @@ header.scrolled {
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+    position: relative;
+    top: -100px;
 }
 
 .book-now-btn:hover {
