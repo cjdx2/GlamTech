@@ -1,15 +1,37 @@
-
 body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     background: url('../img/UserProfileBackground.png') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
 }
+
+.profile-header {
+    position: absolute;
+    top: 65px;
+    left: 65px;
+    color: white;
+}
+
+.profile-title h1 {
+    font: Arial;
+    font-size: 3em;
+    margin: 0;
+    font-weight: normal 
+}
+
+.profile-title h2 {
+    font: Arial;
+    font-size: 2em;
+    margin-top: 0.2em;
+    color: white;
+    font-weight: normal 
+}
+
 
 .profile-container {
     text-align: left;
@@ -19,35 +41,13 @@ body {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-}
-
-.profile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.profile-title {
-    display: flex;
-    flex-direction: column;
-}
-
-.profile-title h1 {
-    font-size: 2.5em;
-    margin: 0;
-}
-
-.profile-title h2 {
-    font-size: 1.5em;
-    margin-top: 0.5em;
-    color: white;
+    margin-top: 200px;
 }
 
 .profile-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2em;
 }
 
 .profile-form {
@@ -55,9 +55,15 @@ body {
 }
 
 .profile-form form {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     max-width: 300px;
+    color: #fff;
+}
+
+.profile-form input::placeholder {
+    color: #ccc;
 }
 
 .profile-form input {
@@ -65,20 +71,21 @@ body {
     padding: 20px;
     margin: 10px 0;
     border: none;
-    border-radius: 15px;
-    background-color: #194d66;
-    color: white;
-    font-size: 1em;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.25em;
+    backdrop-filter: blur(10px);
 }
 
 .confirm-button {
-    margin: 20px 0;
+    margin: 30px 0;
     padding: 12px 20px;
     width: 150px; /* Set a fixed width */
     border: none;
     border-radius: 8px;
     background: #fff;
-    font-size: 1em;
+    font-size: 1.25em;
     color: #004d7a;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
@@ -100,12 +107,12 @@ body {
     width: 285px;
     height: 285px;
     border-radius: 50%;
-    border: 5px solid #0e5b7b;
+    /* border: 5px solid #0e5b7b; */
 }
 
 .edit-picture-button {
-    margin-top: 20px;
-    font-size: 1em;
+    margin-top: 30px;
+    font-size: 1.3em;
     background-color: transparent;
     border: none;
     color: #ccc;
