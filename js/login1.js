@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.getElementById('login-password').value;
 
         // Hard-coded credentials for admin
-        const adminUsername = 'admin';
-        const adminPassword = 'password123';
+        const adminUsername = 'glamtech';
+        const adminPassword = '123';
 
         if (username === adminUsername && password === adminPassword) {
             // Redirect to admin page
