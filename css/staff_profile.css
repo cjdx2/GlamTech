@@ -162,6 +162,11 @@ p {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+#feedback-container {
+  width: 1053px;
+  margin: auto;
+}
+
 .feedback-item {
   display: flex;
   align-items: center;
