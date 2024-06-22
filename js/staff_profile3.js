@@ -51,7 +51,7 @@ function displayFeedback(page) {
         const userProfile = document.createElement('div');
         userProfile.classList.add('user-profile');
         const userImage = document.createElement('img');
-        userImage.src = '../img/profile 2.png';
+        userImage.src = '../img/profile 5.png';
         userImage.alt = 'User Profile';
         userProfile.appendChild(userImage);
         

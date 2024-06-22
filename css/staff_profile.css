@@ -196,6 +196,7 @@ p {
   flex-grow: 1;
   font-size: 1em;
   color: #ffffff;
+  overflow-wrap: break-word;
 }
 
 .date-time {
