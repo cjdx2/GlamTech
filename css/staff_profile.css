@@ -163,7 +163,7 @@ p {
 }
 
 #feedback-container {
-  width: 1053px;
+  width: 1059px;
   margin: auto;
 }
 
@@ -189,20 +189,22 @@ p {
 .feedback-item .star {
   color: #ffc107;
   font-size: 1.5em;
-  margin-right: 2px;
+  margin: 0 2px;;
 }
 
 .feedback-item .feedback-text {
   flex-grow: 1;
   font-size: 1em;
   color: #ffffff;
-  overflow-wrap: break-word;
 }
 
 .date-time {
   font-size: 0.8em;
-  color: #ffffff;
-  margin-top: 5px;
+  color: #dbdbdb;
+  margin-top: 9px;
+  text-shadow: none; 
+  margin: 5px;
+  float: right;
 }
 
 .page-button {
