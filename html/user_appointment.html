@@ -15,6 +15,26 @@
 
 <body>
 
+    <!--MENU BUTTON-->
+    <header>
+        <div class="logo">
+            <img src="../img/logo.png" alt="GlamTech Logo">
+        </div>
+        <div class="menu-container">
+            <div class="menu-button" id="menu-button">MENU</div>
+            <div class="menu" id="sub-menu">
+                <ul>
+                    <li><a href="user_profile.html">profile</a></li>
+                    <li><a href="#home">home</a></li>
+                    <li><a href="#services">services</a></li>
+                    <li><a href="#staff">staff</a></li>
+                    <li><a href="#gallery">gallery</a></li>
+                    <li><a href="#about">about us</a></li>
+                    <li><a href="#logout" id="logout-btn">log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
     <!--user information-->
 
@@ -57,7 +77,7 @@
                 <label for="services"></label>
                 <select name="services" id="services">
                     <option class="options" value="">Service you'd like to book</option>
-                    
+
                     <option class="servicesoption" value="styling">STYLING</option>
                     <option class="services" value="haircut">Hair Cut</option>
                     <option class="services" value="shampoowithblowdry">Shampoo with Blow Dry</option>
@@ -98,10 +118,19 @@
                 <input type="date" id="date" name="date" min="<?php echo date('Y-m-d'); ?>" required>
             </p>
             <p class="text"> Appointment Time </p>
-            <p>
-                <label for="time"></label>
-                <input value="date" class="date" type="time" placeholder="Time">
-            </p>
+            <div id="timeform">
+                <div class="timegroup">
+                    <input type="number" class="time" name="appointmentHour" placeholder="hh" min="1" max="12" required>
+                    <input type="number" class="time" name="appointmentMinute" placeholder="mm" min="00" max="59"
+                        required>
+                    <select class="timeAmPm" name="appointmentAmPm" required>
+                        <option class="ampm" value="AM">AM</option>
+                        <option class="ampm"value="PM">PM</option>
+                    </select>
+                </div>
+            </div>
+
+
 
 
 
@@ -132,6 +161,7 @@
             <div class="profile-pic">
                 <img src="../img/profile 1.png" alt="Profile Picture">
             </div>
+        
             <h3 class="employee">Rosalie Marikit</h3>
             <h4 class="expertise">Expertise: Manicure and Pedicure</h4>
             <!--      <p class="ratep">Employee</p>  -->
@@ -208,23 +238,9 @@
     </section>
 
 
-    <!--MENU BUTTON-->
-    <div id="home-container">
-        <div class="menu-button" id="menu-button">MENU</div>
-        <div class="sub-menu" id="sub-menu">
-            <button id="profile-btn">Profile</button>
-            <button id="home-btn">Home</button>
-            <button id="services-btn">Services</button>
-            <button id="staff-btn">Staff</button>
-            <button id="gallery-btn">Gallery</button>
-            <button id="about-btn">About Us</button>
-            <button id="logout-btn">Logout</button>
-        </div>
-    </div>
+  
 
-
-
-
+    <script src="../js/homepage.js"></script>
     <script src="../js/user_appointment.js"></script>
 </body>
 

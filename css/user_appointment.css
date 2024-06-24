@@ -22,7 +22,7 @@ body {
     width: 480px;
     height: 500px;
    background-color: transparent;
-    margin-left: 30px;
+    margin-left: 80px;
     /*#093d53;*/
 }
 
@@ -42,20 +42,10 @@ h2{
 
 }
 
-.date{
-    width: 450px;
-    height: 28px;
-    border: 2px solid #093d53;
-    border-radius: 10px;
-    margin: 2px;
-    margin-left: 35px;
-    background-color: white;
-}
-
 .text {
     color: white;
     margin-left: 40px;
-    font-size: 20px;
+    font-size: 17px;
    
 }
 
@@ -64,8 +54,8 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="date"],
-input[type="time"],
-input[type="submit"] {
+input[type="submit"] 
+{
     width: 450px;
     height: 33px;
     font-size: 15px;
@@ -79,10 +69,61 @@ color: #d0d5d7;;
     
 }
 
-input[type="time"]{
-   
-   margin-bottom: 30px;
+#timeform{
+  
+    width: 470px;
+    height: 33px;
+    margin-left: 35px;
+    margin-bottom:35px ;
+  
+    
+    
 }
+.timegroup {
+    display: flex;
+    gap: 1px;
+}
+
+.timegroup input,
+.timegroup select {
+    flex: 1;
+}
+
+
+.time{
+    width: 150px;
+    height: 33px;
+    font-size: 15px;
+     border: 2px solid #093d53;
+    border-radius: 10px;
+    margin: 2px;
+    
+    background: rgba(255, 255, 255, 0.1);
+color: #d0d5d7;
+ padding-left: 10px;
+
+}
+
+.timeAmPm{
+    width: 150px;
+    height: 38px;
+    font-size: 15px;
+     border: 2px solid #093d53;
+    border-radius: 10px;
+    margin: 2px;
+    
+    background: rgba(255, 255, 255, 0.1);
+ 
+color: #d0d5d7;
+ padding-left: 10px;
+
+}
+
+.ampm{
+    background-color: #093d53;   
+    color: white;
+}
+
 
 
 ::placeholder{
@@ -180,20 +221,7 @@ input[type="time"]{
     background-color:transparent;
 }
 
-.employee {
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin-top: 10px;
-   
-}
 
-.expertise {
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    font-weight: normal;
-}
 /*
 .ratep {
     color: #ffffff;
@@ -204,12 +232,13 @@ input[type="time"]{
 */
 
 .profile-pic {
-    width: 230px;
-    height: 230px;
+    width: 210px;
+    height: 210px;
     align-content: center;
     border-radius: 50%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 110px;
+    margin-left: 110px;
     margin-bottom: 10px;
     overflow: hidden;
     border: 0px solid #ffffff;
@@ -223,10 +252,28 @@ input[type="time"]{
     
 }
 
+.employee {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    margin-left: -70px;
+   
+}
+
+.expertise {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: normal;
+    margin-left: -70px;
+}
+
 .rating {
     display: flex;
     justify-content: center;
     margin-top: -20px;
+    margin-left: -70px;
     margin-bottom: 20px;
 
 }
@@ -253,14 +300,15 @@ IF MAGDADAGDAG NG flex-wrap:wrap; SA MAIN*/
 
 .showreview{
     margin-left: 20px;
-    font-size: 30px
+    font-size: 25px
 }
 .reviews   {
     width: 500px;
     height: 400px;
-    ;
+
     
 }
+
 
 
 p {
@@ -351,56 +399,85 @@ p {
 
 /*MENU*/
 
-#home-container {
-    position: top;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: transparent;
+    z-index: 1000;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+header.scrolled {
+    background: transparent;
+}
+
+.logo img {
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
 }
 
 .menu-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-
-    /* Dark Blue */
-    color: #fff;
-    /* White */
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
+    font-size: 18px;
     cursor: pointer;
+    padding: 20px;
+    margin-right: 20px;
 }
 
-.sub-menu {
-    position: absolute;
-    top: 40px;
-    right: 10px;
-    background-color: #0b2534;
-    /* Dark Blue */
-    border-radius: 5px;
-    padding: 10px;
+.menu {
     display: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    text-align: right;
+    top: 70px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    backdrop-filter: blur(10px);
 }
 
-.sub-menu button {
+.menu.visible {
     display: block;
-    width: 100%;
-    background-color: transparent;
-    color: #fff;
-    /* White */
-    border: none;
-    border-bottom: 1px solid #fff;
-    /* White */
-    padding: 8px 0;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.sub-menu button:last-child {
-    border-bottom: none;
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.sub-menu button:hover {
-    background-color: #093d53;
-    /* Dark Cyan */
+.menu ul li {
+    margin: 10px 0;
 }
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+}
+
+/*footer*/
+
+
+    
+
