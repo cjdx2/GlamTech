@@ -178,10 +178,12 @@ p {
 }
 
 .feedback-item .user-profile {
+  flex: 0 0 auto; 
   margin-right: 10px;
 }
 
 .feedback-item .star-rating {
+  flex: 0 0 auto;
   display: flex;
   margin-right: 10px;
 }
@@ -189,22 +191,27 @@ p {
 .feedback-item .star {
   color: #ffc107;
   font-size: 1.5em;
-  margin: 0 2px;;
+  margin: 3px;
+  margin-top: -5px;
 }
 
 .feedback-item .feedback-text {
   flex-grow: 1;
   font-size: 1em;
   color: #ffffff;
+  text-align: justify;
+  margin: 12px;
 }
 
 .date-time {
+  flex: 0 0 auto;
   font-size: 0.8em;
   color: #dbdbdb;
   margin-top: 9px;
   text-shadow: none; 
   margin: 5px;
   float: right;
+  white-space: nowrap; 
 }
 
 .page-button {
