@@ -6,6 +6,7 @@ body {
     align-items: center;
     padding: 0 10px;
     flex-wrap: wrap;
+    font-family: 'Arial', sans-serif;
     /*  justify-content: center; 
   min-height: 100vh;    */
    
