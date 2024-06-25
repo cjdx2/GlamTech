@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
     const aboutLink = document.querySelector('a[href="#about"]');
     const homeLink = document.querySelector('a[href="#home"]'); 
+    const prevButton = document.querySelector('.prev-btn');
+    const nextButton = document.querySelector('.next-btn');
 
     logoutLink.addEventListener("click", function(event) {
         event.preventDefault();
@@ -104,5 +106,19 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!galleryContainer.classList.contains('paused') && galleryContainer.scrollLeft >= maxScrollLeft - 50) {
             cloneItems();
         }
+    });
+
+    prevButton.addEventListener('click', function() {
+        galleryContainer.scrollBy({
+            left: -300,
+            behavior: 'smooth'
+        });
+    });
+
+    nextButton.addEventListener('click', function() {
+        galleryContainer.scrollBy({
+            left: 300,
+            behavior: 'smooth'
+        });
     });
 });

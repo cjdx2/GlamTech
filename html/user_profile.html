@@ -7,28 +7,55 @@
     <link rel="stylesheet" href="../css/user_profile.css">
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <img src="../img/logo.png" alt="GlamTech Logo">
+        </div>
+        <div class="menu-container">
+            <div class="menu-button" id="menu-button">MENU</div>
+            <div class="menu" id="sub-menu">
+                <ul>
+                    <li><a href="../homepage.html#home">home</a></li>
+                    <li><a href="../homepage.html#services">services</a></li>
+                    <li><a href="../homepage.html#staff">staff</a></li>
+                    <li><a href="../homepage.html#gallery">gallery</a></li>
+                    <li><a href="../homepage.html#about">about us</a></li>
+                    <li><a href="../homepage.html#logout" id="logout-btn">log out</a></li>
+                </ul>                              
+            </div>
+        </div>
+    </header>    
+
     <div class="profile-header">
         <div class="profile-title">
             <h1>Profile</h1>
             <h2>SET YOUR INFORMATION</h2>
         </div>
     </div>
+      
     <div class="profile-container">
         <div class="profile-content">
             <div class="profile-form">
-                <form>
-                    <input type="text" name="first-name" placeholder="First Name">
-                    <input type="text" name="last-name" placeholder="Last Name">
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="tel" name="phone-number" placeholder="Phone Number">
-                    <button type="submit" class="confirm-button">Confirm</button>
+                <form id="profile-form">
+                    <input type="text" name="first-name" id="first-name" placeholder="First Name">
+                    <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="tel" name="phone-number" id="phone-number" placeholder="Phone Number" pattern="[0-9]{11}">
+                    <div class="button-container">
+                        <button type="submit" class="confirm-button">Confirm</button>
+                        <button type="button" class="back-button" onclick="location.href='homepage.html'">Back</button>
+                    </div>
                 </form>
             </div>
+
             <div class="profile-picture">
-                <img src="../img/profile 2.png" alt="Profile Picture">
-                <button class="edit-picture-button">Edit Picture</button>
+                <img src="../img/profile 2.png" alt="Profile Picture" id="profile-picture-preview">
+                <input type="file" id="profile-picture-input" accept="image/*" style="display:none;">
+                <button class="edit-picture-button" onclick="document.getElementById('profile-picture-input').click();">Edit Picture</button>
             </div>
         </div>
     </div>
+
+    <script src="../js/user_profile.js"></script>
 </body>
 </html>
