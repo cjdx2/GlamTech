@@ -241,3 +241,9 @@ p {
 #feedback-container {
   margin-top: 20px;
 }
+
+.percentage-text {
+  font-size: 0.8em; /* adjust font size */
+  color: #ffc107; /* adjust text color */
+  margin-left: 5%; /* add some space between the stars and the percentage text */
+}

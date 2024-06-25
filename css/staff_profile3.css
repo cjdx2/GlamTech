@@ -178,10 +178,12 @@ body {
   }
   
   .feedback-item .user-profile {
+    flex: 0 0 auto;
     margin-right: 10px;
   }
   
   .feedback-item .star-rating {
+    flex: 0 0 auto;
     display: flex;
     margin-right: 10px;
   }
@@ -189,19 +191,27 @@ body {
   .feedback-item .star {
     color: #ffc107;
     font-size: 1.5em;
-    margin-right: 2px;
+    margin: 3px;
+    margin-top: -5px;
   }
   
   .feedback-item .feedback-text {
     flex-grow: 1;
     font-size: 1em;
     color: #ffffff;
+    text-align: justify;
+    margin: 12px;
   }
   
   .date-time {
+    flex: 0 0 auto;
     font-size: 0.8em;
-    color: #ffffff;
-    margin-top: 5px;
+    color: #dbdbdb;
+    margin-top: 9px;
+    text-shadow: none; 
+    margin: 5px;
+    float: right;
+    white-space: nowrap; 
   }
   
   .page-button {
@@ -231,4 +241,9 @@ body {
   #feedback-container {
     margin-top: 20px;
   }
-   
+
+  .percentage-text {
+    font-size: 0.8em; /* adjust font size */
+    color: #ffc107; /* adjust text color */
+    margin-left: 5%; /* add some space between the stars and the percentage text */
+  }

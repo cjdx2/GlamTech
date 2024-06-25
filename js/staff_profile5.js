@@ -108,3 +108,42 @@ function displayPagination() {
 
 // Initialize the first page of feedback
 displayFeedback(currentPage);
+
+
+// Calculate the average rating
+function calculateAverageRating() {
+    const totalRatings = feedbacks.reduce((acc, feedback) => acc + parseInt(feedback.rating), 0);
+    const averageRating = totalRatings / feedbacks.length;
+    return averageRating;
+  }
+  
+// Display the average rating as a percentage
+function displayAverageRating() {
+    const averageRating = calculateAverageRating();
+    const percentage = (averageRating / 5) * 100;
+    const ratingElement = document.querySelector('.rating');
+    ratingElement.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement('span');
+      star.classList.add('star');
+      if (i <= averageRating) {
+        star.innerHTML = '&#9733;';
+      } else {
+        star.innerHTML = '&#9734;';
+      }
+      ratingElement.appendChild(star);
+    }
+    const percentageElement = document.createElement('span');
+    percentageElement.classList.add('percentage-text'); // add a class to the span element
+    // percentageElement.innerHTML = ` (${percentage.toFixed(2)}%)`; // to display the number percentage beside the star rating
+    // ratingElement.appendChild(percentageElement);
+  }
+  
+  // Call the displayAverageRating function whenever the feedbacks array changes
+  document.querySelector('.submit-button button').addEventListener('click', function(event) {
+    //...
+    displayAverageRating();
+  });
+  
+  // Initialize the average rating display
+  displayAverageRating();
