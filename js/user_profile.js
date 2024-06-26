@@ -1,3 +1,4 @@
+// Form handling
 document.getElementById('profile-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -22,6 +23,7 @@ document.getElementById('profile-form').addEventListener('submit', function(even
     phoneNumberInput.value = '';
 });
 
+// Profile picture handling
 document.getElementById('profile-picture-input').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
@@ -33,8 +35,7 @@ document.getElementById('profile-picture-input').addEventListener('change', func
     }
 });
 
-//menu
-
+// Menu handling
 const menuButton = document.getElementById('menu-button');
 const subMenu = document.getElementById('sub-menu');
 
@@ -48,21 +49,11 @@ document.addEventListener('click', function(event) {
     }
 });
 
-const submenuItems = subMenu.querySelectorAll('ul li a');
-
-submenuItems.forEach(item => {
-    item.addEventListener('click', function(event) {
+// Event delegation for submenu items
+subMenu.addEventListener('click', function(event) {
+    if (event.target.tagName === 'A') {
         event.preventDefault();
-
-        const targetSection = item.getAttribute('href');
-
-        subMenu.classList.remove('visible');
-
-        const targetElement = document.querySelector(targetSection);
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
+        const href = event.target.getAttribute('href');
+        window.location.href = href;
+    }
 });

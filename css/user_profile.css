@@ -61,7 +61,7 @@ header {
     display: none;
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 20px; 
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
