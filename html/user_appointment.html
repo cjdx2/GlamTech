@@ -56,10 +56,10 @@
         <section id="form">
             <div class="name">
                 <label for="firstname"></label>
-                <input class="firstname" type="text" name="firstname" placeholder="First Name">
+                <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
 
                 <label for="lastname"></label>
-                <input id="lastname" type="text" placeholder="Last Name">
+                <input id="lastname" type="text" placeholder="Last Name" required>
 
             </div>
 
@@ -73,44 +73,65 @@
             </div>
 
 
-            <p>
-                <label for="services"></label>
-                <select name="services" id="services">
-                    <option class="options" value="">Service you'd like to book</option>
+            <!--SERVICES DROPDOWN-->
+            <div class="dropdown">
+                <div class="dropdown-header" id="dropdown-header" required>
+                    <span id="selected-service">Service you'd like to book</span>
+                    <span class="dropdown-icon">▼</span>
 
-                    <option class="servicesoption" value="styling">STYLING</option>
-                    <option class="services" value="haircut">Hair Cut</option>
-                    <option class="services" value="shampoowithblowdry">Shampoo with Blow Dry</option>
-                    <option class="services" value="hairiron">Hair Iron</option>
+                </div>
 
-                    <option class="servicesoption" value="color">COLOR</option>
-                    <option class="services" value="haircolor">Hair Color</option>
-                    <option class="services" value="highlights">Highlights</option>
+                <div class="dropdown-options" id="dropdown-options">
+                    <div class="servicesoption" value="styling">STYLING</div>
+                    <div class="services" value="haircut" data-service-value="haircut">Hair Cut <span class="price">&#8369;100</span></div>
+                    <div class="services" value="shampoowithblowdry" data-service-value="shampoowithblowdry">Shampoo with Blow Dry <span
+                            class="price">&#8369;150</span></div>
+                    <div class="services" value="hairiron">Hair Iron <span class="price">&#8369;200</span></div>
 
-                    <option class="servicesoption" value="nailsandfeet">NAILS AND FEET</option>
-                    <option class="services" value="manicure">Manicure</option>
-                    <option class="services" value="pedicure">Pedicure</option>
-                    <option class="services" value="gelpolishmanicure">Gel Polish Manicure</option>
-                    <option class="services" value="gelpolish">Gel Polish</option>
-                    <option class="services" value="footspa">Foot Spa</option>
-                    <option class="services" value="premiumfootspa">Premium Foot Spa</option>
+                    <div class="servicesoption" value="color">COLOR</div>
+                    <div class="services" value="haircolor">Hair Color <span class="price">&#8369;350 UP </span></div>
+                    <div class="services" value="highlights">Highlights<span class="price">&#8369;350 UP </span></div>
 
-                    <option class="servicesoption" value="hairtreatment">NAILS AND FEET</option>
-                    <option class="services" value="hotoil">Hot Oil</option>
-                    <option class="services" value="hairmask">Hair Mask</option>
-                    <option class="services" value="hairspa">Hair Spa</option>
-                    <option class="services" value="semidlino">Semi D' Lino (Per Vial)</option>
-                    <option class="services" value="cellophane">Cellophane</option>
-                    <option class="services" value="coldwave">Cold Wave (Perming)</option>
+                    <div class="servicesoption" value="nailsandfeet">NAILS AND FEET</div>
+                    <div class="services" value="manicure">Manicure<span class="price">&#8369;100</span></div>
+                    <div class="services" value="pedicure">Pedicure<span class="price">&#8369;100 </span></div>
+                    <div class="services" value="gelpolishmanicure">Gel Polish Manicure<span class="price">&#8369;350
+                        </span></div>
+                    <div class="services" value="gelpolish">Gel Polish <span class="price">&#8369;400 </span></div>
+                    <div class="services" value="footspa"> Foot Spa<span class="price">&#8369;200 </span></div>
+                    <div class="services" value="premiumfootspa">Premium Foot Spa <span class="price">&#8369;300 </span>
+                    </div>
 
-                    <option class="servicesoption" value="promo">PROMO PACKAGE</option>
-                    <option class="services" value="promo1">Manicure, Pedicure, Foot Spa</option>
-                    <option class="services" value="hairmask">Hair, Make-up</option>
-                    <option class="services" value="hairspa">Hair Cut, Hair Spa, Manicure, Pedicure, Foot Spa</option>
-                    <option class="services" value="hairspa">Hair Cut, Hair Color, Hair Spa, Vitamin E</option>
-                </select>
+                    <div class="servicesoption" value="hairtreatment">HAIR TREATMENT</div>
+                    <div class="services" value="hotoil">Hot Oil<span class="price">&#8369;200 UP</span></div>
+                    <div class="services" value="hairmask">Hair Mask<span class="price">&#8369;200 UP </span></div>
+                    <div class="services" value="hairspa">Hair Spa<span class="price">&#8369;250 UP </span></div>
+                    <div class="services" value="semidlino"> Semi d' Lino (per vial) <span class="price">&#8369;350
+                        </span></div>
+                    <div class="services" value="cellophane">Cellophane<span class="price">&#8369;450 UP </span></div>
+                    <div class="services" value="coldwave">Coldwave (Perming) <span class="price">&#8369;450 UP </span>
+                    </div>
 
-            </p>
+                    <div class="servicesoption" value="promo">PROMO PACKAGE</div>
+                    <div class="services" value="promo1">Manicure, Pedicure, Foot Spa<span
+                            class="price">&#8369;399</span></div>
+                    <div class="services" value="promo2">Hair, Makeup<span class="price">&#8369;699 </span></div>
+                    <div class="services" value="promo3">Hair Cut, Hair Spa, Manicure, Pedicure, Foot Spa<span
+                            class="price">&#8369;799 </span></div>
+                    <div class="services" value="promo4">Hair Cut, Hair Color, Hair Spa, Vitamin E<span
+                            class="price">&#8369;999 UP </span></div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
 
             <P class="text">Appointment Date</P>
             <p>
@@ -125,12 +146,13 @@
                         required>
                     <select class="timeAmPm" name="appointmentAmPm" required>
                         <option class="ampm" value="AM">AM</option>
-                        <option class="ampm"value="PM">PM</option>
+                        <option class="ampm" value="PM">PM</option>
                     </select>
                 </div>
             </div>
 
-
+            <button type="submit">Submit</button>
+            <button type="button" onclick="location.href='homepage.html'">Back</button>
 
 
 
@@ -145,23 +167,30 @@
             <!--
             <button id="book">Book Appointment</button> -->
 
-
+            <!--
             <a class="booked-btn" href="../html/homepage.html">Confirm</a>
             <a class="booked-btn" href="../html/homepage.html">Back</a>
+        -->
+
 
 
             </p>
         </section>
 
     </form>
+
     <!--RATINGS-->
+
+
+
+
     <section id="ratings">
         <div class="ratings">
 
             <div class="profile-pic">
                 <img src="../img/profile 1.png" alt="Profile Picture">
             </div>
-        
+
             <h3 class="employee">Rosalie Marikit</h3>
             <h4 class="expertise">Expertise: Manicure and Pedicure</h4>
             <!--      <p class="ratep">Employee</p>  -->
@@ -176,7 +205,7 @@
     </section>
 
     <!--REVIEWS-->
-    <section class="reviews">
+    <section class="reviews" id="reviews">
         <h3 class="showreview">REVIEWS:</h3>
         <div class="review-card1">
             <div class="user-profile">
@@ -238,7 +267,6 @@
     </section>
 
 
-  
 
     <script src="../js/homepage.js"></script>
     <script src="../js/user_appointment.js"></script>

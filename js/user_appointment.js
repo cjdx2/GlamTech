@@ -72,4 +72,102 @@ document.querySelector('input[name="appointmentMinute"]').addEventListener('keyd
     }
 });
 
+// DROPDOWN SERVICES 
+
+document.getElementById('dropdown-header').addEventListener('click', function() {
+    const options = document.getElementById('dropdown-options');
+    if (options.style.display === 'none' || options.style.display === '') {
+        options.style.display = 'block';
+    } else {
+        options.style.display = 'none';
+    }
+});
+
+
+document.querySelectorAll('.services').forEach(function(option) {
+    option.addEventListener('click', function() {
+        const selectedService = document.getElementById('selected-service');
+        const serviceName = option.innerText.split('₱')[0].trim();
+        const servicePrice = option.querySelector('.price').textContent.replace('₱', '');
+        selectedService.innerHTML = `
+            <span>${serviceName}</span>
+            <span style="float:right;">₱${servicePrice}</span>
+        `;
+        document.getElementById('dropdown-options').style.display = 'none';
+    });
+});
+
 //END
+/*
+document.addEventListener("DOMContentLoaded", function() {
+    const services = document.querySelectorAll(".services");
+    const ratingsSection = document.getElementById("ratings");
+
+    services.forEach((service) => {
+        service.addEventListener("click", function() {
+            ratingsSection.style.display = "block";
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const services = document.querySelectorAll(".services");
+    const reviewsSection = document.getElementById("reviews");
+
+    services.forEach((service) => {
+        service.addEventListener("click", function() {
+           reviewsSection.style.display = "block";
+        });
+    });
+});
+ */
+
+document.addEventListener("DOMContentLoaded", function() {
+    const services = document.querySelectorAll(".services");
+    const ratingsSection = document.getElementById("ratings");
+    const reviewsSection = document.getElementById("reviews");
+    let currentRatingsSection;
+    let currentReviewsSection;
+
+    services.forEach((service) => {
+        service.addEventListener("click", function() {
+            const serviceName = service.getAttribute("value");
+            const ratingsContainer = document.getElementById(`${serviceName}-ratings`);
+            const reviewsContainer = document.getElementById(`${serviceName}-reviews`);
+
+            // Hide previously shown ratings and reviews sections
+            if (currentRatingsSection) {
+                currentRatingsSection.style.display = "none";
+            }
+            if (currentReviewsSection) {
+                currentReviewsSection.style.display = "none";
+            }
+
+            // Show the new ratings and reviews sections
+            ratingsSection.style.display = "block";
+            reviewsSection.style.display = "block";
+            ratingsContainer.style.display = "block";
+            reviewsContainer.style.display = "block";
+
+            // Update the current sections
+            currentRatingsSection = ratingsContainer;
+            currentReviewsSection = reviewsContainer;
+        });
+    });
+});
+
+
+//required field
+
+//WIILLL CHANGE
+function checkServiceSelected() {
+  const selectedService = document.querySelector('#selected-service');
+  const selectedValue = selectedService.getAttribute('data-selected-service');
+
+  if (!selectedValue) {
+    alert('Please select a service before proceeding.');
+    return false;
+  }
+
+  return true;
+}

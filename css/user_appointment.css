@@ -56,7 +56,7 @@ input[type="tel"],
 input[type="date"],
 input[type="submit"] 
 {
-    width: 450px;
+    width: 449px;
     height: 33px;
     font-size: 15px;
      border: 2px solid #093d53;
@@ -71,7 +71,7 @@ color: #d0d5d7;;
 
 #timeform{
   
-    width: 470px;
+    width: 467px;
     height: 33px;
     margin-left: 35px;
     margin-bottom:35px ;
@@ -134,56 +134,139 @@ color: #d0d5d7;
 }
 
 
-#services {
-    width: 466px;
+/*SERVICES DROPDOWN*/
+
+.dropdown {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+   
+}
+
+.dropdown-header {
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 454px;
     height: 35px;
     font-size: 15px;
     border: 2px solid #093d53;
     border-radius: 10px;
     margin: 2px;
-    margin-left: 32px;
+    margin-left: 34px;
+    
     background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     color: #d0d5d7;
     padding-left: 8px;
-    
+}
 
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.service-name {
+    margin-right: 10px;
 }
 
 
-.options{
-    background-color: #093d53;
+
+#selected-service {
+    display: block;
+    width: 100%;
+}
+
+#selected-service span:first-child {
+    display: inline-block;
+}
+
+#selected-service span:last-child {
+    float: right;
+}
+
+
+
+
+
+.dropdown-options {
+    display: none;
+    position: absolute;
+    width: 458px;
+   
+    border: 3px solid #093d53; 
+  border-radius: 10px;
+    border-top: none;
+    z-index: 1;
+
     color: white;
     font-size: large;
- 
+    margin-left: 35px;
+
+    height: 200px; /* set a fixed height for the dropdown */
+    overflow-y: auto;
 
 }
-.service-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
+
 .servicesoption{
     text-align: center;
+    border-radius: 2px;
     background-color: #ffc107;
     font-weight: bold;
     color: white;
     font-size: 20px;
 }
 
-.services{
-    background-color: #093d53;
+.services {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #084863;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
+
+
+ 
 }
 
+
 .services:hover{
-    background-color: rgba(0, 0, 0, 0.2);
+  
     cursor: pointer;
+    background-color: #093d53;
 }
+
+.selected-service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #084863;
+    color: white;
+    font-size: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.service-name {
+    margin-right: 100px;
+}
+
+.price {
+    margin-left: auto;
+    color: #888;
+}
+
+.dropdown-icon {
+  margin-right: 10px;
+}
+
+
+
+/*confirm/delete*/
 
 .booked-btn {
     
@@ -213,12 +296,17 @@ color: #d0d5d7;
 
 /*RATINGS*/
 
+
 #ratings {
+   display: none;
     width: 500px;
     height: 500px;
     margin-top: 45px;
     margin-left: 110px;
     background-color:transparent;
+}
+#reviews{
+    display: none;
 }
 
 
@@ -305,7 +393,7 @@ IF MAGDADAGDAG NG flex-wrap:wrap; SA MAIN*/
 .reviews   {
     width: 500px;
     height: 400px;
-
+    
     
 }
 
@@ -399,6 +487,7 @@ p {
 
 /*MENU*/
 
+
 header {
     display: flex;
     justify-content: space-between;
@@ -421,17 +510,31 @@ header.scrolled {
     border-radius: 50%;
     box-shadow: 0 0 20px rgba(0, 0, 0, .5);
 }
-
 .menu-container {
     display: flex;
     align-items: center;
+    margin-right: 30px;
 }
 
 .menu-button {
     font-size: 18px;
     cursor: pointer;
-    padding: 20px;
+    padding: 10px 20px;
     margin-right: 20px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    height: 20px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.menu-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.03);
 }
 
 .menu {
