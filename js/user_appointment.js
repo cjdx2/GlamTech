@@ -1,12 +1,23 @@
 
 // DATE
 document.addEventListener("DOMContentLoaded", function() {
-    // Get the current date in YYYY-MM-DD format
+    
     let today = new Date().toISOString().split('T')[0];
 
-    // Set the min attribute for the date input to the current date
     document.getElementById("date").setAttribute("min", today);
 });
+
+
+
+
+
+
+
+
+
+
+
+
 //DISABLED SERVICES
 document.addEventListener('DOMContentLoaded', (event) => {
     const serviceOptions = document.querySelectorAll('option.servicesoption');
@@ -30,6 +41,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+//CONTACT NUMBER
+
+
+
+  const contactInput = document.getElementById('usercontact');
+
+  contactInput.addEventListener('focus', () => {
+    if (contactInput.value === '') {
+      contactInput.value = '09';
+    }
+  });
+
+  contactInput.addEventListener('input', (e) => {
+    const inputValue = e.target.value;
+    const lastChar = inputValue[inputValue.length - 1];
+
+    if (!/\d/.test(lastChar)) {
+      e.preventDefault();
+      e.target.value = inputValue.replace(/[^0-9]/g, '');
+    }
+
+    if (inputValue.length === 2 && inputValue !== '09') {
+      e.preventDefault();
+      e.target.value = '09';
+    }
+  });
 
 
 //TIME
@@ -71,6 +108,62 @@ document.querySelector('input[name="appointmentMinute"]').addEventListener('keyd
         e.preventDefault();
     }
 });
+
+//TIME
+
+const hourInput = document.querySelector('input[name="appointmentHour"]');
+const minuteInput = document.querySelector('input[name="appointmentMinute"]');
+
+hourInput.addEventListener('keydown', (e) => {
+  const keyValue = e.key;
+  if (!/^\d$/.test(keyValue) && keyValue !== 'Backspace' && keyValue !== 'Delete') {
+    e.preventDefault();
+  }
+});
+
+minuteInput.addEventListener('keydown', (e) => {
+  const keyValue = e.key;
+  if (!/^\d$/.test(keyValue) && keyValue !== 'Backspace' && keyValue !== 'Delete') {
+    e.preventDefault();
+  }
+  const currentValue = minuteInput.value;
+  if (currentValue.length >= 2 && keyValue !== 'Backspace' && keyValue !== 'Delete') {
+    e.preventDefault();
+  }
+  const currentValueAsNumber = parseInt(currentValue, 10);
+  if (currentValueAsNumber >= 60) {
+    e.preventDefault();
+  }
+});
+
+hourInput.addEventListener('input', (e) => {
+  const currentValue = hourInput.value;
+  const currentValueAsNumber = parseInt(currentValue, 10);
+  if (currentValueAsNumber > 12) {
+    hourInput.value = '12';
+  }
+});
+
+minuteInput.addEventListener('input', (e) => {
+  const currentValue = minuteInput.value;
+  const currentValueAsNumber = parseInt(currentValue, 10);
+  if (currentValueAsNumber > 59) {
+    minuteInput.value = '59';
+  }
+});
+
+
+
+minuteInput.addEventListener('blur', (e) => {
+  const value = e.target.value;
+  if (value < 10) {
+    e.target.value = `0${value}`;
+  }
+});
+
+
+
+//END TIME
 
 // DROPDOWN SERVICES 
 
@@ -121,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
  */
-
+// SHOW RATINGS
 document.addEventListener("DOMContentLoaded", function() {
     const services = document.querySelectorAll(".services");
     const ratingsSection = document.getElementById("ratings");
@@ -159,15 +252,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //required field
 
-//WIILLL CHANGE
-function checkServiceSelected() {
-  const selectedService = document.querySelector('#selected-service');
-  const selectedValue = selectedService.getAttribute('data-selected-service');
+document.querySelectorAll('.services').forEach((service) => {
+    service.addEventListener('click', (e) => {
+        // Update the value of the hidden input field
+        document.getElementById('service').value = e.target.getAttribute('data-value');
+    });
+});
 
-  if (!selectedValue) {
-    alert('Please select a service before proceeding.');
-    return false;
-  }
-
-  return true;
+function validateForm() {
+    if (document.getElementById('service').value === '') {
+        alert('Please fill out all fields');
+        return false;
+    }
+    return true;
 }
