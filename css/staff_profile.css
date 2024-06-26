@@ -162,11 +162,6 @@ p {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-#feedback-container {
-  width: 1059px;
-  margin: auto;
-}
-
 .feedback-item {
   display: flex;
   align-items: center;
@@ -240,4 +235,6 @@ p {
 
 #feedback-container {
   margin-top: 20px;
+  width: 1059px;
+  margin: auto;
 }

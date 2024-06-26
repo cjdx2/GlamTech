@@ -162,11 +162,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
-  #feedback-container {
-    width: 1053px;
-    margin: auto;
-  }
-  
   .feedback-item {
     display: flex;
     align-items: center;
@@ -240,10 +235,6 @@ body {
   
   #feedback-container {
     margin-top: 20px;
-  }
-  
-  .percentage-text {
-    font-size: 0.8em; /* adjust font size */
-    color: #ffc107; /* adjust text color */
-    margin-left: 5%; /* add some space between the stars and the percentage text */
-  }
+    width: 1059px;
+    margin: auto;
+    }
