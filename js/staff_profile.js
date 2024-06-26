@@ -135,8 +135,6 @@ function displayAverageRating() {
     }
     const percentageElement = document.createElement('span');
     percentageElement.classList.add('percentage-text'); // add a class to the span element
-    // percentageElement.innerHTML = ` (${percentage.toFixed(2)}%)`; // to display the number percentage beside the star rating
-    // ratingElement.appendChild(percentageElement);
   }
   
   // Call the displayAverageRating function whenever the feedbacks array changes
