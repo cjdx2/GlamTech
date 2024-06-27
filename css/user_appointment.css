@@ -531,6 +531,7 @@ header.scrolled {
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease, transform 0.3s ease;
+    color: white;
 }
 
 .menu-button:hover {
