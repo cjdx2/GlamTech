@@ -5,6 +5,21 @@ body {
   justify-content: center;
 }
 
+/* Back button styles */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.back-button img {
+  height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    margin-left: 10px;
+}
+
 h1 {
   color: #ffffff;
   text-align: center;
@@ -21,10 +36,10 @@ h2 {
 }
 
 p {
-    color:#ffffff;
-    text-align: center;
-    margin-bottom: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .profile-pic {
@@ -66,7 +81,6 @@ p {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  
 }
 
 .star {
@@ -103,7 +117,7 @@ p {
 .star-rating label:hover,
 .star-rating label:hover ~ label,
 .star-rating input[type="radio"]:checked ~ label {
-  color:#ffc107;
+  color: #ffc107;
 }
 
 .star-rating input[type="radio"]:checked ~ label::before,
@@ -173,7 +187,7 @@ p {
 }
 
 .feedback-item .user-profile {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
   margin-right: 10px;
 }
 
@@ -203,10 +217,10 @@ p {
   font-size: 0.8em;
   color: #dbdbdb;
   margin-top: 9px;
-  text-shadow: none; 
+  text-shadow: none;
   margin: 5px;
   float: right;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 .page-button {

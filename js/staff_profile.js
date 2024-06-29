@@ -145,3 +145,8 @@ function displayAverageRating() {
   
   // Initialize the average rating display
   displayAverageRating();
+
+  // Back button functionality
+document.querySelector('.back-button').addEventListener('click', function() {
+    window.history.back();
+});

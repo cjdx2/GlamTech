@@ -52,7 +52,7 @@ document.querySelectorAll('.services').forEach(function(option) {
       const serviceName = option.innerText.split('₱')[0].trim();
       const servicePrice = option.querySelector('.price').textContent.replace('₱', '');
       selectedService.innerHTML = `
-          <span>${serviceName}</span>
+          <span>${serviceName} &nbsp</span>
           <span style="float:right;">₱${servicePrice}</span>
       `;
       document.getElementById('dropdown-options').style.display = 'none';
