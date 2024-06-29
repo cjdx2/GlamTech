@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
 </head>
-
 <body>
     <div class="profile-header">
         <div class="profile-title">
@@ -65,13 +63,19 @@
                 <input type="hidden" id="service" name="service" required>
             </div>
 
+            <!-- STAFF ISPLAY -->
+            <div class="staff-section" id="staff">
+                <h2>Our Staff</h2>
+                <div class="staff-grid" id="staff-grid">
+                    <!-- Staff members will be dynamically added here -->
+                </div>
+            </div>
+
             <!-- DATE & TIME -->
             <p class="preferred-text">preferred appointment date</p>
             <input type="date" id="date" name="date" min="<?php echo date('d-m-Y'); ?>" required>
             <p class="preferred-text">preferred appointment time</p>
-            <div class="timegroup">
-                <input type="time" id="appointmentTime" name="appointmentTime" required>
-            </div>
+            <input type="time" id="time" name="time" required>
             <div class="button-container">
                 <button type="submit" class="confirm-button">Confirm</button>
                 <button type="button" class="back-button" onclick="location.href='homepage.html'">Back</button>
@@ -79,7 +83,6 @@
         </section>
     </form>
 </body>
-
 <script src="../js/homepage.js"></script>
 <script src="../js/user_appointment.js"></script>
 </html>

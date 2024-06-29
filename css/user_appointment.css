@@ -1,3 +1,8 @@
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -91,6 +96,12 @@ label {
     margin: 5px 0 2px;
 }
 
+.preferred-text {
+    color: #fff;
+    font-size: 1.25em;
+    margin: 0 0;
+}
+
 /* dropdown */
 
 .dropdown {
@@ -168,40 +179,14 @@ label {
     right: 10px;
 }
 
-/* time */
-.preferred-text {
-    color: #fff;
-    font-size: 1.25em;
-    margin: 0 0;
-}
-
-.timegroup {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.timegroup input[type="time"] {
-    flex: 1;
-    height: 48px;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-size: 1.25em;
-    backdrop-filter: blur(10px);
-    box-sizing: border-box;
-}
-
 /* button */
+
 .button-container {
     display: flex;
-    justify-content: flex-end; /* Align to the end of the form */
-    width: 100%;
-    margin-top: 10px;
+    justify-content: space-between;
+    width: 140%;
+    margin-left: 0;
+    margin-top: 30px;
     position: relative;
 }
 
@@ -218,12 +203,63 @@ label {
     transition: background 0.3s, color 0.3s;
 }
 
+.confirm-button {
+    position: absolute;
+    left: 0;
+}
+
 .back-button {
-    margin-left: 10px; /* Add margin to separate from the confirm button */
+    position: absolute;
+    right: 175px;
+    margin-right: 20px;
 }
 
 .confirm-button:hover,
 .back-button:hover {
     background: #004d7a;
     color: #fff;
+}
+
+/* staff display */
+
+.staff-section {
+    margin-top: 50px;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+.staff-member {
+    text-align: center;
+}
+
+.staff-member img {
+    width: 285px;
+    height: 285px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.staff-member p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .staff-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .staff-member img {
+        width: 200px;
+        height: 200px;
+    }
 }
