@@ -55,11 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const year = document.getElementById('year').value;
         // Update the chart data based on the selected year
         // This is just a dummy example, replace with actual data retrieval logic
-        if (year === '2023') {
+        if (year === '2022') {
             chart.data.datasets[0].data = [20, 40, 35, 60, 70, 50, 80, 90, 85, 100, 95, 110];
-        } else if (year === '2024') {
+        } else if (year === '2023') {
             chart.data.datasets[0].data = [30, 50, 45, 70, 80, 60, 90, 100, 95, 110, 105, 120];
-        } else if (year === '2025') {
+        } else if (year === '2024') {
             chart.data.datasets[0].data = [40, 60, 55, 80, 90, 70, 100, 110, 105, 120, 115, 130];
         }
         chart.update();
