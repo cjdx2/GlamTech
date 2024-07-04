@@ -13,19 +13,18 @@ body {
 
 .container {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center; /* Center the container horizontally */
+    align-items: center;    /* Center the container vertically */
     width: 100%;
-    max-width: 1200px; /* Adjust the width to move the box to the middle right */
     height: 100%;
 }
 
 .login-box {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(7, 0, 0, 0.144);
     border-radius: 10px;
     padding: 40px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(50px);
     width: 100%;
     max-width: 400px; /* Set a maximum width for the login box */
     transition: opacity 0.5s, visibility 0.5s;
@@ -37,7 +36,7 @@ form {
     align-items: center;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
     width: 100%;
     padding: 15px;
     margin: 10px 0;

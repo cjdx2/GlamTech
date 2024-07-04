@@ -43,9 +43,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const firstname = document.getElementById('signup-firstname').value;
+        const lastname = document.getElementById('signup-lastname').value;
         const username = document.getElementById('signup-username').value;
         const password = document.getElementById('signup-password').value;
+        const email = document.getElementById('signup-email').value;
+        const phone = document.getElementById('signup-phone').value;
+
         // Handle signup logic here
+        console.log({
+            firstname,
+            lastname,
+            username,
+            password,
+            email,
+            phone
+        });
+
+        // For now, just redirect to homepage
         window.location.href = 'homepage.html';
     });
 });
