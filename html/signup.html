@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../css/login1.css">
+</head>
+<body>
+        <div class="login-box">
+            <form id="signup-form" action="../php/signup.php" method="POST">
+                <input type="text" id="signup-firstname" name="firstname" placeholder="First Name" required>
+                <input type="text" id="signup-lastname" name="lastname" placeholder="Last Name" required>
+                <input type="text" id="signup-username" name="username" placeholder="Username" required>
+                <input type="password" id="signup-password" name="password" placeholder="Password" required>
+                <input type="email" id="signup-email" name="email" placeholder="Email" required>
+                <input type="tel" id="signup-phone" name="phone" placeholder="Phone Number" required>
+                <div class="actions">
+                    <a href="../html/login.html" id="show-login">Already have an account?</a>
+                    <button type="submit">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../js/login1.js"></script>
+</body>
+</html>

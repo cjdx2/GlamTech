@@ -6,11 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginBox = document.getElementById('login-box');
     const signupBox = document.getElementById('signup-box');
     const errorMessage = document.createElement('p');
+    const successMessage = document.createElement('p');
 
     errorMessage.style.color = 'red';
     errorMessage.style.display = 'none';
     errorMessage.id = 'error-message';
     loginBox.appendChild(errorMessage);
+
+    successMessage.style.color = 'green';
+    successMessage.style.display = 'none';
+    successMessage.id = 'success-message';
+    signupBox.appendChild(successMessage);
 
     showSignup.addEventListener('click', (e) => {
         e.preventDefault();
@@ -29,12 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
 
-        // Hard-coded credentials for admin
         const adminUsername = 'glamtech';
         const adminPassword = '123';
 
         if (username === adminUsername && password === adminPassword) {
-            // Redirect to admin page
             window.location.href = 'adminhome.html';
         } else {
             window.location.href = 'homepage.html';
@@ -50,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = document.getElementById('signup-email').value;
         const phone = document.getElementById('signup-phone').value;
 
-        // Handle signup logic here
-        console.log({
+        handleSignup({
             firstname,
             lastname,
             username,
@@ -59,8 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
             email,
             phone
         });
-
-        // For now, just redirect to homepage
-        window.location.href = 'homepage.html';
     });
+
+    function handleSignup(userDetails) {
+        console.log(userDetails);
+
+        displaySuccessMessage('Account successfully created!');
+
+        window.location.href = 'homepage.html';
+    }
+
+    function displaySuccessMessage(message) {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+    }
 });

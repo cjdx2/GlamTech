@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     logoutLink.addEventListener("click", function(event) {
         event.preventDefault();
         localStorage.clear();
-        window.location.href = "../html/login1.html";
+        window.location.href = "login.html";
     });
 
     menuButton.addEventListener('click', function () {
