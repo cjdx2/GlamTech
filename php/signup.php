@@ -25,28 +25,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-    // Debugging: Output form data
-    echo "Form Data: " . print_r($_POST, true);
-
-    $sql = "INSERT INTO users (firstname, lastname, username, password, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    // Check if username already exists
+    $checkUsernameSql = "SELECT id FROM users WHERE username = ?";
+    $stmt = $conn->prepare($checkUsernameSql);
 
     if ($stmt === false) {
         die("Error preparing statement: " . $conn->error);
     }
 
-    $stmt->bind_param("ssssss", $firstname, $lastname, $username, $password, $email, $phone);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
 
-    // Debugging: Check if the statement executes correctly
-    if ($stmt->execute()) {
-        echo "Data inserted successfully";
-        header("Location: login.html");
-        exit();
+    if ($stmt->num_rows > 0) {
+        // Username already exists
+        echo "<script>alert('Username already taken. Please choose another username.'); window.location.href = '../html/signup.html';</script>";
     } else {
-        echo "Error: " . $stmt->error;
+        // Username does not exist, proceed with insertion
+        $stmt->close();
+
+        $insertSql = "INSERT INTO users (firstname, lastname, username, password, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertSql);
+
+        if ($stmt === false) {
+            die("Error preparing statement: " . $conn->error);
+        }
+
+        $stmt->bind_param("ssssss", $firstname, $lastname, $username, $password, $email, $phone);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Signup successful!'); window.location.href = '../html/login.html';</script>";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
     }
 
-    $stmt->close();
     $conn->close();
 }
 ?>
