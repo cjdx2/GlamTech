@@ -5,20 +5,26 @@ body {
     justify-content: center;
   }
   
-  /* Back button styles */
-  .back-button {
-   position: absolute;
-   top: 20px;
-   left: 20px;
-   cursor: pointer;
- }
- 
- .back-button img {
-   height: 60px;
-     border-radius: 50%;
-     box-shadow: 0 0 20px rgba(0, 0, 0, .5);
-     margin-left: 10px;
- }  
+/* Back button styles */
+.back-button {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.back-button img {
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+  margin-left: 10px;
+}
+
+/* Back button hover effect */
+.back-button:hover img {
+  transform: scale(1.1);
+}
   
   h1 {
     color: #ffffff;
@@ -169,7 +175,7 @@ body {
   }
   
   .container-feedback {
-    background-color: #ffffff8f;
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 2%;
     width: 1000px;
     margin: auto;
