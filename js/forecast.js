@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Customer Volume',
-                data: [30, 50, 45, 70, 80, 60, 90, 100, 95, 110, 105, 120],
+                data: [0, 5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5],
                 borderColor: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                 borderWidth: 2,
@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         color: 'rgba(255, 255, 255, 0.1)'
                     },
                     ticks: {
-                        color: 'white'
+                        color: 'white',
+                        max: 30 // Setting max value for y-axis
                     }
                 }
             },
@@ -53,14 +54,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateChart() {
         const year = document.getElementById('year').value;
-        // Update the chart data based on the selected year
-        // This is just a dummy example, replace with actual data retrieval logic
-        if (year === '2022') {
-            chart.data.datasets[0].data = [20, 40, 35, 60, 70, 50, 80, 90, 85, 100, 95, 110];
+        if (year === '2021') {
+            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            chart.data.datasets[0].data = [5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 20];
+        } else if (year === '2022') {
+            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            chart.data.datasets[0].data = [10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 30, 5];
         } else if (year === '2023') {
-            chart.data.datasets[0].data = [30, 50, 45, 70, 80, 60, 90, 100, 95, 110, 105, 120];
+            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            chart.data.datasets[0].data = [15, 20, 25, 30, 25, 20, 15, 10, 5, 25, 5, 10];
         } else if (year === '2024') {
-            chart.data.datasets[0].data = [40, 60, 55, 80, 90, 70, 100, 110, 105, 120, 115, 130];
+            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            chart.data.datasets[0].data = [20, 25, 30, 25, 20, 15];
         }
         chart.update();
     }
