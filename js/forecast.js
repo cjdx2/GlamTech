@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Customer Volume',
-                data: [0, 5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5],
+                data: [25, 20, 15, 10, 5, 20],
                 borderColor: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                 borderWidth: 2,
@@ -54,18 +54,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateChart() {
         const year = document.getElementById('year').value;
-        if (year === '2021') {
-            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            chart.data.datasets[0].data = [5, 10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 20];
-        } else if (year === '2022') {
+        if (year === '2024') {
+            chart.data.labels = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            chart.data.datasets[0].data = [25, 20, 15, 10, 5, 20];
+        } else if (year === '2025') {
             chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             chart.data.datasets[0].data = [10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 30, 5];
-        } else if (year === '2023') {
+        } else if (year === '2026') {
             chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             chart.data.datasets[0].data = [15, 20, 25, 30, 25, 20, 15, 10, 5, 25, 5, 10];
-        } else if (year === '2024') {
-            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-            chart.data.datasets[0].data = [20, 25, 30, 25, 20, 15];
         }
         chart.update();
     }
