@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     },
                     ticks: {
                         color: 'white',
-                        max: 1000 // Updated max value for y-axis
+                        max: 1000
                     }
                 }
             },
@@ -57,8 +57,25 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 chart.data.datasets[0].data = data;
                 chart.update();
+                updateSummary(data, year);
             })
             .catch(error => console.error('Error fetching forecast data:', error));
+    }
+
+    function updateSummary(data, year) {
+        const summaryContainer = document.getElementById('summary-container');
+        let total = data.reduce((a, b) => a + b, 0);
+        let avg = total / data.length;
+        let min = Math.min(...data);
+        let max = Math.max(...data);
+
+        summaryContainer.innerHTML = `
+            <h3>Summary for ${year}</h3>
+            <p>Total Customer Volume: ${total}</p>
+            <p>Average Monthly Volume: ${avg.toFixed(2)}</p>
+            <p>Highest Month: ${max}</p>
+            <p>Lowest Month: ${min}</p>
+        `;
     }
 
     document.getElementById('year').addEventListener('change', function() {
