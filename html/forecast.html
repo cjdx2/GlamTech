@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/forecast.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body onload="displayDate()">
+<body>
     <div class="container">
         <header class="header">
             <div class="logo">
@@ -32,10 +32,10 @@
             <h1>FORECAST</h1>
             <div class="year-selector">
                 <label for="year">Year: </label>
-                <select id="year" onchange="updateChart()">
-                    <option value="2024">2024</option>
+                <select id="year" onchange="updateChart(this.value)">
                     <option value="2025">2025</option>
                     <option value="2026">2026</option>
+                    <option value="2027">2027</option>
                 </select>
             </div>
             <div class="chart-container">

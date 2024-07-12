@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Customer Volume',
-                data: [25, 20, 15, 10, 5, 20],
+                data: [],
                 borderColor: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                 borderWidth: 2,
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 x: {
                     beginAtZero: true,
                     grid: {
-                        display: false,
+                        display: true,
                     },
                     ticks: {
                         color: 'white'
@@ -35,45 +35,42 @@ document.addEventListener("DOMContentLoaded", function() {
                     },
                     ticks: {
                         color: 'white',
-                        max: 30 // Setting max value for y-axis
+                        max: 1000 // Updated max value for y-axis
                     }
                 }
             },
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    labels: {
+                        color: 'white'
+                    }
                 }
             },
             responsive: true
         }
     });
 
+    function updateChart(year) {
+        fetch(`http://127.0.0.1:5000/forecast?year=${year}`)
+            .then(response => response.json())
+            .then(data => {
+                chart.data.datasets[0].data = data;
+                chart.update();
+            })
+            .catch(error => console.error('Error fetching forecast data:', error));
+    }
+
     document.getElementById('year').addEventListener('change', function() {
-        updateChart();
+        const year = this.value;
+        updateChart(year);
     });
 
-    function updateChart() {
-        const year = document.getElementById('year').value;
-        if (year === '2024') {
-            chart.data.labels = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            chart.data.datasets[0].data = [25, 20, 15, 10, 5, 20];
-        } else if (year === '2025') {
-            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            chart.data.datasets[0].data = [10, 15, 20, 25, 30, 25, 20, 15, 10, 5, 30, 5];
-        } else if (year === '2026') {
-            chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            chart.data.datasets[0].data = [15, 20, 25, 30, 25, 20, 15, 10, 5, 25, 5, 10];
-        }
-        chart.update();
-    }
-});
+    updateChart(document.getElementById('year').value);
 
-// Include the logbook functionality for date and menu
-document.addEventListener("DOMContentLoaded", () => {
     const menuButton = document.getElementById('menu-button');
     const menuContent = document.getElementById('menu-content');
 
-    // Update the date
     const dateElement = document.getElementById('current-date');
     const yearElement = document.getElementById('current-year');
     const now = new Date();
