@@ -68,7 +68,7 @@ function displayStaff(selectedServices) {
   console.log('Selected services:', selectedServices); // Debug log
 
   // Make POST request to Flask backend
-  fetch('/recommend-staff', {
+  fetch('http://127.0.0.1:5000/recommend-staff', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

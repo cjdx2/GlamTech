@@ -1,9 +1,10 @@
-import os
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
 
 app = Flask(__name__, template_folder='D:/xampp/htdocs/GlamTech/appointment', static_folder='D:/xampp/htdocs/GlamTech/appointment')
+CORS(app)  # Enable CORS for all routes
 
 # Data for services and corresponding staff members
 services = [
@@ -49,17 +50,20 @@ def index():
 @app.route('/recommend-staff', methods=['POST'])
 def recommend_staff():
     selected_services = request.json.get('services', [])
-    print(f"Selected services: {selected_services}")  # Debug log
+    app.logger.debug(f"Selected services: {selected_services}")  # Debug log
     
     recommendations = []
     for service in selected_services:
-        encoded_service = encoder.transform([service])[0]
-        predicted_service = clf.predict([[encoded_service]])[0]
-        available_staff = staff_data.get(predicted_service, [])
-        if available_staff:
-            recommendations.append(available_staff[0])  # Recommend only one staff member per service
+        try:
+            encoded_service = encoder.transform([service])[0]
+            predicted_service = clf.predict([[encoded_service]])[0]
+            available_staff = staff_data.get(predicted_service, [])
+            if available_staff:
+                recommendations.append(available_staff[0])  # Recommend only one staff member per service
+        except Exception as e:
+            app.logger.error(f"Error processing service '{service}': {e}")  # Error log
     
-    print(f"Recommendations: {recommendations}")  # Debug log
+    app.logger.debug(f"Recommendations: {recommendations}")  # Debug log
     return jsonify(recommendations=recommendations)
 
 if __name__ == '__main__':
