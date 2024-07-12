@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../appointment/user_appointment.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+    <title>Book Now - GlamTech</title>
+</head>
+<body>
+    <div class="profile-header">
+        <div class="profile-title">
+            <h1>Book Now</h1>
+            <h2>FOR AN APPOINTMENT</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="left-column">
+            <form id="appointment" onsubmit="return validateForm(event)">
+                <section id="form">
+                    <div class="name">
+                        <input type="text" id="firstname" name="firstname" placeholder="first name" required>
+                        <input id="lastname" type="text" name="lastname" placeholder="last name" required>
+                    </div>
+                    <div class="contacts">
+                        <input id="email" type="email" name="email" placeholder="email" required>
+                        <input id="usercontact" type="tel" name="usercontact" placeholder="contact number" maxlength="11" pattern="^09[0-9]*$" required>
+                    </div>
+
+                    <div class="services-dropdown">
+                        <label for="serviceDropdown">Services you'd like to book:</label>
+                        <div class="dropdown">
+                            <button class="dropbtn" id="dropdown-header" type="button">Select Services</button>
+                            <div class="dropdown-content" id="dropdown-options">
+                                <label><input type="checkbox" name="service" value="haircut"> Hair Cut (₱100)</label>
+                                <label><input type="checkbox" name="service" value="shampoowithblowdry"> Shampoo with Blow Dry (₱150)</label>
+                                <label><input type="checkbox" name="service" value="hairiron"> Hair Iron (₱200)</label>
+                                <label><input type="checkbox" name="service" value="haircolor"> Hair Color (₱350 UP)</label>
+                                <label><input type="checkbox" name="service" value="highlights"> Highlights (₱350 UP)</label>
+                                <label><input type="checkbox" name="service" value="manicure"> Manicure (₱100)</label>
+                                <label><input type="checkbox" name="service" value="pedicure"> Pedicure (₱100)</label>
+                                <label><input type="checkbox" name="service" value="gelpolishmanicure"> Gel Polish Manicure (₱350)</label>
+                                <label><input type="checkbox" name="service" value="gelpolish"> Gel Polish (₱400)</label>
+                                <label><input type="checkbox" name="service" value="footspa"> Foot Spa (₱200)</label>
+                                <label><input type="checkbox" name="service" value="premiumfootspa"> Premium Foot Spa (₱300)</label>
+                                <label><input type="checkbox" name="service" value="hotoil"> Hot Oil (₱200 UP)</label>
+                                <label><input type="checkbox" name="service" value="hairmask"> Hair Mask (₱200 UP)</label>
+                                <label><input type="checkbox" name="service" value="hairspa"> Hair Spa (₱250 UP)</label>
+                                <label><input type="checkbox" name="service" value="semidlino"> Semi d' Lino (₱350)</label>
+                                <label><input type="checkbox" name="service" value="cellophane"> Cellophane (₱450 UP)</label>
+                                <label><input type="checkbox" name="service" value="coldwave"> Coldwave (Perming) (₱450 UP)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="preferred-text">Preferred appointment date:</p>
+                    <input type="date" id="date" name="date" required>
+                    <p class="preferred-text">Preferred appointment time:</p>
+                    <input type="time" id="time" name="time" required>
+                    <div class="button-container">
+                        <button type="submit" class="confirm-button">Confirm</button>
+                        <button type="button" class="back-button" onclick="location.href='homepage.html'">Back</button>
+                    </div>
+                </section>
+            </form>
+        </div>
+        <div class="right-column">
+            <h2>Recommended Staff</h2>
+            <div id="staff-recommendation">
+                <!-- Recommended staff will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../appointment/user_appointment.js"></script>
+</body>
+</html>
