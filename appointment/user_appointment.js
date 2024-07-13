@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', () => {
   const serviceOptions = document.querySelectorAll('.servicesoption');
   serviceOptions.forEach(option => {
-    option.disabled = true;
+      option.disabled = true;
   });
 });
 
@@ -17,7 +17,7 @@ const contactInput = document.getElementById('usercontact');
 
 contactInput.addEventListener('focus', () => {
   if (contactInput.value === '') {
-    contactInput.value = '09';
+      contactInput.value = '09';
   }
 });
 
@@ -26,13 +26,13 @@ contactInput.addEventListener('input', (e) => {
   const lastChar = inputValue[inputValue.length - 1];
 
   if (!/\d/.test(lastChar)) {
-    e.preventDefault();
-    e.target.value = inputValue.replace(/[^0-9]/g, '');
+      e.preventDefault();
+      e.target.value = inputValue.replace(/[^0-9]/g, '');
   }
 
   if (inputValue.length === 2 && inputValue !== '09') {
-    e.preventDefault();
-    e.target.value = '09';
+      e.preventDefault();
+      e.target.value = '09';
   }
 });
 
@@ -45,13 +45,13 @@ document.getElementById('dropdown-header').addEventListener('click', function() 
 // VALIDATE FORM - Ensure a service is selected before submission
 function validateForm() {
   const selectedServices = Array.from(document.querySelectorAll('#dropdown-options input[type="checkbox"]:checked'))
-                            .map(checkbox => checkbox.value);
-  
+                          .map(checkbox => checkbox.value);
+
   if (selectedServices.length === 0) {
-    alert('Please select at least one service');
-    return false;
+      alert('Please select at least one service');
+      return false;
   }
-  
+
   // Update the hidden input field with the selected services
   document.getElementById('service').value = selectedServices.join(',');
 
@@ -69,41 +69,45 @@ function displayStaff(selectedServices) {
 
   // Make POST request to Flask backend
   fetch('http://127.0.0.1:5000/recommend-staff', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ services: selectedServices })
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ services: selectedServices })
   })
   .then(response => response.json())
   .then(data => {
-    console.log('Recommendations received:', data); // Debug log
+      console.log('Recommendations received:', data); // Debug log
 
-    if (data.recommendations && data.recommendations.length > 0) {
-      data.recommendations.forEach(recommendedStaff => {
-        const staffName = recommendedStaff;
-        const staffServices = selectedServices.join(', ');
+      if (data.recommendations && data.recommendations.length > 0) {
+          const uniqueStaff = new Set();
+          data.recommendations.forEach(recommendedStaff => {
+              const { name, expertise } = recommendedStaff;
+              if (!uniqueStaff.has(name)) {
+                  uniqueStaff.add(name);
 
-        // Construct HTML for staff member
-        const staffHTML = `
-          <div class="staff-member">
-            <img src="/img/${staffName.toLowerCase()}.png" alt="${staffName}">
-            <p>${staffName}</p>
-            <p>${getStaffExpertise(staffName)}</p>
-            <p>Services: ${staffServices}</p>
-          </div>
-        `;
+                  // Construct HTML for staff member
+                  const staffHTML = `
+                      <div class="staff-member">
+                          <img src="../img/${name.toLowerCase()}.png" alt="${name}">
+                          <div class="staff-info">
+                              <p><strong>${name}</strong></p>
+                              <p>${expertise}</p>
+                          </div>
+                      </div>
+                  `;
 
-        // Append staff HTML to staff section
-        staffSection.innerHTML += staffHTML;
-      });
-    } else {
-      staffSection.innerHTML += '<p>No staff available for these services.</p>';
-    }
+                  // Append staff HTML to staff section
+                  staffSection.innerHTML += staffHTML;
+              }
+          });
+      } else {
+          staffSection.innerHTML += '<p>No staff available for these services.</p>';
+      }
   })
   .catch(error => {
-    console.error('Error:', error);
-    staffSection.innerHTML += '<p>Failed to fetch staff recommendations.</p>';
+      console.error('Error:', error);
+      staffSection.innerHTML += '<p>Failed to fetch staff recommendations.</p>';
   });
 }
 
@@ -112,22 +116,22 @@ const serviceCheckboxes = document.querySelectorAll('#dropdown-options input[typ
 
 serviceCheckboxes.forEach(checkbox => {
   checkbox.addEventListener('change', function() {
-    const selectedServices = Array.from(serviceCheckboxes)
-                                .filter(checkbox => checkbox.checked)
-                                .map(checkbox => checkbox.value);
+      const selectedServices = Array.from(serviceCheckboxes)
+                                  .filter(checkbox => checkbox.checked)
+                                  .map(checkbox => checkbox.value);
 
-    displayStaff(selectedServices);
+      displayStaff(selectedServices);
   });
 });
 
 // Get expertise details for a staff member based on their name
 function getStaffExpertise(staffName) {
   const expertiseMap = {
-    'Wendell': 'Haircut, Shampoo with Blow Dry, Hair Iron, Hair Color, Highlights, Hot Oil, Hair Mask, Hair Spa, Semi D Lino, Cellophane, Cold Wave',
-    'Jirven': 'Haircut, Shampoo with Blow Dry, Hair Iron, Hair Color, Highlights, Hot Oil, Hair Mask, Hair Spa, Semi D Lino, Cellophane, Cold Wave',
-    'Joane': 'Haircut, Shampoo with Blow Dry, Hair Iron, Hair Color, Highlights, Hot Oil, Hair Mask, Hair Spa, Semi D Lino, Cellophane, Cold Wave',
-    'Rosalie': 'Manicure, Pedicure, Gel Polish Manicure, Gel Polish, Foot Spa, Premium Foot Spa',
-    'Mernalyn': 'Manicure, Pedicure, Gel Polish Manicure, Gel Polish, Foot Spa, Premium Foot Spa'
+      'Wendell': 'Haircut, Shampoo with Blow Dry, Hair Iron, Hair Color, Highlights, Hot Oil, Hair Mask, Hair Spa, Semi D Lino, Cellophane, Cold Wave',
+      'Jirven': 'Haircut, Shampoo with Blow Dry, Hair Iron, Hair Color, Highlights, Hot Oil, Hair Mask, Hair Spa, Semi D Lino, Cellophane, Cold Wave',
+      'Joane': 'Haircut, Shampoo with Blow Dry, Hair Iron, Hair Color, Highlights, Hot Oil, Hair Mask, Hair Spa, Semi D Lino, Cellophane, Cold Wave',
+      'Rosalie': 'Manicure, Pedicure, Gel Polish Manicure, Gel Polish, Foot Spa, Premium Foot Spa',
+      'Mernalyn': 'Manicure, Pedicure, Gel Polish Manicure, Gel Polish, Foot Spa, Premium Foot Spa'
   };
   return expertiseMap[staffName] || 'Unknown Expertise';
 }

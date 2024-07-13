@@ -34,6 +34,14 @@ staff_data = {
     'coldwave': ['Wendell', 'Jirven', 'Joane']
 }
 
+staff_expertise = {
+    'Wendell': 'Hairdresser',
+    'Jirven': 'Hairdresser',
+    'Joane': 'Hairdresser',
+    'Rosalie': 'Manicurist',
+    'Mernalyn': 'Manicurist'
+}
+
 # Encoding categorical data
 encoder = LabelEncoder()
 encoder.fit(services)
@@ -59,7 +67,11 @@ def recommend_staff():
             predicted_service = clf.predict([[encoded_service]])[0]
             available_staff = staff_data.get(predicted_service, [])
             if available_staff:
-                recommendations.append(available_staff[0])  # Recommend only one staff member per service
+                staff_name = available_staff[0]  # Recommend only one staff member per service
+                recommendations.append({
+                    'name': staff_name,
+                    'expertise': staff_expertise.get(staff_name, 'Unknown')
+                })
         except Exception as e:
             app.logger.error(f"Error processing service '{service}': {e}")  # Error log
     
