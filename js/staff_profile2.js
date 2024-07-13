@@ -2,34 +2,37 @@ let feedbacks = [];
 let currentPage = 1;
 const feedbacksPerPage = 5;
 
-document.querySelector('.submit-button button').addEventListener('click', function(event) {
+document.querySelector('#feedbackForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
-    // Get the rating value
     const rating = document.querySelector('input[name="rating"]:checked');
     const feedbackText = document.getElementById('feedback').value;
     
     if (rating && feedbackText) {
-        // Get the current date and time
-        const now = new Date();
-        const dateTimeString = now.toLocaleString();
+        const formData = new FormData();
+        formData.append('rating', rating.value);
+        formData.append('comment', feedbackText);
 
-        // Create a feedback object
-        const feedback = {
-            rating: rating.value,
-            text: feedbackText,
-            dateTime: dateTimeString
-        };
+        fetch('../php/save_feedback_mernalyn.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                feedbacks.unshift(data.feedback); // Add feedback to the beginning
+                document.getElementById('feedback').value = '';
+                document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
 
-        // Add the feedback to the array
-        feedbacks.push(feedback);
-        
-        // Clear the form
-        document.getElementById('feedback').value = '';
-        document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
-
-        // Display the current page of feedback
-        displayFeedback(currentPage);
+                displayFeedback(currentPage);
+                displayAverageRating();
+            } else {
+                alert('Error saving feedback: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     } else {
         alert('Please provide a rating and feedback.');
     }
@@ -47,7 +50,6 @@ function displayFeedback(page) {
         const feedbackElement = document.createElement('div');
         feedbackElement.classList.add('feedback-item');
         
-        // Add user profile picture
         const userProfile = document.createElement('div');
         userProfile.classList.add('user-profile');
         const userImage = document.createElement('img');
@@ -55,25 +57,22 @@ function displayFeedback(page) {
         userImage.alt = 'User Profile';
         userProfile.appendChild(userImage);
         
-        // Add rating stars
         const starRating = document.createElement('div');
         starRating.classList.add('star-rating');
         for (let i = 4; i >= 0; i--) {
             const star = document.createElement('span');
             star.classList.add('star');
-            star.innerHTML = i < feedback.rating ? '&#9733;' : '&#9734';
+            star.innerHTML = i < feedback.star_rating ? '&#9733;' : '&#9734;';
             starRating.appendChild(star);
         }
 
-        // Add feedback text
         const feedbackTextElement = document.createElement('p');
         feedbackTextElement.classList.add('feedback-text');
-        feedbackTextElement.innerText = feedback.text;
+        feedbackTextElement.innerText = feedback.comment;
 
-        // Add date and time
         const dateTimeElement = document.createElement('p');
         dateTimeElement.classList.add('date-time');
-        dateTimeElement.innerText = feedback.dateTime;
+        dateTimeElement.innerText = feedback.date_time;
         
         feedbackElement.appendChild(userProfile);
         feedbackElement.appendChild(starRating);
@@ -106,49 +105,42 @@ function displayPagination() {
     }
 }
 
-// Initialize the first page of feedback
-displayFeedback(currentPage);
+function initializePage() {
+    fetch('../php/insert_mernalyn.php')
+    .then(response => response.json())
+    .then(data => {
+        feedbacks = data;
+        displayFeedback(currentPage);
+        displayAverageRating();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
+initializePage();
 
-// Calculate the average rating
 function calculateAverageRating() {
-    const totalRatings = feedbacks.reduce((acc, feedback) => acc + parseInt(feedback.rating), 0);
+    if (feedbacks.length === 0) return 0;
+    const totalRatings = feedbacks.reduce((acc, feedback) => acc + parseInt(feedback.star_rating), 0);
     const averageRating = totalRatings / feedbacks.length;
     return averageRating;
-  }
-  
-// Display the average rating as a percentage
+}
+
 function displayAverageRating() {
     const averageRating = calculateAverageRating();
-    const percentage = (averageRating / 5) * 100;
     const ratingElement = document.querySelector('.rating');
     ratingElement.innerHTML = '';
     for (let i = 1; i <= 5; i++) {
-      const star = document.createElement('span');
-      star.classList.add('star');
-      if (i <= averageRating) {
-        star.innerHTML = '&#9733;';
-      } else {
-        star.innerHTML = '&#9734;';
-      }
-      ratingElement.appendChild(star);
+        const star = document.createElement('span');
+        star.classList.add('star');
+        star.innerHTML = i <= averageRating ? '&#9733;' : '&#9734;';
+        ratingElement.appendChild(star);
     }
-    const percentageElement = document.createElement('span');
-    percentageElement.classList.add('percentage-text'); // add a class to the span element
-    // percentageElement.innerHTML = ` (${percentage.toFixed(2)}%)`; // to display the number percentage beside the star rating
-    // ratingElement.appendChild(percentageElement);
-  }
-  
-  // Call the displayAverageRating function whenever the feedbacks array changes
-  document.querySelector('.submit-button button').addEventListener('click', function(event) {
-    //...
-    displayAverageRating();
-  });
-  
-  // Initialize the average rating display
-  displayAverageRating();
+}
 
-  // Back button functionality
+// Back button functionality
 document.querySelector('.back-button').addEventListener('click', function() {
     window.history.back();
 });
+    

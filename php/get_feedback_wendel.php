@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT user_name, star_rating, comment, date_time FROM feedback ORDER BY date_time DESC";
+$sql = "SELECT user_name, star_rating, comment, date_time FROM wendel_feedback ORDER BY date_time DESC";
 $result = $conn->query($sql);
 
 $feedbacks = [];

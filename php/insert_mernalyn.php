@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = 'Anonymous';
 
     // Prepare SQL statement to insert feedback into the table
-    $stmt = $conn->prepare("INSERT INTO feedback (user_name, star_rating, comment, date_time) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO mernalyn_feedback (user_name, star_rating, comment, date_time) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("siss", $user_name, $star_rating, $comment, $date_time);
 
     if ($stmt->execute()) {
@@ -36,6 +36,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
 }
+
+// Fetch feedback from the database
+$sql = "SELECT * FROM mernalyn_feedback ORDER BY date_time DESC";
+$result = $conn->query($sql);
+
+$feedbacks = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $feedbacks[] = $row;
+    }
+}
+
+// Output the feedbacks in JSON format
+echo json_encode($feedbacks);
 
 // Close the database connection
 $conn->close();

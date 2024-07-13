@@ -13,7 +13,7 @@ document.querySelector('#feedbackForm').addEventListener('submit', function(even
         formData.append('rating', rating.value);
         formData.append('comment', feedbackText);
 
-        fetch('../php/save_feedback.php', {
+        fetch('../php/save_feedback_rosalie.php', {
             method: 'POST',
             body: formData
         })
@@ -106,7 +106,7 @@ function displayPagination() {
 }
 
 function initializePage() {
-    fetch('../php/get_feedbacks.php')
+    fetch('../php/insert_rosalie.php')
     .then(response => response.json())
     .then(data => {
         feedbacks = data;

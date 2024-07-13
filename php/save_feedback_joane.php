@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date_time = date('Y-m-d H:i:s');
     $user_name = 'Anonymous';
 
-    $stmt = $conn->prepare("INSERT INTO feedback (user_name, star_rating, comment, date_time) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO joane_feedback (user_name, star_rating, comment, date_time) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("siss", $user_name, $star_rating, $comment, $date_time);
 
     if ($stmt->execute()) {
