@@ -32,9 +32,33 @@
                 <h2>LOGBOOK</h2>
                 <form id="logbook-form" action="../php/logbook.php" method="POST">
                     <label for="staff">Staff:</label>
-                    <input type="text" id="staff" name="staff" required>
+                    <select id="staff" name="staff" required>
+                        <option value="Wendell">Wendell</option>
+                        <option value="Jirven">Jirven</option>
+                        <option value="Joane">Joane</option>
+                        <option value="Rosalie">Rosalie</option>
+                        <option value="Mernalyn">Mernalyn</option>
+                    </select>
                     <label for="service">Service:</label>
-                    <input type="text" id="service" name="service" required>
+                    <select id="service" name="service" required>
+                        <option value="haircut">Haircut</option>
+                        <option value="shampoowithblowdry">Shampoo with Blowdry</option>
+                        <option value="hairiron">Hair Iron</option>
+                        <option value="haircolor">Hair Color</option>
+                        <option value="highlights">Highlights</option>
+                        <option value="manicure">Manicure</option>
+                        <option value="pedicure">Pedicure</option>
+                        <option value="gelpolishmanicure">Gel Polish Manicure</option>
+                        <option value="gelpolish">Gel Polish</option>
+                        <option value="footspa">Foot Spa</option>
+                        <option value="premiumfootspa">Premium Foot Spa</option>
+                        <option value="hotoil">Hot Oil</option>
+                        <option value="hairmask">Hair Mask</option>
+                        <option value="hairspa">Hair Spa</option>
+                        <option value="semidlino">Semi D'Lino</option>
+                        <option value="cellophane">Cellophane</option>
+                        <option value="coldwave">Cold Wave</option>
+                    </select>
                     <label for="amount">Amount:</label>
                     <input type="number" id="amount" name="amount" required>
                     <label for="commission">Commission:</label>

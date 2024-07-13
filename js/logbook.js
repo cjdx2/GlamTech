@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const menuButton = document.getElementById('menu-button');
     const menuContent = document.getElementById('menu-content');
+    const form = document.getElementById('logbook-form'); // Added form variable
 
     // Update the date
     const dateElement = document.getElementById('current-date');
@@ -26,11 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Handle form submission
-    const form = document.getElementById('logbook-form');
-    const logbookEntries = document.getElementById('logbook-entries');
-    const totalAmount = document.getElementById('total-amount');
-    const totalCommission = document.getElementById('total-commission');
-
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -61,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(data => {
                 // Handle successful response
+                const logbookEntries = document.getElementById('logbook-entries');
                 logbookEntries.innerHTML = '';
                 let totalAmountSum = 0;
                 let totalCommissionSum = 0;
@@ -80,6 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     totalAmountSum += parseFloat(entry.amount);
                     totalCommissionSum += parseFloat(entry.commission);
                 });
+
+                const totalAmount = document.getElementById('total-amount');
+                const totalCommission = document.getElementById('total-commission');
 
                 totalAmount.textContent = totalAmountSum.toFixed(2);
                 totalCommission.textContent = totalCommissionSum.toFixed(2);
@@ -123,13 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleSaveClick(event) {
         const button = event.target;
         const entryId = button.dataset.id; // Retrieve entryId from button dataset
-    
+
         const row = button.closest("tr");
         const inputs = row.querySelectorAll("input");
-    
+
         let isValid = true;
         const updatedData = {};
-    
+
         inputs.forEach((input, index) => {
             const newText = input.value;
             const cell = input.closest("td");
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             cell.innerHTML = newText;
-    
+
             // Add the updated data to the object
             switch(index) {
                 case 0: updatedData.staff = newText; break;
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 case 4: updatedData.time = newText; break;
             }
         });
-    
+
         if (isValid) {
             fetch(`../php/update_logbook_entries.php`, {
                 method: 'POST',
@@ -172,10 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     button.innerText = "Edit";
                     button.classList.remove("save");
                     button.classList.add("edit");
-    
+
                     button.removeEventListener('click', handleSaveClick);
                     button.addEventListener('click', handleEditClick);
-    
+
                     updateTotals();
                     loadEntries();  // Reload entries after successful save
                 } else {
@@ -199,7 +199,48 @@ document.addEventListener("DOMContentLoaded", () => {
             totalCommissionSum += commission;
         });
 
+        const totalAmount = document.getElementById('total-amount');
+        const totalCommission = document.getElementById('total-commission');
+
         totalAmount.textContent = totalAmountSum.toFixed(2);
         totalCommission.textContent = totalCommissionSum.toFixed(2);
     }
+
+    // Staff availability for each service
+    const staffForService = {
+        'haircut': ['Wendell', 'Jirven', 'Joane'],
+        'shampoowithblowdry': ['Wendell', 'Jirven', 'Joane'],
+        'hairiron': ['Wendell', 'Jirven', 'Joane'],
+        'haircolor': ['Wendell', 'Jirven', 'Joane'],
+        'highlights': ['Wendell', 'Jirven', 'Joane'],
+        'manicure': ['Rosalie', 'Mernalyn'],
+        'pedicure': ['Rosalie', 'Mernalyn'],
+        'gelpolishmanicure': ['Rosalie', 'Mernalyn'],
+        'gelpolish': ['Rosalie', 'Mernalyn'],
+        'footspa': ['Rosalie', 'Mernalyn'],
+        'premiumfootspa': ['Rosalie', 'Mernalyn'],
+        'hotoil': ['Wendell', 'Jirven', 'Joane'],
+        'hairmask': ['Wendell', 'Jirven', 'Joane'],
+        'hairspa': ['Wendell', 'Jirven', 'Joane'],
+        'semidlino': ['Wendell', 'Jirven', 'Joane'],
+        'cellophane': ['Wendell', 'Jirven', 'Joane'],
+        'coldwave': ['Wendell', 'Jirven', 'Joane']
+    };
+
+    const serviceDropdowns = document.querySelectorAll('.service-dropdown'); // Adjusted selector to target all service dropdowns
+    const staffDropdown = document.getElementById('staff');
+
+    staffDropdown.addEventListener('change', function() {
+        const selectedStaff = this.value;
+
+        serviceDropdowns.forEach(serviceDropdown => {
+            const options = serviceDropdown.options;
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                const serviceName = option.value;
+                const isHandledByStaff = staffForService[serviceName].includes(selectedStaff);
+                option.disabled = !isHandledByStaff;
+            }
+        });
+    });
 });
