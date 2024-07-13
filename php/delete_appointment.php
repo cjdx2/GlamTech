@@ -14,12 +14,11 @@ if ($conn->connect_error) {
 
 $data = json_decode(file_get_contents('php://input'), true);
 $id = $data['id'];
-$status = $data['status'];
 
-// Update the appointment status
-$sql = "UPDATE appointments SET status = ? WHERE id = ?";
+// Delete appointment from the database
+$sql = "DELETE FROM appointments WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("si", $status, $id);
+$stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true]);
