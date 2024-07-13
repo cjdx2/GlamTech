@@ -41,17 +41,26 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(response => response.text())
         .then(data => {
-            console.log(data);
-            loadEntries();
+            console.log('Logbook form submission response:', data);
+            loadEntries();  // Reload entries after submission
+            form.reset();  // Optionally clear form fields after submission
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error submitting logbook form:', error);
+            alert('Failed to submit logbook form. Please try again.');
+        });
     });
 
-    // Load entries from the database
     function loadEntries() {
         fetch('../php/logbook_entries.php')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
+                // Handle successful response
                 logbookEntries.innerHTML = '';
                 let totalAmountSum = 0;
                 let totalCommissionSum = 0;
@@ -64,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <td>${entry.amount}</td>
                         <td>${entry.commission}</td>
                         <td>${entry.time}</td>
-                        <td><button class="edit">Edit</button></td>
+                        <td><button class="edit" data-id="${entry.id}">Edit</button></td>
                     `;
                     logbookEntries.appendChild(row);
 
@@ -76,21 +85,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 totalCommission.textContent = totalCommissionSum.toFixed(2);
 
                 // Re-add event listeners for edit buttons
-                document.querySelectorAll("button.edit").forEach(button => {
+                logbookEntries.querySelectorAll(".edit").forEach(button => {
                     button.addEventListener("click", handleEditClick);
                 });
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                // Handle fetch errors
+                console.error('Error fetching logbook entries:', error);
+                alert('Failed to load logbook entries. Please try again.');
+            });
     }
 
     // Initial load of entries
     loadEntries();
 
     // Handle edit button click
-    document.querySelectorAll("button.edit").forEach(button => {
-        button.addEventListener("click", handleEditClick);
-    });
-
     function handleEditClick(event) {
         const button = event.target;
         const row = button.closest("tr");
@@ -113,10 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleSaveClick(event) {
         const button = event.target;
+        const entryId = button.dataset.id; // Retrieve entryId from button dataset
+    
         const row = button.closest("tr");
         const inputs = row.querySelectorAll("input");
-
+    
         let isValid = true;
+        const updatedData = {};
+    
         inputs.forEach((input, index) => {
             const newText = input.value;
             const cell = input.closest("td");
@@ -126,34 +139,67 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             cell.innerHTML = newText;
+    
+            // Add the updated data to the object
+            switch(index) {
+                case 0: updatedData.staff = newText; break;
+                case 1: updatedData.service = newText; break;
+                case 2: updatedData.amount = parseFloat(newText); break;
+                case 3: updatedData.commission = parseFloat(newText); break;
+                case 4: updatedData.time = newText; break;
+            }
         });
-
+    
         if (isValid) {
-            button.innerText = "Edit";
-            button.classList.remove("save");
-            button.classList.add("edit");
-
-            button.removeEventListener('click', handleSaveClick);
-            button.addEventListener('click', handleEditClick);
-
-            updateTotals();
+            fetch(`../php/update_logbook_entries.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: entryId, // Use retrieved entryId
+                    staff: updatedData.staff,
+                    service: updatedData.service,
+                    amount: updatedData.amount,
+                    commission: updatedData.commission,
+                    time: updatedData.time
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                if (data === "success") {
+                    button.innerText = "Edit";
+                    button.classList.remove("save");
+                    button.classList.add("edit");
+    
+                    button.removeEventListener('click', handleSaveClick);
+                    button.addEventListener('click', handleEditClick);
+    
+                    updateTotals();
+                    loadEntries();  // Reload entries after successful save
+                } else {
+                    alert("Failed to save data.");
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
     }
 
     function updateTotals() {
         const rows = document.querySelectorAll("tbody tr");
-        let totalAmount = 0;
-        let totalCommission = 0;
+        let totalAmountSum = 0;
+        let totalCommissionSum = 0;
 
         rows.forEach(row => {
             const amount = parseFloat(row.cells[2].innerText);
             const commission = parseFloat(row.cells[3].innerText);
 
-            totalAmount += amount;
-            totalCommission += commission;
+            totalAmountSum += amount;
+            totalCommissionSum += commission;
         });
 
-        document.getElementById("total-amount").innerText = totalAmount.toFixed(2);
-        document.getElementById("total-commission").innerText = totalCommission.toFixed(2);
+        totalAmount.textContent = totalAmountSum.toFixed(2);
+        totalCommission.textContent = totalCommissionSum.toFixed(2);
     }
 });

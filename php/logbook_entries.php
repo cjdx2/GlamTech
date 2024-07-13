@@ -1,16 +1,21 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Change to your database username
-$password = ""; // Change to your database password
-$dbname = "account";
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 
+$servername = "localhost";
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "account"; // Replace with your database name
+
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM logbook ORDER BY created_at DESC";
+$sql = "SELECT * FROM logbook ORDER BY id DESC";
 $result = $conn->query($sql);
 
 $entries = [];
