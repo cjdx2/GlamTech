@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-
     // Set current date
     const currentDateElement = document.getElementById('current-date');
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -236,13 +235,11 @@ function generateCalendar(calendarElement, date) {
     document.getElementById('prev-month').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         generateCalendar(calendarElement, currentDate);
-        fetchAppointments(currentDate.toISOString().split('T')[0]); // Fetch appointments for the new month
     });
 
     document.getElementById('next-month').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
         generateCalendar(calendarElement, currentDate);
-        fetchAppointments(currentDate.toISOString().split('T')[0]); // Fetch appointments for the new month
     });
 
     // Add click event listener for the days
@@ -260,7 +257,9 @@ function generateCalendar(calendarElement, date) {
                 displayAppointments(appointmentsCache[selectedDate.toISOString().split('T')[0]], selectedDate.toISOString().split('T')[0]);
             } else {
                 fetchAppointments(selectedDate.toISOString().split('T')[0]);
-            } 
+            }
         });
     }); 
 }
+
+
