@@ -1,4 +1,8 @@
+let currentDate = new Date(); // Global variable to track the currently displayed date
+let appointmentsCache = {}; // Cache for appointments
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Menu button toggle
     const menuButton = document.getElementById('menu-button');
     const menuContent = document.getElementById('menu-content');
 
@@ -17,32 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Set current date
     const currentDateElement = document.getElementById('current-date');
-    const today = new Date();
-    const options = { month: 'long', day: 'numeric' };
-    currentDateElement.textContent = today.toLocaleDateString('en-US', options);
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    displayCurrentDate();
 
-    // Example appointments
-    const appointments = {
-        '2024-06-17': [
-            { name: 'Roberta Masikap', service: 'Hair Color', time: '10:00 AM' },
-            { name: 'Jebron Lames', service: 'Hair Spa', time: '1:00 PM' }
-        ]
-    };
+    // Generate initial calendar
+    generateCalendar(document.getElementById('calendar'), currentDate);
 
-    const calendarElement = document.getElementById('calendar');
-    const appointmentsTodayElement = document.getElementById('appointments-today');
-
-    // Generate calendar
-    generateCalendar(calendarElement, today);
-
-    // Display today's appointments
-    displayAppointments(appointments, today, appointmentsTodayElement);
+    // Fetch and display appointments for today
+    fetchAppointments();
 
     // Logout functionality
     const logoutButton = document.getElementById('logout');
     logoutButton.addEventListener('click', () => {
         alert('You have been logged out.');
-        window.location.href = 'login1.html'; // Redirect to login page
+        window.location.href = 'login.html'; // Redirect to login page
     });
 
     // Logbook redirection
@@ -50,39 +42,224 @@ document.addEventListener("DOMContentLoaded", () => {
     logbookButton.addEventListener('click', () => {
         window.location.href = 'logbook.html';
     });
+
+    // Update date at midnight (local time in US settings)
+    function updateDateAtMidnight() {
+        const now = new Date();
+        const delay = 24 * 60 * 60 * 1000 - now % (24 * 60 * 60 * 1000); // Calculate milliseconds until midnight
+        setTimeout(function() {
+            displayCurrentDate();
+            setInterval(updateDateAtMidnight, 24 * 60 * 60 * 1000); // Update daily
+        }, delay);
+    }
+    
+    updateDateAtMidnight();
 });
 
-function generateCalendar(calendarElement, today) {
+// Function to display today's date beside the logo
+function displayCurrentDate() {
+    const currentDateElement = document.getElementById('current-date');
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    
+    // Get current date in local time (in US settings, for example)
+    const now = new Date();
+    
+    // Display current date
+    currentDateElement.textContent = now.toLocaleDateString('en-US', options);
+}
+
+async function fetchAppointments(date = new Date().toISOString().split('T')[0]) {
+    try {
+        const response = await fetch(`../php/fetch_appointments.php?date=${date}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const appointments = await response.json();
+        
+        // Cache appointments by date
+        appointmentsCache[date] = appointments;
+
+        displayAppointments(appointments, date);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+function displayAppointments(appointments, date) {
+    const appointmentsTodayElement = document.getElementById('appointments-today');
+    if (appointments.length > 0) {
+        const table = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${appointments.map((app, index) => `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${app.firstname} ${app.lastname}</td>
+                            <td>${app.email}</td>
+                            <td>${app.usercontact}</td>
+                            <td>${app.service}</td>
+                            <td>${app.date}</td>
+                            <td>${app.time}</td>
+                            <td class="${app.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">${app.status || 'Pending'}</td>
+                            <td>
+                                <button class="confirm-btn" data-id="${app.id}">Confirm</button>
+                                <button class="delete-btn" data-id="${app.id}">Delete</button>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+        appointmentsTodayElement.innerHTML = table;
+
+        // Add event listeners for buttons
+        document.querySelectorAll('.confirm-btn').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const appointmentId = e.target.getAttribute('data-id');
+                await updateAppointmentStatus(appointmentId, 'Confirmed');
+                fetchAppointments(date); // Refresh the appointments
+            });
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const appointmentId = e.target.getAttribute('data-id');
+                await deleteAppointment(appointmentId);
+                fetchAppointments(date); // Refresh the appointments
+            });
+        });
+    } else {
+        appointmentsTodayElement.innerHTML = 'No appointments for ' + date;
+    }
+}
+
+async function updateAppointmentStatus(id, status) {
+    try {
+        const response = await fetch(`../php/update_appointment.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, status })
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error('Error updating appointment status:', error);
+    }
+}
+
+async function deleteAppointment(id) {
+    try {
+        const response = await fetch(`../php/delete_appointment.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error('Error deleting appointment:', error);
+    }
+}
+
+function generateCalendar(calendarElement, date) {
     const monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
-    const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const currentMonth = date.getMonth();
+    const currentYear = date.getFullYear();
 
+    // Set calendar header
     let calendarHTML = '<div class="calendar-header">';
-    calendarHTML += `<h2>${monthNames[today.getMonth()]}</h2>`;
+    calendarHTML += `<h2>${monthNames[currentMonth]} ${currentYear}</h2>`;
+    calendarHTML += '<button id="today">Today</button>';
+    calendarHTML += '<button id="prev-month">Prev</button>';
+    calendarHTML += '<button id="next-month">Next</button>';
     calendarHTML += '</div>';
+    
     calendarHTML += '<div class="calendar-body">';
+    calendarHTML += '<div class="weekday-header">';
+    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
+        calendarHTML += `<div>${day}</div>`;
+    });
+    calendarHTML += '</div>'; // Close day names
     calendarHTML += '<div class="calendar-grid">';
 
+    // Get the first day of the month and how many days are in the month
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    // Fill in the empty days for the start of the month
+    for (let i = 0; i < firstDay; i++) {
+        calendarHTML += '<div class="calendar-day empty"></div>'; // Empty divs for empty days
+    }
+
+    // Fill in the days of the month
     for (let day = 1; day <= daysInMonth; day++) {
-        calendarHTML += `<div class="calendar-day">${day}</div>`;
-    }
-
-    calendarHTML += '</div>';
-    calendarHTML += '</div>';
-    calendarElement.innerHTML = calendarHTML;
-}
-
-function displayAppointments(appointments, today, appointmentsTodayElement) {
-    const todayStr = today.toISOString().split('T')[0];
-    if (appointments[todayStr]) {
-        appointmentsTodayElement.innerHTML = appointments[todayStr].map(app => `
-            <div class="appointment">
-                <p><strong>Name:</strong> ${app.name}</p>
-                <p><strong>Service:</strong> ${app.service}</p>
-                <p><strong>Time:</strong> ${app.time}</p>
+        const dateString = new Date(currentYear, currentMonth, day).toISOString().split('T')[0]; // YYYY-MM-DD format
+        calendarHTML += `
+            <div class="calendar-day" data-date="${dateString}">
+                ${day}
             </div>
-        `).join('');
-    } else {
-        appointmentsTodayElement.textContent = 'no appointments for today';
+        `;
     }
+    
+    calendarHTML += '</div>'; // Close calendar grid
+    calendarHTML += '</div>'; // Close calendar body
+    calendarElement.innerHTML = calendarHTML;
+
+    // Add event listeners for navigation buttons
+    document.getElementById('today').addEventListener('click', () => {
+        currentDate = new Date();
+        generateCalendar(document.getElementById('calendar'), currentDate); // Regenerate calendar
+        fetchAppointments(); // Fetch today's appointments
+    });
+
+    document.getElementById('prev-month').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        generateCalendar(calendarElement, currentDate);
+    });
+
+    document.getElementById('next-month').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        generateCalendar(calendarElement, currentDate);
+    });
+
+    // Add click event listener for the days
+    document.querySelectorAll('.calendar-day:not(.empty)').forEach(dayElement => {
+        dayElement.addEventListener('click', () => {
+            const selectedDate = new Date(dayElement.getAttribute('data-date'));
+            selectedDate.setDate(selectedDate.getDate() + 1); // Add one day to the selected date
+            currentDate = selectedDate;
+    
+            // Update the displayed date
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+            document.getElementById('current-date').textContent = selectedDate.toLocaleDateString('en-US', options);
+    
+            if (appointmentsCache[selectedDate.toISOString().split('T')[0]]) {
+                displayAppointments(appointmentsCache[selectedDate.toISOString().split('T')[0]], selectedDate.toISOString().split('T')[0]);
+            } else {
+                fetchAppointments(selectedDate.toISOString().split('T')[0]);
+            }
+        });
+    }); 
 }
+
+
