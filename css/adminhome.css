@@ -74,24 +74,35 @@ body {
 }
 
 .calendar {
+    
     padding: 2vw;
     border-radius: 10px;
-    background-color: #005f73;
+    display: inline-block;
 }
 
-
+.appointments {
+    background-color: #015f7a;
+    padding: 60px;
+    border-radius: 10px;
+    display: inline-block;
+}
 
 #current-date {
+    
     font-size: 34px;
 }
 
-
+#appointments-today {
+    margin-top: 2vw;
+    font-size: 60px;
+}
 
 .calendar-header {
     text-align: center;
     margin-bottom: 1vw;
     font-size: 40px;
 }
+
 
 .calendar-body {
     display: flex;
@@ -117,148 +128,9 @@ body {
     background-color: #017a90;
 }
 
-/*BOOKED APPOINTMENTS*/
-.appointments {
-    background-color: #015f7a;
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
-    width: 100%; /* Allow it to fill the container */
-    max-width: 600px; /* Limit the maximum width */
-    overflow-x: auto; /* Allow horizontal scrolling if needed */
-}
-
-
-#appointments-today {
-    margin-top: 2vw;
-    font-size: 20px;
-    max-height: 300px; /* Set a max height if necessary */
-    overflow-y: auto; /* Allow vertical scrolling if needed */
-}
-
-table {
-    width: 100%; /* Full width of the container */
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-thead {
-    background-color: #013440;
-    text-align: center;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-    font-size: 14px; /* Adjust font size for */
-}
-
-th {
-    color: white;
-    background-color: #013440;
-}
-
-tbody tr:hover {
-    background-color: #017a90;
-}
-
-.calendar {
-    padding: 20px; /* Padding around the calendar */
-    border-radius: 10px;
-    background-color: #005f73; /* Background color for the calendar */
-}
-
-.calendar-header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px; /* Adjust font size for header */
-    color: white; /* Header text color */
-}
-
-.calendar-body {
-    display: flex;
-    flex-direction: column; /* Arrange days in a column */
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
-    gap: 10px; /* Space between days */
-}
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.calendar-header h2 {
-    margin: 0;
-}
-
-button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.calendar-body {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.day-names {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-}
-
-.calendar-day {
-    padding: 15px;
-    border: 1px solid #e0e0e0;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.appointment {
+    background-color: #014b60;
+    padding: 1vw;
     border-radius: 5px;
-}
-
-.calendar-day:hover {
-    background-color: #f0f0f0;
-}
-
-.weekday-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    font-weight: bold; /* Make header bold */
-    color: white; /* Header text color */
-}
-
-.calendar-day.has-appointment {
-    background-color: #f0f8ff; /* Light blue background for days with appointments */
-    border: 20px solid #007bff; /* Border to indicate appointment */
-}
-
-.calendar-day.has-appointments {
-    position: relative;
-}
-
-.calendar-day.has-appointments .badge {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: red; /* Adjust color as needed */
-    color: white;
-    padding: 3px 6px;
-    border-radius: 50%;
-    font-size: 12px;
+    font-size: 1.5vw;
 }
