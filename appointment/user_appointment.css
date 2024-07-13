@@ -16,12 +16,6 @@ body {
     height: 100vh;
 }
 
-.profile-header {
-    position: absolute;
-    top: 65px;
-    left: 65px;
-    color: white;
-}
 
 .profile-title h1 {
     font-size: 3em;
