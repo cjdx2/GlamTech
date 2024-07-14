@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/user_profile.css">
 </head>
 <body>   
-
     <div class="profile-header">
         <div class="profile-title">
             <h1>Profile</h1>
@@ -18,11 +17,14 @@
     <div class="profile-container">
         <div class="profile-content">
             <div class="profile-form">
-                <form id="profile-form">
+                <form id="profile-form" action="../php/update_profile.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="first-name" id="first-name" placeholder="First Name">
                     <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+                    <input type="text" name="username" id="username" placeholder="Username">
+                    <input type="password" name="password" id="password" placeholder="Password">
                     <input type="email" name="email" id="email" placeholder="Email">
                     <input type="tel" name="phone-number" id="phone-number" placeholder="Phone Number" pattern="[0-9]{11}">
+                    <input type="file" id="profile-picture-input" name="profile-picture" accept="image/*" style="display:none;">
                     <div class="button-container">
                         <button type="submit" class="confirm-button">Confirm</button>
                         <button type="button" class="back-button" onclick="location.href='homepage.html'">Back</button>
@@ -31,8 +33,7 @@
             </div>
 
             <div class="profile-picture">
-                <img src="../img/profile 2.png" alt="Profile Picture" id="profile-picture-preview">
-                <input type="file" id="profile-picture-input" accept="image/*" style="display:none;">
+                <img src="../img/defaultprofile.jpg" alt="Profile Picture" id="profile-picture-preview">
                 <button class="edit-picture-button" onclick="document.getElementById('profile-picture-input').click();">Edit Picture</button>
             </div>
         </div>
