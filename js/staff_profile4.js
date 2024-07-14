@@ -1,3 +1,15 @@
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('../php/get_user_session.php')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.error) {
+                document.getElementById('username').innerText = data.username;
+                document.getElementById('profile-picture').src = data.profile_picture;
+                document.getElementById('hidden-username').value = data.username;
+            }
+        });
+});
+
 let feedbacks = [];
 let currentPage = 1;
 const feedbacksPerPage = 5;
@@ -20,7 +32,7 @@ document.querySelector('#feedbackForm').addEventListener('submit', function(even
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                feedbacks.unshift(data.feedback); // Add feedback to the beginning
+                feedbacks.unshift(data.feedback);
                 document.getElementById('feedback').value = '';
                 document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
 
@@ -53,9 +65,14 @@ function displayFeedback(page) {
         const userProfile = document.createElement('div');
         userProfile.classList.add('user-profile');
         const userImage = document.createElement('img');
-        userImage.src = '../img/profile 6.png';
+        userImage.src = feedback.profile_picture || '../img/defaultprofile.jpg';  // Use the profile picture from feedback
         userImage.alt = 'User Profile';
         userProfile.appendChild(userImage);
+
+        const userNameElement = document.createElement('span');
+        userNameElement.classList.add('user-name');
+        userNameElement.textContent = feedback.username;
+        userProfile.appendChild(userNameElement);
         
         const starRating = document.createElement('div');
         starRating.classList.add('star-rating');
@@ -143,4 +160,3 @@ function displayAverageRating() {
 document.querySelector('.back-button').addEventListener('click', function() {
     window.history.back();
 });
-    

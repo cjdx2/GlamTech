@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlamTech</title>
     <link rel="stylesheet" href="../css/staff_profile4.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../php/get_user_session.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.error) {
+                        document.getElementById('username').innerText = data.username;
+                        document.getElementById('profile-picture').src = data.profile_picture;
+                    }
+                });
+        });
+    </script>
 </head>
 <body>
-    <!-- Back button -->
-    <div class="back-button"> 
+    <div class="back-button">
         <img src="../img/back-button white.png" alt="Back">
     </div>
 
@@ -20,12 +31,12 @@
         <h2>Expertise: Haircut</h2>
         <p>Employee</p>
         <div class="rating">
-            <!-- Average rating stars will be updated by JS -->
         </div>
         <form id="feedbackForm" action="../php/save_feedback_jirven.php" method="POST">
             <div class="container-feedback">
                 <div class="user-profile">
-                    <img src="../img/profile 6.png" alt="User Profile">
+                    <img src="../img/defaultprofile.jpg" alt="User Profile" id="user-profile-picture">
+                    <span id="user-username"></span>
                 </div>
                 <div class="star-rating">
                     <input type="radio" id="star5" name="rating" value="5">

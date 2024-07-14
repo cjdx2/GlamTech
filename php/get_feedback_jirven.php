@@ -4,15 +4,16 @@ $username = "root";
 $password = "";
 $dbname = "glamtechdb";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT user_name, star_rating, comment, date_time FROM jirven_feedback ORDER BY date_time DESC";
+$sql = "SELECT f.user_id, f.star_rating, f.comment, f.date_time, u.profile_picture
+        FROM jirven_feedback f
+        JOIN users u ON f.user_id = u.id
+        ORDER BY f.date_time DESC";
 $result = $conn->query($sql);
 
 $feedbacks = [];

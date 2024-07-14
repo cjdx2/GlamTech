@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $username = $_POST['username'];
-    $password = $_POST['password'];  // Remove password hashing
+    $password = $_POST['password'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
@@ -48,6 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssssss", $firstname, $lastname, $username, $password, $email, $phone);
 
         if ($stmt->execute()) {
+            session_start();
+            $_SESSION['user_id'] = $stmt->insert_id;
+            $_SESSION['username'] = $username;
             echo "<script>alert('Signup successful!'); window.location.href = '../html/login.html';</script>";
         } else {
             echo "Error: " . $stmt->error;
