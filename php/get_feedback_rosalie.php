@@ -12,7 +12,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT user_name, star_rating, comment, date_time FROM rosalie_feedback ORDER BY date_time DESC";
+$sql = "SELECT f.user_id, f.star_rating, f.comment, f.date_time, u.profile_picture
+        FROM rosalie_feedback f
+        JOIN users u ON f.user_id = u.id
+        ORDER BY f.date_time DESC";
 $result = $conn->query($sql);
 
 $feedbacks = [];

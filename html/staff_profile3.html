@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlamTech</title>
     <link rel="stylesheet" href="../css/staff_profile3.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../php/get_user_session.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.error) {
+                        document.getElementById('username').innerText = data.username;
+                        document.getElementById('profile-picture').src = data.profile_picture;
+                    }
+                });
+        });
+    </script>
 </head>
 <body>
     <!-- Back button -->
@@ -25,7 +37,8 @@
         <form id="feedbackForm" action="../php/save_feedback_joane.php" method="POST">
             <div class="container-feedback">
                 <div class="user-profile">
-                    <img src="../img/profile 5.png" alt="User Profile">
+                    <img src="../img/defaultprofile.jpg" alt="User Profile" id="user-profile-picture">
+                    <span id="user-username"></span>
                 </div>
                 <div class="star-rating">
                     <input type="radio" id="star5" name="rating" value="5">
