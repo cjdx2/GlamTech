@@ -341,7 +341,6 @@ header.scrolled {
     height: 280px;
     border-radius: 50%;
     border: 2px solid white;
-    margin-bottom: 10px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -394,6 +393,21 @@ header.scrolled {
 .staff-section h2 {
     font-size: 36px;
     margin-bottom: 20px;
+}
+
+.staff-member .staff-name {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700; /* Bold for names */
+    font-size: 24px; /* Adjust size as needed */
+    color: #fff; /* Adjust color if needed */
+    margin-bottom: -10px;
+}
+
+.staff-member .staff-expertise {
+    font-family: 'Arial', sans-serif;
+    font-weight: 100; /* Normal for expertise */
+    font-size: 16px; /* Adjust size as needed */
+    color: #ccc; /* Adjust color if needed */
 }
 
 .gallery-navigation {
