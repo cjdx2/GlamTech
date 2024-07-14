@@ -5,7 +5,7 @@ header("Content-Type: application/json; charset=UTF-8");
 $servername = "localhost";
 $username = "root"; // Replace with your database username
 $password = ""; // Replace with your database password
-$dbname = "account"; // Replace with your database name
+$dbname = "glamtechdb"; // Replace with your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

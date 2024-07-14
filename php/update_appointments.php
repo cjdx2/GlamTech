@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Manila'); // Set the desired time zone
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "account";
+$dbname = "glamtechdb";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

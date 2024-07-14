@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root"; // Change to your database username
 $password = ""; // Change to your database password
-$dbname = "account";
+$dbname = "glamtechdb";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
