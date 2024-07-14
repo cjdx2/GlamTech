@@ -1,31 +1,39 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "account";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $id = $data['id'];
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "glamtechdb";
 
-$data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id'];
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Delete appointment from the database
-$sql = "DELETE FROM appointments WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-if ($stmt->execute()) {
-    echo json_encode(['success' => true]);
+    // Delete the appointment
+    $query = "DELETE FROM appointments WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        echo json_encode(['status' => 'success', 'message' => 'Appointment deleted.']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'No appointment found with that ID']);
+    }
+
+    $conn->close();
 } else {
-    echo json_encode(['success' => false, 'error' => $stmt->error]);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
-
-$stmt->close();
-$conn->close();
 ?>
