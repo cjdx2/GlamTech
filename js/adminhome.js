@@ -100,6 +100,7 @@ function displayAppointments(appointments, date) {
                         <th>Service</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Recommended Staff</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -114,6 +115,7 @@ function displayAppointments(appointments, date) {
                             <td>${app.service}</td>
                             <td>${app.date}</td>
                             <td>${app.time}</td>
+                            <td>${app.recommended_staff}</td>
                             <td class="${app.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">${app.status || 'Pending'}</td>
                             <td>
                                 <button class="confirm-btn" data-id="${app.id}">Confirm</button>

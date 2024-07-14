@@ -1,8 +1,4 @@
 <?php
-
-date_default_timezone_set('Asia/Manila'); // e.g., 'America/New_York'
-
-error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $servername = "localhost";
@@ -31,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get services from POST array
     $services = isset($_POST['services']) ? implode(',', $_POST['services']) : '';
 
+    
     $sql = "INSERT INTO appointments (firstname, lastname, email, usercontact, service, date, time, staff) 
             VALUES ('$firstname', '$lastname', '$email', '$usercontact', '$services', '$date', '$time', '$recommended_staff')";
 
