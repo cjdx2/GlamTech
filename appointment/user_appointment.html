@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <form id="appointment" action="../php/get_appointments.php" method="post" onsubmit="return validateForm()">
+            <form id="appointment" action="../php/get_appointments.php" method="post">
                 <section id="form">
                     <div class="name">
                         <input type="text" id="firstname" name="firstname" placeholder="first name" required>
@@ -45,7 +45,10 @@
                             </div>
                         </div>
                     </div>
+
                     <input type="hidden" id="service" name="service"> <!-- Hidden input to store selected services -->
+                    <input type="hidden" id="recommended_staff" name="recommended_staff"> <!-- Hidden input to store recommended staff -->
+
                     <p class="preferred-text">Preferred appointment date:</p>
                     <input type="date" id="date" name="date" required>
                     <p class="preferred-text">Preferred appointment time:</p>
@@ -65,15 +68,5 @@
         </div>
     </div>
     <script src="../appointment/user_appointment.js"></script>
-    <script>
-        // JavaScript to handle service selection and set the value of the hidden input
-        const dropdownContent = document.getElementById('dropdown-options');
-        dropdownContent.addEventListener('change', () => {
-            const selectedServices = Array.from(document.querySelectorAll('input[name="services[]"]:checked'))
-                .map(checkbox => checkbox.value)
-                .join(',');
-            document.getElementById('service').value = selectedServices;
-        });
-    </script>
 </body>
 </html>

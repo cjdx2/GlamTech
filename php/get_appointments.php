@@ -26,12 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usercontact = $conn->real_escape_string($_POST['usercontact']);
     $date = $conn->real_escape_string($_POST['date']);
     $time = $conn->real_escape_string($_POST['time']);
+    $recommended_staff = $conn->real_escape_string($_POST['recommended_staff']);
 
     // Get services from POST array
     $services = isset($_POST['services']) ? implode(',', $_POST['services']) : '';
 
-    $sql = "INSERT INTO appointments (firstname, lastname, email, usercontact, service, date, time) 
-            VALUES ('$firstname', '$lastname', '$email', '$usercontact', '$services', '$date', '$time')";
+    $sql = "INSERT INTO appointments (firstname, lastname, email, usercontact, service, date, time, staff) 
+            VALUES ('$firstname', '$lastname', '$email', '$usercontact', '$services', '$date', '$time', '$recommended_staff')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Appointment booked successfully";
