@@ -63,8 +63,9 @@ function displayHeaderDate() {
 }
 
 // Function to fetch appointments for a specific date
+/// Function to fetch appointments for a specific date
 async function fetchAppointments(date = new Date()) {
-    date.setDate(date.getDate()); // Adjust date to be 1 day ahead
+    
     const dateString = date.toISOString().split('T')[0];
     try {
         const response = await fetch(`../php/fetch_appointments.php?date=${dateString}`);
@@ -75,18 +76,97 @@ async function fetchAppointments(date = new Date()) {
         appointmentsCache[dateString] = appointments; // Cache appointments by date
         generateCalendar(document.getElementById('calendar'), currentDate); // Regenerate calendar with updated data
         displayAppointments(appointments, dateString);
+        
+        // Fetch and display confirmed appointments for the selected date
+        fetchConfirmedAppointments(date);
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
 
-// Function to display appointments
+
+
+// Function to update appointment status and send email
+async function updateAppointmentStatus(id, status) {
+    const isConfirmed = confirm(`Are you sure you want to mark this appointment as ${status}?`);
+
+    if (!isConfirmed) {
+        return;
+    }
+
+    try {
+        const response = await fetch('../php/get_appointment_details.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
+
+        const appointment = await response.json();
+        if (appointment) {
+            const { email, firstname, lastname, date, time } = appointment;
+
+            const updateResponse = await fetch('../php/update_appointments.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id, status, email, name: `${firstname} ${lastname}`, date, time })
+            });
+
+            const result = await updateResponse.json();
+            if (result.status === 'success') {
+                alert('Appointment has been confirmed and an email has been sent.');
+
+                // Move appointment to confirmed section
+                moveAppointmentToConfirmed(id, appointment);
+
+                // Remove appointment from pending list
+                removeAppointmentFromPending(id);
+            } else {
+                alert('Error updating appointment status: ' + result.message);
+            }
+        } else {
+            alert('Error fetching appointment details.');
+        }
+    } catch (error) {
+        alert('Error updating appointment status: ' + error.message);
+    }
+}
+
+function moveAppointmentToConfirmed(id, appointment) {
+    const confirmedAppointmentsList = document.getElementById('confirmed-appointments-list');
+    const confirmedRow = document.createElement('div');
+    confirmedRow.classList.add('appointment');
+    confirmedRow.innerHTML = `
+        <p>Name: ${appointment.firstname} ${appointment.lastname}</p>
+        <p>Email: ${appointment.email}</p>
+        <p>Contact: ${appointment.usercontact}</p>
+        <p>Service: ${appointment.service}</p>
+        <p>Date: ${appointment.date}</p>
+        <p>Time: ${appointment.time}</p>
+        <p>Recommended Staff: ${appointment.staff}</p>
+        <p>Status: Confirmed</p>
+    `;
+  
+}
+
+function removeAppointmentFromPending(id) {
+    const row = document.querySelector(`.confirm-btn[data-id="${id}"]`).closest('tr');
+    row.remove();
+}
+
+
+
 function displayAppointments(appointments, date) {
     const appointmentsTodayElement = document.getElementById('appointments-today');
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
     const formattedDate = new Date(date).toLocaleDateString('en-US', options);
 
-    if (appointments.length > 0) {
+    const pendingAppointments = appointments.filter(app => app.status !== 'Confirmed');
+
+    if (pendingAppointments.length > 0) {
         const table = `
             <table>
                 <thead>
@@ -104,7 +184,7 @@ function displayAppointments(appointments, date) {
                     </tr>
                 </thead>
                 <tbody>
-                    ${appointments.map((app, index) => `
+                    ${pendingAppointments.map((app, index) => `
                         <tr>
                             <td>${index + 1}</td>
                             <td>${app.firstname} ${app.lastname}</td>
@@ -151,57 +231,6 @@ function displayAppointments(appointments, date) {
     }
 }
 
-// Function to update appointment status and send email
-async function updateAppointmentStatus(id, status) {
-    const isConfirmed = confirm(`Are you sure you want to mark this appointment as ${status}?`);
-
-    if (!isConfirmed) {
-        return;
-    }
-
-    try {
-        const response = await fetch('../php/get_appointment_details.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id })
-        });
-
-        const appointment = await response.json();
-        if (appointment) {
-            const { email, firstname, lastname, date, time } = appointment;
-
-            const updateResponse = await fetch('../php/update_appointments.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id, status, email, name: `${firstname} ${lastname}`, date, time })
-            });
-
-            const result = await updateResponse.json();
-            if (result.status === 'success') {
-                alert('Appointment has been confirmed and an email has been sent.');
-
-                const row = document.querySelector(`.confirm-btn[data-id="${id}"]`).closest('tr');
-                const statusCell = row.querySelector('td:nth-child(9)');
-                statusCell.textContent = status;
-                statusCell.className = (status === 'Confirmed') ? 'status-confirmed' : 'status-pending';
-
-                if (status === 'Confirmed') {
-                    row.querySelector('.confirm-btn').remove();
-                }
-            } else {
-                alert('Error updating appointment status: ' + result.message);
-            }
-        } else {
-            alert('Error fetching appointment details.');
-        }
-    } catch (error) {
-        alert('Error updating appointment status: ' + error.message);
-    }
-}
 
 // Function to delete appointment
 async function deleteAppointment(id) {
@@ -221,6 +250,69 @@ async function deleteAppointment(id) {
     }
 }
 
+// Function to fetch confirmed appointments for a specific date
+// Function to fetch confirmed appointments for a specific date
+async function fetchConfirmedAppointments(date = new Date()) {
+    const dateString = date.toISOString().split('T')[0];
+    try {
+        const response = await fetch(`../php/fetch_confirmed_appointments.php?date=${dateString}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const appointments = await response.json();
+        displayConfirmedAppointments(appointments, dateString);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+
+// Function to display confirmed appointments
+// Function to display confirmed appointments
+function displayConfirmedAppointments(appointments, date) {
+    const confirmedAppointmentsElement = document.getElementById('confirmed-appointments');
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    
+    const formattedDate = new Date(date).toLocaleDateString('en-US', options);
+
+    if (appointments.length > 0) {
+        const table = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Recommended Staff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${appointments.map((app, index) => `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${app.firstname} ${app.lastname}</td>
+                            <td>${app.email}</td>
+                            <td>${app.usercontact}</td>
+                            <td>${app.service}</td>
+                            <td>${app.date}</td>
+                            <td>${app.time}</td>
+                            <td>${app.staff}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+        confirmedAppointmentsElement.innerHTML = table;
+    } else {
+        confirmedAppointmentsElement.innerHTML = `<p>No confirmed appointments for ${formattedDate}.</p>`;
+    }
+}
+
+
 async function fetchPendingAppointments(month, year) {
     try {
         const response = await fetch(`../php/getpendingappointments.php?month=${month}&year=${year}`);
@@ -232,7 +324,7 @@ async function fetchPendingAppointments(month, year) {
 
         for (const [dateString, count] of Object.entries(data)) {
             const date = new Date(dateString);
-            date.setDate(date.getDate() - 1); // Adjust date to 1 day ahead
+            date.setDate(date.getDate() -1); // Adjust date to 1 day ahead
             const adjustedDateString = date.toISOString().split('T')[0];
             adjustedData[adjustedDateString] = count;
         }
@@ -256,13 +348,13 @@ function generateCalendar(calendarElement, date) {
 
     let calendarHTML = '<div class="calendar-header">';
     calendarHTML += `<h2>${monthNames[currentMonth]} ${currentYear}</h2>`;
-   
+
     calendarHTML += '<div class="calendar-button">';
     calendarHTML += '<button id="today">Today</button>';
     calendarHTML += '<button id="prev-month">Prev</button>';
     calendarHTML += '<button id="next-month">Next</button>';
-   calendarHTML += '</div>';
-   calendarHTML += '</div>';
+    calendarHTML += '</div>';
+    calendarHTML += '</div>';
 
     calendarHTML += '<div class="calendar-body">';
     calendarHTML += '<div class="weekday-header">';
@@ -302,6 +394,7 @@ function generateCalendar(calendarElement, date) {
             currentDate = new Date();
             generateCalendar(calendarElement, currentDate); // Re-generate calendar with today's date
             fetchAppointments(); // Fetch today's appointments
+            
         });
 
         document.getElementById('prev-month').addEventListener('click', () => {
@@ -328,12 +421,20 @@ function generateCalendar(calendarElement, date) {
                 selectedDate.setDate(selectedDate.getDate() + 1); // Keep the selected date as is
                 currentDate = selectedDate;
 
+                const dateString = selectedDate.toISOString().split('T')[0];
+
                 if (appointmentsCache[selectedDate.toISOString().split('T')[0]]) {
                     displayAppointments(appointmentsCache[selectedDate.toISOString().split('T')[0]], selectedDate.toISOString().split('T')[0]);
                 } else {
                     fetchAppointments(selectedDate);
+                 
                 }
+                fetchConfirmedAppointments(selectedDate);
             });
         });
     });
 }
+   
+
+
+
