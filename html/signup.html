@@ -14,7 +14,7 @@
                 <input type="text" id="signup-username" name="username" placeholder="Username" required>
                 <input type="password" id="signup-password" name="password" placeholder="Password" required>
                 <input type="email" id="signup-email" name="email" placeholder="Email" required>
-                <input type="tel" id="signup-phone" name="phone" placeholder="Phone Number" required>
+                <input type="tel" id="signup-phone" name="phone" placeholder="Phone Number" maxlength="11" pattern="^09[0-9]*$" required>
                 <div class="actions">
                     <a href="../html/login.html" id="show-login">Already have an account?</a>
                     <button type="submit">Sign Up</button>
