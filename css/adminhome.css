@@ -138,10 +138,7 @@ table {
     margin-top: 20px;
 }
 
-thead {
-    background-color: #013440;
-    text-align: center;
-}
+
 
 th, td {
     padding: 10px;
@@ -153,6 +150,11 @@ th, td {
 th {
     color: white;
     background-color: #013440;
+    text-align: center;
+    position: sticky; /* Keep header sticky */
+    top: 0; /* Stick to the top of the table */
+    z-index: 1; /* Ensure header stays above other content */
+    
 }
 
 tbody tr:hover {
@@ -316,18 +318,26 @@ tbody tr:hover {
 
 /*confirmed appointments*/
 
-
-#confirmed-appointments{
+.confirmed-appointments-container{
     background-color: #015f7a;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     display: inline-block;
-   width: 1180px;/* Allow it to fill the container */
+    width: 100%; /* Allow it to fill the container */
+    max-width: 1180px; /* Limit the maximum width */
+   /* Allow horizontal scrolling if needed */
+    margin-left: 20px;
+}
+#confirmed-appointments{
     
-    overflow-x: auto; /* Allow horizontal scrolling if needed */
+
    
-   max-height: 300px;
-    margin-left: 25px;
+    overflow-x: auto; 
+    overflow-y: auto;
+    
+    max-height: 350px;
+
+  
 }
 
 
