@@ -63,16 +63,18 @@ function displayHeaderDate() {
 }
 
 // Function to fetch appointments for a specific date
-async function fetchAppointments(date = new Date().toISOString().split('T')[0]) {
+async function fetchAppointments(date = new Date()) {
+    date.setDate(date.getDate()); // Adjust date to be 1 day ahead
+    const dateString = date.toISOString().split('T')[0];
     try {
-        const response = await fetch(`../php/fetch_appointments.php?date=${date}`);
+        const response = await fetch(`../php/fetch_appointments.php?date=${dateString}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         const appointments = await response.json();
-        appointmentsCache[date] = appointments; // Cache appointments by date
+        appointmentsCache[dateString] = appointments; // Cache appointments by date
         generateCalendar(document.getElementById('calendar'), currentDate); // Regenerate calendar with updated data
-        displayAppointments(appointments, date);
+        displayAppointments(appointments, dateString);
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
@@ -219,7 +221,29 @@ async function deleteAppointment(id) {
     }
 }
 
-// Function to generate the calendar
+async function fetchPendingAppointments(month, year) {
+    try {
+        const response = await fetch(`../php/getpendingappointments.php?month=${month}&year=${year}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        const adjustedData = {};
+
+        for (const [dateString, count] of Object.entries(data)) {
+            const date = new Date(dateString);
+            date.setDate(date.getDate() - 1); // Adjust date to 1 day ahead
+            const adjustedDateString = date.toISOString().split('T')[0];
+            adjustedData[adjustedDateString] = count;
+        }
+
+        return adjustedData;
+    } catch (error) {
+        console.error('Failed to fetch pending appointments:', error);
+        return {};
+    }
+}
+
 // Function to generate the calendar
 function generateCalendar(calendarElement, date) {
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -232,11 +256,14 @@ function generateCalendar(calendarElement, date) {
 
     let calendarHTML = '<div class="calendar-header">';
     calendarHTML += `<h2>${monthNames[currentMonth]} ${currentYear}</h2>`;
+   
+    calendarHTML += '<div class="calendar-button">';
     calendarHTML += '<button id="today">Today</button>';
     calendarHTML += '<button id="prev-month">Prev</button>';
     calendarHTML += '<button id="next-month">Next</button>';
-    calendarHTML += '</div>';
-    
+   calendarHTML += '</div>';
+   calendarHTML += '</div>';
+
     calendarHTML += '<div class="calendar-body">';
     calendarHTML += '<div class="weekday-header">';
     ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
@@ -252,65 +279,61 @@ function generateCalendar(calendarElement, date) {
         calendarHTML += '<div class="calendar-day empty"></div>'; // Empty divs for empty days
     }
 
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dateString = new Date(currentYear, currentMonth, day).toISOString().split('T')[0];
-        const todayClass = isToday(day) ? 'today' : '';
-        const adjustedDateString = new Date(new Date(dateString).setDate(new Date(dateString).getDate() + 1)).toISOString().split('T')[0];
-        const badgeCount = getPendingAppointmentsCount(adjustedDateString);
-        const badge = `<span class="badge">${badgeCount > 0 ? badgeCount : ''}</span>`;
-        calendarHTML += `
-            <div class="calendar-day ${todayClass}" data-date="${dateString}">
-                ${day}
-                ${badge}
-            </div>
-        `;
-    }
-    
-    calendarHTML += '</div>'; // Close calendar grid
-    calendarHTML += '</div>'; // Close calendar body
-    calendarElement.innerHTML = calendarHTML;
-
-    // Add event listeners for navigation buttons
-    document.getElementById('today').addEventListener('click', () => {
-        currentDate = new Date();
-        fetchAppointments(); // Fetch today's appointments
-    });
-
-    document.getElementById('prev-month').addEventListener('click', () => {
-        const limitDate = new Date('2024-02-01');
-        if (currentDate > limitDate) {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            fetchAppointments(); // Fetch appointments for the new month
-        } else {
-            console.log("Cannot go back further than February 1, 2024.");
+    fetchPendingAppointments(currentMonth + 1, currentYear).then(pendingAppointmentsData => {
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateString = new Date(currentYear, currentMonth, day).toISOString().split('T')[0];
+            const todayClass = isToday(day) ? 'today' : '';
+            const badgeCount = pendingAppointmentsData[dateString] || 0;
+            const badge = badgeCount > 0 ? `<span class="badge">${badgeCount}</span>` : '';
+            calendarHTML += `
+                <div class="calendar-day ${todayClass}" data-date="${dateString}">
+                    ${day}
+                    ${badge}
+                </div>
+            `;
         }
-    });
 
-    document.getElementById('next-month').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        fetchAppointments(); // Fetch appointments for the new month
-    });
+        calendarHTML += '</div>'; // Close calendar grid
+        calendarHTML += '</div>'; // Close calendar body
+        calendarElement.innerHTML = calendarHTML;
 
-    // Add click event listener for the days
-    document.querySelectorAll('.calendar-day:not(.empty)').forEach(dayElement => {
-        dayElement.addEventListener('click', () => {
-            const selectedDate = new Date(dayElement.getAttribute('data-date'));
-            selectedDate.setDate(selectedDate.getDate() + 1); // Add one day to the selected date
-            currentDate = selectedDate;
+        // Add event listeners for navigation buttons
+        document.getElementById('today').addEventListener('click', () => {
+            currentDate = new Date();
+            generateCalendar(calendarElement, currentDate); // Re-generate calendar with today's date
+            fetchAppointments(); // Fetch today's appointments
+        });
 
-            if (appointmentsCache[selectedDate.toISOString().split('T')[0]]) {
-                displayAppointments(appointmentsCache[selectedDate.toISOString().split('T')[0]], selectedDate.toISOString().split('T')[0]);
+        document.getElementById('prev-month').addEventListener('click', () => {
+            const limitDate = new Date('2024-02-01');
+            if (currentDate > limitDate) {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                generateCalendar(calendarElement, currentDate); // Re-generate calendar with new month
+                fetchAppointments(); // Fetch appointments for the new month
             } else {
-                fetchAppointments(selectedDate.toISOString().split('T')[0]);
+                console.log("Cannot go back further than February 1, 2024.");
             }
         });
-    });
-}
 
-// Function to get the number of pending appointments for a given date
-function getPendingAppointmentsCount(dateString) {
-    if (appointmentsCache[dateString]) {
-        return appointmentsCache[dateString].filter(app => app.status !== 'Confirmed').length;
-    }
-    return 0;
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(calendarElement, currentDate); // Re-generate calendar with new month
+            fetchAppointments(); // Fetch appointments for the new month
+        });
+
+        // Add click event listener for the days
+        document.querySelectorAll('.calendar-day:not(.empty)').forEach(dayElement => {
+            dayElement.addEventListener('click', () => {
+                const selectedDate = new Date(dayElement.getAttribute('data-date'));
+                selectedDate.setDate(selectedDate.getDate() + 1); // Keep the selected date as is
+                currentDate = selectedDate;
+
+                if (appointmentsCache[selectedDate.toISOString().split('T')[0]]) {
+                    displayAppointments(appointmentsCache[selectedDate.toISOString().split('T')[0]], selectedDate.toISOString().split('T')[0]);
+                } else {
+                    fetchAppointments(selectedDate);
+                }
+            });
+        });
+    });
 }

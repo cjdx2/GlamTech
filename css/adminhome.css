@@ -85,11 +85,6 @@ body {
 }
 
 
-.calendar-header {
-    text-align: center;
-    margin-bottom: 1vw;
-    font-size: 40px;
-}
 
 .calendar-body {
     display: flex;
@@ -160,18 +155,14 @@ tbody tr:hover {
     background-color: #017a90;
 }
 
+/*CALENDAR*/
+
 .calendar {
     padding: 20px; /* Padding around the calendar */
     border-radius: 10px;
     background-color: #005f73; /* Background color for the calendar */
 }
 
-.calendar-header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px; /* Adjust font size for header */
-    color: white; /* Header text color */
-}
 
 .calendar-body {
     display: flex;
@@ -185,20 +176,71 @@ tbody tr:hover {
 }
 .calendar-header {
     display: flex;
-    justify-content: space-between;
+    
     align-items: center;
     margin-bottom: 10px;
+  
 }
 
 .calendar-header h2 {
     margin: 0;
+    font-size: 40px;
 }
 
-button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
+.calendar-button{
+   
+    margin-left: auto;
+    
 }
+
+#today{
+    background-color: #013440;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+   
+
+}
+
+#prev-month{
+    background-color: #013440;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0px 5px;
+
+}
+
+
+#next-month{
+    background-color: #013440;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
 
 .calendar-body {
     border: 1px solid #ccc;
@@ -218,7 +260,6 @@ button {
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
 }
-
 .calendar-day {
     padding: 15px;
     border: 1px solid #e0e0e0;
@@ -227,9 +268,20 @@ button {
     transition: background-color 0.3s;
     border-radius: 5px;
 }
+.calendar-day.today {
+    padding: 15px;
+    background-color: #ffeb3b; /* Yellow background */
+    border: 1px solid #000;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+}
 
 .calendar-day:hover {
-    background-color: #f0f0f0;
+    background-color: #017a90;
 }
 
 .weekday-header {
@@ -240,32 +292,7 @@ button {
     color: white; /* Header text color */
 }
 
-.calendar-day.has-appointment {
-    background-color: #f0f8ff; /* Light blue background for days with appointments */
-    border: 20px solid #007bff; /* Border to indicate appointment */
-}
 
-.calendar-day.has-appointments {
-    position: relative;
-}
-
-.calendar-day.has-appointments .badge {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: red; /* Adjust color as needed */
-    color: white;
-    padding: 3px 6px;
-    border-radius: 50%;
-    font-size: 12px;
-}
-
-.calendar-day.today {
-    background-color: #ffeb3b; /* Yellow background */
-    color: #000; /* Black text */
-    
-    font-weight: bold;
-}
 
 .calendar-day {
     position: relative;
@@ -281,4 +308,5 @@ button {
     padding: 2px 6px;
     font-size: 12px;
 }
+
 
