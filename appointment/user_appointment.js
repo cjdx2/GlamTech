@@ -37,9 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
         options.classList.toggle('show');
     });
 
-    // Ensure a service is selected before form submission
-    document.getElementById('appointment').addEventListener('submit', validateForm);
-
     // Handle service selection and display staff recommendations
     const serviceCheckboxes = document.querySelectorAll('#dropdown-options input[type="checkbox"]');
     serviceCheckboxes.forEach(checkbox => {
@@ -51,6 +48,38 @@ document.addEventListener("DOMContentLoaded", function() {
             displayStaff(selectedServices);
             updateHiddenServiceInput(selectedServices);
         });
+    });
+
+    // Add event listener to confirm button for booking another appointment
+    document.querySelector('.confirm-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        if (validateForm(event)) {
+            // Gather form data
+            const formData = new FormData(document.getElementById('appointment'));
+
+            // Submit form data via AJAX
+            fetch('../php/get_appointments.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const bookAnother = confirm("Do you want to book another appointment?");
+                    if (bookAnother) {
+                        document.getElementById('appointment').reset();
+                    } else {
+                        window.location.href = '../html/homepage.html';
+                    }
+                } else {
+                    alert('Failed to book appointment. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while booking the appointment. Please try again.');
+            });
+        }
     });
 });
 
@@ -112,8 +141,8 @@ function displayStaff(selectedServices) {
             // Display staff with highest ratings
             staffWithAverageRating.forEach(staff => {
                 const staffName = staff.name.toLowerCase();
-                const staffHTML = `
-                    <div class="staff-member">
+                const staffHTML = 
+                    `<div class="staff-member">
                         <img src="../img/${staffName}.png" alt="${staffName}">
                         <div class="staff-info">
                             <p><strong>${staffName}</strong></p>
@@ -122,8 +151,7 @@ function displayStaff(selectedServices) {
                         <div class="staff-reviews" id="reviews-${staffName}">
                             <!-- Reviews will be loaded here -->
                         </div>
-                    </div>
-                `;
+                    </div>`;
                 staffSection.innerHTML += staffHTML;
                 renderStarRating(`star-rating-${staffName}`, staff.averageRating);
                 fetchReviews(staffName); // Fetch and display top 3 feedbacks
@@ -188,14 +216,13 @@ function fetchReviews(staffName) {
             topThreeFeedback.forEach(review => {
                 const reviewElement = document.createElement('div');
                 reviewElement.className = 'review';
-                reviewElement.innerHTML = `
-                    <img src="${review.profile_picture}" alt="User Profile Picture">
+                reviewElement.innerHTML = 
+                    `<img src="${review.profile_picture}" alt="User Profile Picture">
                     <div class="review-details">
                         <span class="review-rating">${review.star_rating}</span>
                         <p class="review-comment">${review.comment}</p>
                         <span class="review-date">${review.date_time}</span>
-                    </div>
-                `;
+                    </div>`;
                 reviewsContainer.appendChild(reviewElement);
             });
         })

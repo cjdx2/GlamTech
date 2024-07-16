@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(['success' => false, 'message' => "Connection failed: " . $conn->connect_error]));
 }
 
 // Check if form data is received
@@ -27,14 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get services from POST array
     $services = isset($_POST['services']) ? implode(',', $_POST['services']) : '';
 
-    
     $sql = "INSERT INTO appointments (firstname, lastname, email, usercontact, service, date, time, staff) 
             VALUES ('$firstname', '$lastname', '$email', '$usercontact', '$services', '$date', '$time', '$recommended_staff')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Appointment booked successfully";
+        echo json_encode(['success' => true, 'message' => 'Appointment booked successfully']);
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo json_encode(['success' => false, 'message' => "Error: " . $sql . "<br>" . $conn->error]);
     }
 }
 
