@@ -32,9 +32,11 @@
             <h1>PERFORMANCE</h1>
             <div class="month-selector">
                 <label for="month">Month:</label>
-                <input type="month" id="month" name="month" onchange="updateGraph()">
+                <input type="month" id="month" name="month" min="2021-01" max="2024-12" onchange="updateGraphs()">
             </div>
-            <canvas id="performanceChart"></canvas>
+            <canvas id="servicesChart"></canvas>
+            <canvas id="salesChart"></canvas>
+            <canvas id="commissionChart"></canvas>
         </main>
     </div>
     <script src="../js/performance.js"></script>

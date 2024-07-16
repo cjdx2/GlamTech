@@ -15,7 +15,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM logbook ORDER BY id DESC";
+$month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+$start_date = $month . '-01';
+$end_date = date("Y-m-t", strtotime($start_date)); // Last day of the selected month
+
+$sql = "SELECT * FROM logbook WHERE DATE(time) BETWEEN '$start_date' AND '$end_date' ORDER BY id DESC";
 $result = $conn->query($sql);
 
 $entries = [];
