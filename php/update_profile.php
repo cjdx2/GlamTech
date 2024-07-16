@@ -13,6 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $phone = $_POST['phone-number'];
 
+
+    $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/';
+    if (!preg_match($passwordPattern, $password)) {
+        $response['message'] = 'Password does not meet the required criteria.';
+        echo json_encode($response);
+        exit;
+    }
+
     $profilePicture = null;
     if (isset($_FILES['profile-picture']) && $_FILES['profile-picture']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['profile-picture']['tmp_name'];
