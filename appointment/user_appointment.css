@@ -178,16 +178,86 @@ form select {
 
 .staff-member {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.staff-member img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.staff-member img:hover {
+    transform: scale(1.1);
+}
+
+.staff-info p {
+    margin: 5px 0;
+    color: #004d7a;
+    font-weight: bold;
+}
+
+.staff-reviews {
+    margin-top: 10px;
+}
+
+.review {
+    display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.staff-member img {
+.review img {
     width: 50px;
     height: 50px;
+    border-radius: 50%;
     margin-right: 10px;
 }
 
-.staff-info p {
-    margin: 0;
+.review-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-rating {
+    font-weight: bold;
+}
+
+.review-comment {
+    margin: 5px 0;
+}
+
+.review-date {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.star-rating {
+    display: inline-block;
+    font-size: 1.2em;
+    color: #f7b500; /* Change color as needed */
+}
+
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    font-size: 1.2em;
+    color: #ccc; /* Change color as needed */
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    color: #f7b500; /* Change color as needed */
 }

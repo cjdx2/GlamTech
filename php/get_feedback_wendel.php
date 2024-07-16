@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "SELECT f.user_id, f.star_rating, f.comment, f.date_time, u.profile_picture
-        FROM wwendel_feedback f
+        FROM wendel_feedback f
         JOIN users u ON f.user_id = u.id
         ORDER BY f.date_time DESC";
 $result = $conn->query($sql);

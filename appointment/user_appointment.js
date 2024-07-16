@@ -85,33 +85,121 @@ function displayStaff(selectedServices) {
     .then(response => response.json())
     .then(data => {
         if (data.recommendations && data.recommendations.length > 0) {
-            const uniqueStaff = new Set();
+            // Calculate overall average ratings for each staff member
+            const staffRatings = {};
             data.recommendations.forEach(recommendedStaff => {
-                const { name, expertise } = recommendedStaff;
-                if (!uniqueStaff.has(name)) {
-                    uniqueStaff.add(name);
-                    const staffHTML = `
-                        <div class="staff-member">
-                            <img src="../img/${name.toLowerCase()}.png" alt="${name}">
-                            <div class="staff-info">
-                                <p><strong>${name}</strong></p>
-                                <p>${expertise}</p>
-                            </div>
-                        </div>
-                    `;
-                    staffSection.innerHTML += staffHTML;
+                const { name, star_rating } = recommendedStaff;
+                if (!staffRatings[name]) {
+                    staffRatings[name] = {
+                        totalStars: star_rating,
+                        count: 1
+                    };
+                } else {
+                    staffRatings[name].totalStars += star_rating;
+                    staffRatings[name].count++;
                 }
             });
 
+            // Calculate overall average ratings
+            const staffWithAverageRating = Object.keys(staffRatings).map(name => {
+                const averageRating = staffRatings[name].totalStars / staffRatings[name].count;
+                return { name, averageRating };
+            });
+
+            // Sort staff by overall average rating in descending order
+            staffWithAverageRating.sort((a, b) => b.averageRating - a.averageRating);
+
+            // Display staff with highest ratings
+            staffWithAverageRating.forEach(staff => {
+                const staffName = staff.name.toLowerCase();
+                const staffHTML = `
+                    <div class="staff-member">
+                        <img src="../img/${staffName}.png" alt="${staffName}">
+                        <div class="staff-info">
+                            <p><strong>${staffName}</strong></p>
+                            <div class="star-rating" id="star-rating-${staffName}"></div>
+                        </div>
+                        <div class="staff-reviews" id="reviews-${staffName}">
+                            <!-- Reviews will be loaded here -->
+                        </div>
+                    </div>
+                `;
+                staffSection.innerHTML += staffHTML;
+                renderStarRating(`star-rating-${staffName}`, staff.averageRating);
+                fetchReviews(staffName); // Fetch and display top 3 feedbacks
+            });
+
             // Update hidden input field with recommended staff
-            const recommendedStaff = Array.from(uniqueStaff).join(', ');
-            document.getElementById('recommended_staff').value = recommendedStaff; // Ensure this matches your HTML input id
+            const recommendedStaff = staffWithAverageRating.map(staff => staff.name).join(', ');
+            document.getElementById('recommended_staff').value = recommendedStaff;
 
         } else {
             staffSection.innerHTML += '<p>No staff available for these services.</p>';
         }
     })
     .catch(error => console.error('Error fetching staff recommendations:', error));
+}
+
+function renderStarRating(containerId, rating) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear previous content
+
+    const starsTotal = 5;
+    const starPercentage = (rating / starsTotal) * 100;
+    const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+
+    const starContainer = document.createElement('div');
+    starContainer.classList.add('stars-inner');
+    starContainer.style.width = starPercentageRounded;
+
+    const starEmpty = document.createElement('div');
+    starEmpty.classList.add('stars-outer');
+    starEmpty.appendChild(starContainer);
+
+    for (let i = 0; i < starsTotal; i++) {
+        const starIcon = document.createElement('i');
+        starIcon.classList.add('fas', 'fa-star');
+        starEmpty.appendChild(starIcon);
+    }
+
+    container.appendChild(starEmpty);
+}
+
+function fetchReviews(staffName) {
+    fetch(`/GlamTech/php/get_feedback_${staffName}.php`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Sort feedback by star_rating in descending order
+            data.sort((a, b) => b.star_rating - a.star_rating);
+
+            // Take only the top 3 highest rated feedback entries
+            const topThreeFeedback = data.slice(0, 3);
+
+            // Select the container where reviews will be displayed
+            const reviewsContainer = document.querySelector(`#reviews-${staffName}`);
+            reviewsContainer.innerHTML = ''; // Clear previous content
+
+            // Iterate over the top three feedback entries
+            topThreeFeedback.forEach(review => {
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review';
+                reviewElement.innerHTML = `
+                    <img src="${review.profile_picture}" alt="User Profile Picture">
+                    <div class="review-details">
+                        <span class="review-rating">${review.star_rating}</span>
+                        <p class="review-comment">${review.comment}</p>
+                        <span class="review-date">${review.date_time}</span>
+                    </div>
+                `;
+                reviewsContainer.appendChild(reviewElement);
+            });
+        })
+        .catch(error => console.error('Error fetching reviews:', error));
 }
 
 function updateHiddenServiceInput(selectedServices) {
