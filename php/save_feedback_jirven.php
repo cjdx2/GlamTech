@@ -12,6 +12,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+function containsBannedWords($text) {
+    $bannedWords = ['putang ina', 'gago', 'gaga', 'tangina', 'leche', 'bobo', 'ulol', 'tarantado', 'hayop ka', 'lintik', 'pakshet', 'burat', 'bwisit', 'kupal'];
+    foreach ($bannedWords as $word) {
+        if (stripos($text, $word) !== false) {
+            return true;
+        }
+    }
+    return false;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $star_rating = $_POST['rating'];
     $comment = $_POST['comment'];
@@ -19,6 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['user_id'];
     $username = $_SESSION['username'];
     $profile_picture = $_SESSION['profile_picture'];
+
+    if (containsBannedWords($comment)) {
+        echo json_encode(['success' => false, 'error' => 'Feedback contains inappropriate language.']);
+        exit;
+    }
 
     $stmt = $conn->prepare("INSERT INTO jirven_feedback (user_id, username, profile_picture, star_rating, comment, date_time) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ississ", $user_id, $username, $profile_picture, $star_rating, $comment, $date_time);

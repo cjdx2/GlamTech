@@ -14,41 +14,52 @@ let feedbacks = [];
 let currentPage = 1;
 const feedbacksPerPage = 5;
 
-document.querySelector('#feedbackForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const rating = document.querySelector('input[name="rating"]:checked');
-    const feedbackText = document.getElementById('feedback').value;
-    
-    if (rating && feedbackText) {
-        const formData = new FormData();
-        formData.append('rating', rating.value);
-        formData.append('comment', feedbackText);
+const bannedWords = ['putangina', 'gago', 'gaga', 'tangina', 'leche', 'bobo', 'ulol', 'tarantado', 'hayop ka', 'lintik', 'bwisit', 'kupal', 'damn', 'hell', 'shit', 'asshole', 'bitch', 'bastard', 'fuck', 'motherfucker', 'prick', 'shithead', 'son of a bitch'];
 
-        fetch('../php/save_feedback_jirven.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                feedbacks.unshift(data.feedback);
-                document.getElementById('feedback').value = '';
-                document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
-
-                displayFeedback(currentPage);
-                displayAverageRating();
-            } else {
-                alert('Error saving feedback: ' + data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    } else {
-        alert('Please provide a rating and feedback.');
+    function containsBannedWords(text) {
+        return bannedWords.some(word => text.toLowerCase().includes(word));
     }
-});
+
+    document.querySelector('#feedbackForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const rating = document.querySelector('input[name="rating"]:checked');
+        const feedbackText = document.getElementById('feedback').value;
+        
+        if (rating && feedbackText) {
+            if (containsBannedWords(feedbackText)) {
+                alert('Your feedback contains inappropriate language. Please remove it.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('rating', rating.value);
+            formData.append('comment', feedbackText);
+
+            fetch('../php/save_feedback_jirven.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    feedbacks.unshift(data.feedback); // Add feedback to the beginning
+                    document.getElementById('feedback').value = '';
+                    document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
+
+                    displayFeedback(currentPage);
+                    displayAverageRating();
+                } else {
+                    alert('Error saving feedback: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        } else {
+            alert('Please provide a rating and feedback.');
+        }
+    });
 
 function displayFeedback(page) {
     const feedbackContainer = document.getElementById('feedback-container');
