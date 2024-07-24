@@ -81,6 +81,17 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+
+    // Validate time input to ensure it's between 9 AM and 8 PM
+    const timeInput = document.getElementById('time');
+    timeInput.addEventListener('change', () => {
+        const timeValue = timeInput.value;
+        const [hours, minutes] = timeValue.split(':').map(Number);
+        if (hours < 9 || (hours >= 20 && minutes > 0)) {
+            alert('Please select a time between 9:00 AM and 8:00 PM.');
+            timeInput.value = '';
+        }
+    });
 });
 
 function validateForm(event) {

@@ -161,6 +161,43 @@ tbody tr:hover {
     background-color: #017a90;
 }
 
+.confirm-btn {
+    background-color:#013440;
+    color: #fff;
+    padding: 4px;
+    width: 60px;
+    margin-bottom: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000;
+    transition-duration: 0.4s;
+}
+
+.confirm-btn:hover {
+    background-color:green;
+    color: #fff;
+    cursor: pointer;
+
+    
+}
+
+.delete-btn {
+    background-color: #013440;
+    color: #fff;
+    padding: 4px;
+    width: 60px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000;
+    transition-duration: 0.4s;
+}
+
+.delete-btn:hover{
+    background-color: red;
+    color: #fff;
+   cursor: pointer;
+}
+
 /*CALENDAR*/
 
 .calendar {

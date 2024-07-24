@@ -197,7 +197,7 @@ function displayAppointments(appointments, date) {
                             <td class="${app.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">${app.status || 'Pending'}</td>
                             <td>
                                 ${app.status !== 'Confirmed' ? `<button class="confirm-btn" data-id="${app.id}">Confirm</button>` : ''}
-                                <button class="delete-btn" data-id="${app.id}">Delete</button>
+                                <button class="delete-btn" data-id="${app.id}">Cancel</button>
                             </td>
                         </tr>
                     `).join('')}
@@ -220,7 +220,7 @@ function displayAppointments(appointments, date) {
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', async (event) => {
                 const id = event.target.getAttribute('data-id');
-                const isConfirmed = confirm('Are you sure you want to delete this appointment?');
+                const isConfirmed = confirm('Are you sure you want to cancel this appointment?');
                 if (isConfirmed) {
                     await deleteAppointment(id);
                 }
@@ -250,7 +250,7 @@ async function deleteAppointment(id) {
     }
 }
 
-// Function to fetch confirmed appointments for a specific date
+
 // Function to fetch confirmed appointments for a specific date
 async function fetchConfirmedAppointments(date = new Date()) {
     const dateString = date.toISOString().split('T')[0];
@@ -267,7 +267,7 @@ async function fetchConfirmedAppointments(date = new Date()) {
 }
 
 
-// Function to display confirmed appointments
+
 // Function to display confirmed appointments
 function displayConfirmedAppointments(appointments, date) {
     const confirmedAppointmentsElement = document.getElementById('confirmed-appointments');
