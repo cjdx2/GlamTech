@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: [],
             datasets: [{
                 label: 'Customer Volume',
                 data: [],
@@ -55,9 +55,10 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(`http://127.0.0.1:5000/forecast?year=${year}`)
             .then(response => response.json())
             .then(data => {
-                chart.data.datasets[0].data = data;
+                chart.data.labels = data.labels;
+                chart.data.datasets[0].data = data.data;
                 chart.update();
-                updateSummary(data, year);
+                updateSummary(data.data, year);
             })
             .catch(error => console.error('Error fetching forecast data:', error));
     }

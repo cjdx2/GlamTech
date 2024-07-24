@@ -1,46 +1,63 @@
-# forecast.py
 from flask import Flask, jsonify, request
 import pandas as pd
-from statsmodels.tsa.arima.model import ARIMA
 import numpy as np
+from statsmodels.tsa.arima.model import ARIMA
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
+# Load the data from the Excel file
+df = pd.read_excel('./excel/customer_volume.xlsx', index_col=0)
 
-data = {
-    "2021": [186, 156, 186, 180, 186, 180, 186, 186, 210, 217, 216, 248],
-    "2022": [496, 420, 496, 480, 496, 480, 496, 496, 540, 558, 552, 589],
-    "2023": [558, 504, 651, 630, 651, 630, 651, 651, 750, 755, 800, 900],
-    "2024": [825, 780, 850, 800, 835, 815]  # Only first 6 months of 2024
-}
+# Flatten the data
+data_flat = df.values.flatten()
+dates = pd.date_range(start='2021-01-01', periods=len(data_flat), freq='ME')  # Updated to 'ME'
+df_flat = pd.DataFrame(data_flat, index=dates, columns=['customer_volume'])
 
-# Convert the data to a pandas DataFrame
-data_flat = [value for sublist in data.values() for value in sublist]
-dates = pd.date_range(start='2021-01-01', periods=len(data_flat), freq='M')
-df = pd.DataFrame(data_flat, index=dates, columns=['customer_volume'])
+# Function to create Fourier terms
+def fourier_series(df, period=12, num_terms=6):  # Increase num_terms to 6
+    for i in range(1, num_terms + 1):
+        df[f'sin_{i}'] = np.sin(2 * np.pi * i * df.index.month / period)
+        df[f'cos_{i}'] = np.cos(2 * np.pi * i * df.index.month / period)
+    return df
 
-# Train the ARIMA model
-model = ARIMA(df['customer_volume'], order=(5, 1, 0))
+# Add Fourier terms to the dataframe
+df_flat = fourier_series(df_flat)
+
+# Fit ARIMA with Fourier terms
+exog = df_flat[[col for col in df_flat.columns if 'sin_' in col or 'cos_' in col]]
+model = ARIMA(df_flat['customer_volume'], order=(5, 1, 0), exog=exog)
 model_fit = model.fit()
 
 @app.route('/forecast', methods=['GET'])
 def forecast():
     year = request.args.get('year')
-    if year not in ['2025', '2026', '2027']:
+    if year not in ['2024', '2025']:
         return jsonify({"error": "Year not in forecast range"}), 404
 
-    # Calculate how many months into the future we need to forecast
-    start_year = 2025
-    months_into_future = (int(year) - start_year) * 12
+    if year == '2024':
+        steps = 6  # Forecast from July to December
+        labels = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    elif year == '2025':
+        steps = 12  # Forecast for the entire year
+        labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-    # Forecast the next months_into_future + 12 months to get the full year's forecast
-    forecast = model_fit.forecast(steps=months_into_future + 12)
+    # Generate future Fourier terms
+    future_dates = pd.date_range(start='2024-01-01', periods=steps, freq='ME')
+    future_df = pd.DataFrame(index=future_dates)
+    future_df = fourier_series(future_df)
     
-    # Extract the forecast for the requested year
-    forecast_for_year = forecast[-12:].tolist()
+    # Forecast the data
+    forecast = model_fit.get_forecast(steps=steps, exog=future_df)
+    forecast_values = forecast.predicted_mean
 
+    # Return the forecasted data
+    forecast_for_year = {
+        "labels": labels,
+        "data": forecast_values.tolist()
+    }
+    
     return jsonify(forecast_for_year)
 
 if __name__ == '__main__':

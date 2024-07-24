@@ -20,11 +20,11 @@
             <div class="menu">
                 <button id="menu-button" onclick="toggleMenu()">MENU</button>
                 <div id="menu-content" class="menu-content">
-                    <a href="adminhome.html">home</a>
-                    <a href="logbook.html">logbook</a>
-                    <a href="forecast.html">forecast</a>
-                    <a href="performance.html">performance</a>
-                    <a href="login.html">log out</a>
+                    <a href="adminhome.html">Home</a>
+                    <a href="logbook.html">Logbook</a>
+                    <a href="forecast.html">Forecast</a>
+                    <a href="performance.html">Performance</a>
+                    <a href="login.html">Log out</a>
                 </div>
             </div>
         </header>
@@ -33,15 +33,14 @@
             <div class="year-selector">
                 <label for="year">Year: </label>
                 <select id="year" onchange="updateChart(this.value)">
+                    <option value="2024">2024</option>
                     <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
                 </select>
             </div>
             <div class="chart-container">
                 <canvas id="forecastChart"></canvas>
             </div>
-            <div id="summary-container"></div> <!-- New container for summaries -->
+            <div id="summary-container"></div>
         </main>
     </div>
     <script src="../js/forecast.js"></script>
