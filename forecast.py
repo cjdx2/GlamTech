@@ -16,7 +16,7 @@ dates = pd.date_range(start='2021-01-01', periods=len(data_flat), freq='ME')  # 
 df_flat = pd.DataFrame(data_flat, index=dates, columns=['customer_volume'])
 
 # Function to create Fourier terms
-def fourier_series(df, period=12, num_terms=6):  # Increase num_terms to 6
+def fourier_series(df, period=12, num_terms=4):  # Increase num_terms to 4
     for i in range(1, num_terms + 1):
         df[f'sin_{i}'] = np.sin(2 * np.pi * i * df.index.month / period)
         df[f'cos_{i}'] = np.cos(2 * np.pi * i * df.index.month / period)
