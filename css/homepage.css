@@ -355,9 +355,16 @@ header.scrolled {
     color: inherit;
 }
 
-.staff-member.owner {
+.staff-member.owner:nth-child(1) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin-right: -500px;
+}
+
+.staff-member.owner:nth-child(2) {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    margin-right: -500px;
 }
 
 .staff-member.manicurist1 {
