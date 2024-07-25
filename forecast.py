@@ -52,10 +52,13 @@ def forecast():
     forecast = model_fit.get_forecast(steps=steps, exog=future_df)
     forecast_values = forecast.predicted_mean
 
+    # Round the forecasted values
+    forecast_values_rounded = forecast_values.round().astype(int)
+
     # Return the forecasted data
     forecast_for_year = {
         "labels": labels,
-        "data": forecast_values.tolist()
+        "data": forecast_values_rounded.tolist()
     }
     
     return jsonify(forecast_for_year)
