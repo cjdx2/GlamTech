@@ -4,41 +4,40 @@ $username = "root";
 $password = "";
 $dbname = "glamtechdb";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Read JSON input from the request body
+// Enable error logging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $data = json_decode(file_get_contents("php://input"), true);
 
-// Validate and sanitize input
-if (isset($data['id'], $data['staff'], $data['service'], $data['amount'], $data['commission'], $data['time'])) {
+if (isset($data['id'], $data['staff'], $data['service'], $data['amount'], $data['commission'], $data['datetime'])) {
     $id = $data['id'];
     $staff = $data['staff'];
     $service = $data['service'];
     $amount = $data['amount'];
     $commission = $data['commission'];
-    $time = $data['time'];
+    $datetime = $data['datetime'];
 
-    // Prepare and bind parameters to update statement
-    $updateSql = "UPDATE logbook SET staff = ?, service = ?, amount = ?, commission = ?, time = ? WHERE id = ?";
+    $updateSql = "UPDATE logbook SET staff = ?, service = ?, amount = ?, commission = ?, datetime = ? WHERE id = ?";
     $stmt = $conn->prepare($updateSql);
 
     if ($stmt === false) {
         die("Error preparing statement: " . $conn->error);
     }
 
-    $stmt->bind_param("ssddsi", $staff, $service, $amount, $commission, $time, $id);
+    $stmt->bind_param("ssddsi", $staff, $service, $amount, $commission, $datetime, $id);
 
-    // Execute the statement
     if ($stmt->execute()) {
         echo "success";
     } else {
-        echo "error";
+        echo "error: " . $stmt->error;
     }
 
     $stmt->close();

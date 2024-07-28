@@ -22,18 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $service = $_POST['service'];
     $amount = intval($_POST['amount']);
     $commission = intval($_POST['commission']);
-    $time = $_POST['time'];
+    $datetime = $_POST['datetime'];
 
     // Verify if all fields are set
-    if (isset($staff, $service, $amount, $commission, $time)) {
-        $insertSql = "INSERT INTO logbook (staff, service, amount, commission, time) VALUES (?, ?, ?, ?, ?)";
+    if (isset($staff, $service, $amount, $commission, $datetime)) {
+        $insertSql = "INSERT INTO logbook (staff, service, amount, commission, datetime) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertSql);
 
         if ($stmt === false) {
             die("Error preparing statement: " . $conn->error);
         }
 
-        $stmt->bind_param("ssiii", $staff, $service, $amount, $commission, $time);
+        $stmt->bind_param("ssids", $staff, $service, $amount, $commission, $datetime);
 
         if ($stmt->execute()) {
             echo "<script>alert('Successfully saved!'); window.location.href = '../html/logbook.html';</script>";

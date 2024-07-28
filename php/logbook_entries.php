@@ -3,9 +3,9 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 $servername = "localhost";
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "glamtechdb"; // Replace with your database name
+$username = "root"; // Change to your database username
+$password = ""; // Change to your database password
+$dbname = "glamtechdb";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,22 +15,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
-$start_date = $month . '-01';
-$end_date = date("Y-m-t", strtotime($start_date)); // Last day of the selected month
+// Retrieve the selected date from the query parameters
+$date = isset($_GET['date']) ? $_GET['date'] : '';
 
-$sql = "SELECT * FROM logbook WHERE DATE(time) BETWEEN '$start_date' AND '$end_date' ORDER BY id DESC";
-$result = $conn->query($sql);
+if ($date) {
+    $sql = "SELECT id, staff, service, amount, commission, datetime FROM logbook WHERE DATE(datetime) = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $date);
+} else {
+    $sql = "SELECT id, staff, service, amount, commission, datetime FROM logbook";
+    $stmt = $conn->prepare($sql);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
 
 $entries = [];
-
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $entries[] = $row;
     }
 }
 
-echo json_encode($entries);
-
+$stmt->close();
 $conn->close();
+
+echo json_encode($entries);
 ?>
