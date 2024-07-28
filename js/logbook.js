@@ -2,6 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const datePicker = document.getElementById('date-picker');
     const form = document.getElementById('logbook-form');
 
+    const menuButton = document.getElementById('menu-button');
+    const menuContent = document.getElementById('menu-content');
+
+    menuButton.addEventListener('click', () => {
+        menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close the menu if clicked outside
+    window.addEventListener('click', (event) => {
+        if (!event.target.matches('#menu-button')) {
+            if (menuContent.style.display === 'block') {
+                menuContent.style.display = 'none';
+            }
+        }
+    });
+
     // Set the default value of the date picker to today's date
     const today = new Date().toISOString().split('T')[0];
     datePicker.value = today;

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/performance.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body onload="displayDate()">
+<body>
     <div class="container">
         <header class="header">
             <div class="logo">
@@ -35,9 +35,11 @@
                 <label for="month">Month:</label>
                 <input type="month" id="month" name="month" min="2021-01" max="2024-12" onchange="updateGraphs()">
             </div>
-            <canvas id="servicesChart"></canvas>
-            <canvas id="salesChart"></canvas>
-            <canvas id="commissionChart"></canvas>
+            <div class="charts-container">
+                <canvas id="servicesChart"></canvas>
+                <canvas id="salesChart"></canvas>
+                <canvas id="commissionChart"></canvas>
+            </div>
         </main>
     </div>
     <script src="../js/performance.js"></script>

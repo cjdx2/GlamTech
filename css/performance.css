@@ -1,3 +1,4 @@
+/* performance.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -81,9 +82,16 @@ body {
     margin-bottom: 20px;
 }
 
+.charts-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 canvas {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
+    max-width: 30%; /* Adjust the width to fit three charts in a row */
+    height: 200px; /* Adjust the height to make the charts smaller */
 }
-
