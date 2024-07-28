@@ -26,29 +26,37 @@
                         <div class="dropdown">
                             <button class="dropbtn" id="dropdown-header" type="button">Select Services</button>
                             <div class="dropdown-content" id="dropdown-options">
-                                <label><input type="checkbox" name="services[]" value="haircut"> Hair Cut (₱100)</label>
-                                <label><input type="checkbox" name="services[]" value="shampoowithblowdry"> Shampoo with Blow Dry (₱150)</label>
-                                <label><input type="checkbox" name="services[]" value="hairiron"> Hair Iron (₱200)</label>
-                                <label><input type="checkbox" name="services[]" value="haircolor"> Hair Color (₱350 UP)</label>
-                                <label><input type="checkbox" name="services[]" value="highlights"> Highlights (₱350 UP)</label>
-                                <label><input type="checkbox" name="services[]" value="manicure"> Manicure (₱100)</label>
-                                <label><input type="checkbox" name="services[]" value="pedicure"> Pedicure (₱100)</label>
-                                <label><input type="checkbox" name="services[]" value="gelpolishmanicure"> Gel Polish Manicure (₱350)</label>
-                                <label><input type="checkbox" name="services[]" value="gelpolish"> Gel Polish (₱400)</label>
+                                <label><input type="checkbox" name="services[]" value="brazilian"> Brazilian (₱700 up)</label>
+                                <label><input type="checkbox" name="services[]" value="cellophane"> Cellophane (₱450 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="coldwave"> Coldwave (₱450 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="eyebrowshave"> Eyebrow Shave (₱100)</label>
+                                <label><input type="checkbox" name="services[]" value="footmassage"> Foot Massage (₱200 UP)</label>
                                 <label><input type="checkbox" name="services[]" value="footspa"> Foot Spa (₱200)</label>
-                                <label><input type="checkbox" name="services[]" value="premiumfootspa"> Premium Foot Spa (₱300)</label>
-                                <label><input type="checkbox" name="services[]" value="hotoil"> Hot Oil (₱200 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="gelpolish"> Gel Polish (₱350)</label>
+                                <label><input type="checkbox" name="services[]" value="gelpolishmanicure"> Gel Polish Manicure (₱350)</label>
+                                <label><input type="checkbox" name="services[]" value="gelpolishpedicure"> Gel Polish Pedicure (₱350)</label>
+                                <label><input type="checkbox" name="services[]" value="haircut"> Hair Cut (₱100)</label>
+                                <label><input type="checkbox" name="services[]" value="haircolor"> Hair Color (₱350 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="haircurl"> Hair Curl (₱500 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="hairiron"> Hair Iron (₱200)</label>
                                 <label><input type="checkbox" name="services[]" value="hairmask"> Hair Mask (₱200 UP)</label>
                                 <label><input type="checkbox" name="services[]" value="hairspa"> Hair Spa (₱250 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="hairtreatment"> Hair Treatment (₱700 up)</label>
+                                <label><input type="checkbox" name="services[]" value="hairwithmakeup"> Hair with Makeup (₱1000)</label>
+                                <label><input type="checkbox" name="services[]" value="highlights"> Highlights (₱350 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="hotoil"> Hot Oil (₱200 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="manicure"> Manicure (₱100)</label>
+                                <label><input type="checkbox" name="services[]" value="pedicure"> Pedicure (₱100)</label>
+                                <label><input type="checkbox" name="services[]" value="premiumfootspa"> Premium Foot Spa (₱300)</label>
+                                <label><input type="checkbox" name="services[]" value="rebond"> Rebond (₱800 UP)</label>
+                                <label><input type="checkbox" name="services[]" value="shampoowithblowdry"> Shampoo with Blow Dry (₱150)</label>
                                 <label><input type="checkbox" name="services[]" value="semidlino"> Semi d' Lino (₱350)</label>
-                                <label><input type="checkbox" name="services[]" value="cellophane"> Cellophane (₱450 UP)</label>
-                                <label><input type="checkbox" name="services[]" value="coldwave"> Coldwave (Perming) (₱450 UP)</label>
                             </div>
                         </div>
                     </div>
 
-                    <input type="hidden" id="service" name="service"> <!-- Hidden input to store selected services -->
-                    <input type="hidden" id="recommended_staff" name="recommended_staff"> <!-- Hidden input to store recommended staff -->
+                    <input type="hidden" id="service" name="service">
+                    <input type="hidden" id="recommended_staff" name="recommended_staff">
 
                     <p class="preferred-text">Preferred appointment date:</p>
                     <input type="date" id="date" name="date" required>
@@ -64,7 +72,6 @@
         <div class="right-column">
             <h2>Recommended Staff</h2>
             <div id="staff-recommendation">
-                <!-- Recommended staff will be dynamically added here -->
             </div>
         </div>
     </div>

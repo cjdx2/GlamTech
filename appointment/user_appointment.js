@@ -156,7 +156,7 @@ function displayStaff(selectedServices) {
                     `<div class="staff-member">
                         <img src="../img/${staffName}.png" alt="${staffName}">
                         <div class="staff-info">
-                            <p><strong>${staffName}</strong></p>
+                            <p><strong>${staff.name}</strong></p>
                             <div class="star-rating" id="star-rating-${staffName}"></div>
                         </div>
                         <div class="staff-reviews" id="reviews-${staffName}">
@@ -232,12 +232,17 @@ function fetchReviews(staffName) {
                     <div class="review-details">
                         <span class="review-rating">${review.star_rating}</span>
                         <p class="review-comment">${review.comment}</p>
-                        <span class="review-date">${review.date_time}</span>
+                        <span class="review-date">${formatDateTime(review.date_time)}</span>
                     </div>`;
                 reviewsContainer.appendChild(reviewElement);
             });
         })
         .catch(error => console.error('Error fetching reviews:', error));
+}
+
+function formatDateTime(dateTimeString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true, timeZone: 'Asia/Manila' };
+    return new Date(dateTimeString).toLocaleString('en-US', options);
 }
 
 function updateHiddenServiceInput(selectedServices) {
