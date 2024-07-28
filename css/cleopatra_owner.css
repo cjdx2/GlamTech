@@ -85,9 +85,20 @@ body {
   
   .rating {
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
-  }
+    font-size: 24px;
+    color: #ffd700; /* Gold color for stars */
+    margin-bottom: 10px;
+}
+
+.average-rating-text {
+    display: block;
+    margin-left: 10px;
+    font-size: 18px;
+    color: white; /* Change color to white */
+    font-weight: bold;
+}
   
   .star {
     color: #ffc107;
@@ -152,7 +163,23 @@ body {
     border-radius: 4px;
     background-color: #ffffff6f;
   }
-  
+
+.feedback-text {
+  position: relative;
+}
+
+.see-more {
+  color: #529ef0;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
+}
+
+.full-feedback {
+  display: none;
+}
+
   .submit-button {
     text-align: right;
     margin-top: 10px;
@@ -162,7 +189,7 @@ body {
   .submit-button button {
     padding: 7px 12px;
     font-size: 1em;
-    background-color: #529ef0f6;
+    background-color: #084863;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -170,7 +197,7 @@ body {
   }
   
   .submit-button button:hover {
-    background-color: #0056b3;
+    background-color: #f7da26;
   }
   
   .container-feedback {
@@ -233,19 +260,18 @@ body {
     padding: 7px 12px;
     margin: 0 5px;
     font-size: 1em;
-    background-color: #529ef0f6;
-    color: #fff;
+    background-color: #f2f8f7;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   
   .page-button.active {
-    background-color: #0056b3;
+    background-color: #084863;
   }
   
   .page-button:hover {
-    background-color: #0056b3;
+    background-color: #f7da26;
   }
   
   #pagination-container {
@@ -258,3 +284,27 @@ body {
     width: 1059px;
     margin: auto;
   }
+  .rating-filters {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #f2f8f7;
+    border: 1px solid #f2f8f7;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-button.active {
+    background-color: #084863;
+    color: white;
+}
+
+.filter-button:hover {
+    background-color: #f7da26;
+    color: white;
+}

@@ -16,11 +16,17 @@
                         document.getElementById('profile-picture').src = data.profile_picture;
                     }
                 });
+
+            // Add event listener to the back button
+            document.getElementById('back-button').addEventListener('click', function() {
+                window.location.href = 'homepage.html';
+            });
         });
     </script>
 </head>
 <body>
-    <div class="back-button">
+    <!-- Back button -->
+    <div id="back-button" class="back-button"> 
         <img src="../img/back-button white.png" alt="Back">
     </div>
 
@@ -59,9 +65,16 @@
                 </div>
             </div>
         </form>
+        <div class="rating-filters">
+            <button id="filter-all" class="filter-button">All</button>
+            <button id="filter-5" class="filter-button">5 Star</button>
+            <button id="filter-4" class="filter-button">4 Star</button>
+            <button id="filter-3" class="filter-button">3 Star</button>
+            <button id="filter-2" class="filter-button">2 Star</button>
+            <button id="filter-1" class="filter-button">1 Star</button>
+        </div>
         <div id="feedback-container"></div>
         <div id="pagination-container"></div>
-    </div>
     <script src="../js/staff_profile4.js"></script>
 </body>
 </html>

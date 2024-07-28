@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = 'Anonymous';
 
     // Prepare SQL statement to insert feedback into the table
-    $stmt = $conn->prepare("INSERT INTO rosalie_feedback (user_name, star_rating, comment, date_time) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO marilyn_feedback (user_name, star_rating, comment, date_time) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("siss", $user_name, $star_rating, $comment, $date_time);
 
     if ($stmt->execute()) {
