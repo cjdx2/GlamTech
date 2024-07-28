@@ -6,6 +6,9 @@ $username = "root";
 $password = "";
 $dbname = "glamtechdb";
 
+// Set the timezone to Philippines
+date_default_timezone_set('Asia/Manila');
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -25,7 +28,7 @@ function containsBannedWords($text) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $star_rating = $_POST['rating'];
     $comment = $_POST['comment'];
-    $date_time = date('Y-m-d H:i:s');
+    $date_time = date('Y-m-d H:i:s'); // Format the date and time
     $user_id = $_SESSION['user_id'];
     $username = $_SESSION['username'];
     $profile_picture = $_SESSION['profile_picture'];
@@ -47,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'profile_picture' => $profile_picture,
                 'star_rating' => $star_rating,
                 'comment' => $comment,
-                'date_time' => $date_time
+                'date_time' => date('F j, Y, g:i a', strtotime($date_time)) // Format the date and time for JSON response
             ]
         ]);
     } else {

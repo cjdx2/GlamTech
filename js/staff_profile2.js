@@ -100,23 +100,42 @@ function displayFeedback(page) {
             starRating.appendChild(star);
         }
 
-        const feedbackTextElement = document.createElement('p');
+        const feedbackTextElement = document.createElement('div');
         feedbackTextElement.classList.add('feedback-text');
-        feedbackTextElement.innerText = feedback.comment;
+        const truncatedText = feedback.comment.length > 100 ? feedback.comment.substring(0, 100) + '...' : feedback.comment;
+        feedbackTextElement.innerHTML = `
+            <span class="truncated-text">${truncatedText}</span>
+            <span class="full-feedback" style="display: none;">${feedback.comment}</span>
+            ${feedback.comment.length > 100 ? '<span class="see-more">See More</span>' : ''}
+        `;
 
-        const dateTimeElement = document.createElement('p');
+        feedbackTextElement.querySelector('.see-more')?.addEventListener('click', function() {
+            const fullFeedback = feedbackTextElement.querySelector('.full-feedback');
+            const truncatedText = feedbackTextElement.querySelector('.truncated-text');
+            if (fullFeedback.style.display === 'none') {
+                fullFeedback.style.display = 'inline';
+                truncatedText.style.display = 'none';
+                this.textContent = 'See Less';
+            } else {
+                fullFeedback.style.display = 'none';
+                truncatedText.style.display = 'inline';
+                this.textContent = 'See More';
+            }
+        });
+
+        const dateTimeElement = document.createElement('p'); // Added to display date and time
         dateTimeElement.classList.add('date-time');
         dateTimeElement.innerText = feedback.date_time;
-        
+
         feedbackElement.appendChild(userProfile);
         feedbackElement.appendChild(starRating);
         feedbackElement.appendChild(feedbackTextElement);
-        feedbackElement.appendChild(dateTimeElement);
-        
+        feedbackElement.appendChild(dateTimeElement); // Appending date and time element
+
         feedbackContainer.appendChild(feedbackElement);
     });
 
-    displayPagination();
+    displayPagination(filteredFeedbacks.length, page);
 }
 
 function displayPagination() {
@@ -217,27 +236,6 @@ function displayRatingPercentages() {
         percentageElement.appendChild(starLabel);
         percentageElement.appendChild(percentageText);
         percentagesContainer.appendChild(percentageElement);
-    });
-}
-function displayFeedback(page) {
-    const feedbackContainer = document.getElementById('feedback-container');
-    feedbackContainer.innerHTML = '';
-
-    const filteredFeedbacks = filterFeedbacks();
-    const start = (page - 1) * feedbacksPerPage;
-    const end = start + feedbacksPerPage;
-    const paginatedFeedbacks = filteredFeedbacks.slice(start, end);
-
-    paginatedFeedbacks.forEach(feedback => {
-        const feedbackElement = document.createElement('div');
-        feedbackElement.classList.add('feedback-item');
-        
-        const userProfile = document.createElement('div');
-        userProfile.classList.add('user-profile');
-        const userImage = document.createElement('img');
-        userImage.src = feedback.profile_picture || '../img/defaultprofile.jpg';
-        userImage.alt = 'User Profile';
-        userProfile.appendChild(userImage);
 
         const userNameElement = document.createElement('span');
         userNameElement.classList.add('user-name');

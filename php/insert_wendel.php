@@ -5,6 +5,8 @@ $username = "root"; // Change to your database username
 $password = ""; // Change to your database password
 $dbname = "glamtechdb";
 
+date_default_timezone_set('Asia/Manila');
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -42,12 +44,14 @@ $sql = "SELECT * FROM wendel_feedback ORDER BY date_time DESC";
 $result = $conn->query($sql);
 
 $feedbacks = [];
+
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
+        // Format the date and time for display
+        $row['date_time'] = date('F j, Y, g:i a', strtotime($row['date_time']));
         $feedbacks[] = $row;
     }
 }
-
 // Output the feedbacks in JSON format
 echo json_encode($feedbacks);
 
